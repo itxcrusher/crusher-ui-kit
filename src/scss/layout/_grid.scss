@@ -1,0 +1,28 @@
+@use '../base/variables' as *;
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  // Use our numeric spacing tokens for consistent gutters
+  padding-left: $crusher-spacing-6;
+  padding-right: $crusher-spacing-6;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  // We use CSS gap for modern spacing, but this is a fallback for older grid needs.
+  // We will remove the old padd-15 logic as it's replaced by utility classes.
+}
+
+// This class is now deprecated and replaced by utility classes like .p-4, .px-4 etc.
+// We'll keep it here for now to prevent breaking old HTML structures, but it should be removed in the future.
+.padd-15 {
+  padding-left: $crusher-spacing-4; // 1rem, which is ~16px
+  padding-right: $crusher-spacing-4;
+}
+
+// The old ".section .container" styles are removed as they are application-specific.
+// We will apply padding directly with utility classes in the final application.

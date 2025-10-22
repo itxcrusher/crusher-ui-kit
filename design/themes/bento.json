@@ -1,0 +1,12 @@
+{
+  "radius": { "lg": { "value": "1.25rem" } },
+  "spacing": {
+    "bentoGap": { "value": "1rem" }
+  },
+  "shadow": {
+    "2": { "value": "0 8px 24px rgba(0,0,0,0.08)" }
+  },
+  "color": {
+    "brand": { "primary": { "value": "#16a34a" }, "secondary": { "value": "#3b82f6" } }
+  }
+}

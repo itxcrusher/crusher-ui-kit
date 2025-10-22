@@ -1,0 +1,54 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --crusher-color-brand-primary: #22c55e;
+  --crusher-color-brand-secondary: #3b82f6;
+  --crusher-color-brand-accent-orange: #f97316;
+  --crusher-color-brand-accent-pink: #ec4899;
+  --crusher-color-brand-accent-red: #ef4444;
+  --crusher-color-light-background-canvas: #f8fafc;
+  --crusher-color-light-background-surface: rgba(255,255,255,0.5);
+  --crusher-color-light-text-primary: #0f172a;
+  --crusher-color-light-text-secondary: #64748b;
+  --crusher-color-light-border-primary: rgba(226,232,240,0.6);
+  --crusher-color-dark-background-canvas: #020617;
+  --crusher-color-dark-background-surface: rgba(15,23,42,0.5);
+  --crusher-color-dark-text-primary: #f8fafc;
+  --crusher-color-dark-text-secondary: #94a3b8;
+  --crusher-color-dark-border: rgba(30,41,59,0.6);
+  --crusher-color-base-white: #ffffff;
+  --crusher-font-family-body: 'Inter', sans-serif;
+  --crusher-font-family-display: 'Manrope', sans-serif;
+  --crusher-font-size-xs: 0.75rem;
+  --crusher-font-size-sm: 0.875rem;
+  --crusher-font-size-base: 1rem;
+  --crusher-font-size-lg: 1.125rem;
+  --crusher-font-size-xl: 1.25rem;
+  --crusher-font-size-2xl: 1.5rem;
+  --crusher-font-size-3xl: 1.875rem;
+  --crusher-font-size-4xl: 2.25rem;
+  --crusher-font-weight-regular: 400;
+  --crusher-font-weight-medium: 500;
+  --crusher-font-weight-semibold: 600;
+  --crusher-font-weight-bold: 700;
+  --crusher-spacing-0: 0;
+  --crusher-spacing-1: 0.25rem;
+  --crusher-spacing-2: 0.5rem;
+  --crusher-spacing-3: 0.75rem;
+  --crusher-spacing-4: 1rem;
+  --crusher-spacing-6: 1.5rem;
+  --crusher-spacing-8: 2rem;
+  --crusher-spacing-10: 2.5rem;
+  --crusher-spacing-12: 3rem;
+  --crusher-radius-sm: 0.25rem;
+  --crusher-radius-md: 0.5rem;
+  --crusher-radius-lg: 1rem;
+  --crusher-radius-full: 9999px;
+  --crusher-shadow-0: none;
+  --crusher-shadow-1: 0 1px 2px rgba(0,0,0,.06);
+  --crusher-shadow-2: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
+  --crusher-effect-blur-md: 16px;
+  --crusher-effect-glow-soft: 0 0 24px currentColor;
+}

@@ -1,0 +1,20 @@
+{
+  "color": {
+    "brand": { "primary": { "value": "#22d3ee" }, "secondary": { "value": "#a78bfa" } },
+    "light": {
+      "background": { "surface": { "value": "rgba(255,255,255,0.28)" } },
+      "border": { "primary": { "value": "rgba(59,130,246,0.35)" } }
+    },
+    "dark": {
+      "background": { "surface": { "value": "rgba(2,6,23,0.28)" } },
+      "border": { "primary": { "value": "rgba(99,102,241,0.35)" } }
+    }
+  },
+  "effect": {
+    "glow": { "soft": { "value": "0 0 28px currentColor" } }
+  },
+  "shadow": {
+    "2": { "value": "0 10px 30px rgba(34,211,238,0.15)" }
+  },
+  "radius": { "lg": { "value": "1rem" } }
+}

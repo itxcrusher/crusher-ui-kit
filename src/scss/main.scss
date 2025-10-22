@@ -1,0 +1,10 @@
+// 1. Base Styles (Tokens and global setup)
+@forward 'base/variables';
+@forward 'base/reset';
+@forward 'base/typography';
+
+// 2. Layout (Only contains the grid system now)
+@forward 'layout/grid';
+
+// 3. Utilities (Helper classes for spacing, flexbox, etc.)
+@forward 'utilities/utilities';

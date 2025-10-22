@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="" data-theme="glass" data-mode="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crusher UI Kit - Demo</title>
+    
+    <!-- CSS is imported via main.js in dev and bundled to dist in build -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body style="background-image: linear-gradient(to right top, #61dafb, #d946ef, #f97316, #3b82f6); min-height: 100vh;">
+
+    <main class="container py-12">
+        <header class="py-12" style="text-align: center;">
+            <h1 style="font-size: 2.5rem; color: var(--crusher-text-primary);">Crusher UI Kit</h1>
+            <p class="mt-4" style="font-size: 1.125rem; color: var(--crusher-text-secondary);">A modern, token-driven UI Kit with a stunning Glassmorphism theme.</p>
+        </header>
+
+        <hr style="border: 0; height: 1px; background-color: var(--crusher-border-primary); opacity: 0.5; margin: 3rem 0;">
+
+        <section id="components" class="py-12">
+            <crusher-section-title class="mb-12">Components</crusher-section-title>
+            <crusher-card class="mb-12">
+                <h3 class="mb-4">Card & Button</h3>
+                <p class="mb-6">The card features our signature Glassmorphism effect. Inside, the `<crusher-button>` component provides interactive elements.</p>
+                <div class="flex items-center" style="gap: 1rem;">
+                    <crusher-button>Primary</crusher-button>
+                    <crusher-button variant="secondary">Secondary</crusher-button>
+                </div>
+            </crusher-card>
+             <crusher-card class="mb-12">
+                <h3 class="mb-4">Form Elements</h3>
+                <p class="mb-6">A collection of smart form components, including inputs and text areas, that are fully themeable and accessible.</p>
+                <crusher-input label="Your Email" type="email" placeholder="you@example.com"></crusher-input>
+                <crusher-textarea label="Your Message" rows="3"></crusher-textarea>
+             </crusher-card>
+             <crusher-card class="mb-12">
+                <h3 class="mb-4">Data Visualization</h3>
+                <p class="mb-6">Components for displaying data, such as skill levels or chronological events.</p>
+                <crusher-skill-bar label="Cloud Infrastructure" percentage="95"></crusher-skill-bar>
+                <crusher-timeline class="mt-8">
+                    <crusher-timeline-item>
+                      <h4 style="font-size: var(--crusher-font-size-lg); font-weight: var(--crusher-font-weight-semibold);">Phase 1: Foundation</h4>
+                    </crusher-timeline-item>
+                    <crusher-timeline-item>
+                      <h4 style="font-size: var(--crusher-font-size-lg); font-weight: var(--crusher-font-weight-semibold);">Phase 2: Components</h4>
+                    </crusher-timeline-item>
+                </crusher-timeline>
+             </crusher-card>
+        </section>
+    </main>
+
+    <crusher-style-switcher></crusher-style-switcher>
+    
+    <script type="module" src="/src/js/main.js"></script>
+</body>
+</html>

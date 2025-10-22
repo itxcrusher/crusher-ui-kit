@@ -1,0 +1,13 @@
+{
+  "effect": { "blur": { "md": { "value": "20px" } } },
+  "color": {
+    "light": {
+      "background": { "surface": { "value": "rgba(255,255,255,0.35)" } },
+      "border": { "primary": { "value": "rgba(226,232,240,0.45)" } }
+    },
+    "dark": {
+      "background": { "surface": { "value": "rgba(15,23,42,0.35)" } },
+      "border": { "primary": { "value": "rgba(30,41,59,0.45)" } }
+    }
+  }
+}

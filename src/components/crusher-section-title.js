@@ -1,0 +1,48 @@
+import { LitElement, html, css } from 'lit';
+
+export class CrusherSectionTitle extends LitElement {
+  static styles = css`
+    :host {
+      display: block; /* The component itself takes up block space */
+      margin-bottom: var(--crusher-spacing-12);
+    }
+    .title {
+      font-size: var(--crusher-font-size-4xl);
+      font-weight: var(--crusher-font-weight-bold);
+      color: var(--crusher-text-primary);
+      position: relative;
+      padding-bottom: var(--crusher-spacing-4);
+      margin: 0; /* Remove default h2 margin */
+    }
+    /* The main (longer) underline */
+    .title::before {
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 50px;
+      background-color: var(--crusher-color-brand-primary);
+      left: 0;
+      bottom: 0;
+    }
+    /* The secondary (shorter) underline */
+    .title::after {
+      content: '';
+      position: absolute;
+      height: 4px;
+      width: 25px;
+      background-color: var(--crusher-color-brand-primary);
+      left: 0;
+      bottom: -8px; /* Position it below the first line */
+    }
+  `;
+
+  render() {
+    return html`
+      <h2 class="title">
+        <slot></slot>
+      </h2>
+    `;
+  }
+}
+
+customElements.define('crusher-section-title', CrusherSectionTitle);

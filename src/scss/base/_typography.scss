@@ -1,0 +1,79 @@
+@use 'variables' as *; // kept for compatibility; not redefining CSS vars here
+
+/* Fonts (author CSS). Tokens already expose font family/size variables. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700&display=swap');
+
+/* Base typography consumes token variables emitted by Style Dictionary */
+body {
+  line-height: 1.6;
+  font-size: var(--crusher-font-size-base);
+  font-family: var(--crusher-font-family-body);
+  font-weight: var(--crusher-font-weight-regular);
+  background-color: var(--crusher-background-canvas);
+  color: var(--crusher-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--crusher-font-family-display);
+  font-weight: var(--crusher-font-weight-bold);
+  color: var(--crusher-text-primary);
+  line-height: 1.2;
+  margin: 0 0 var(--crusher-spacing-3);
+  text-shadow: 0 1px 0 rgba(255,255,255,.15);
+}
+
+html[data-mode="dark"] h1, 
+html[data-mode="dark"] h2, 
+html[data-mode="dark"] h3 {
+  text-shadow: 0 1px 0 rgba(0,0,0,.35);
+}
+
+/* Scales (optional, based on token sizes) */
+h1 { font-size: var(--crusher-font-size-4xl); }
+h2 { font-size: var(--crusher-font-size-3xl); }
+h3 { font-size: var(--crusher-font-size-2xl); }
+h4 { font-size: var(--crusher-font-size-xl); }
+h5 { font-size: var(--crusher-font-size-lg); }
+h6 { font-size: var(--crusher-font-size-base); }
+
+p {
+  color: var(--crusher-text-secondary);
+  margin: 0 0 var(--crusher-spacing-3);
+}
+
+a {
+  color: var(--crusher-color-brand-primary);
+  text-decoration: none;
+  font-weight: var(--crusher-font-weight-medium);
+  transition: opacity 0.2s ease;
+}
+a:hover { opacity: 0.8; }
+a:focus-visible {
+  outline: none;
+  /* soft focus ring using brand color; safe even without extra tokens */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%);
+  border-radius: 4px;
+}
+
+ul, ol { margin: 0 0 var(--crusher-spacing-3); }
+ul { list-style: none; }
+
+code, kbd, samp {
+  background: color-mix(in srgb, var(--crusher-color-brand-primary), transparent 90%);
+  color: var(--crusher-text-primary);
+  padding: .125rem .375rem;
+  border-radius: var(--crusher-radius-sm);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

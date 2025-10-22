@@ -1,4 +1,61 @@
+# ==========================================
+# Crusher UI Kit – Git Ignore
+# ==========================================
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build output
+dist/
+build/
+.cache/
+.tmp/
+out/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Storybook
+storybook-static/
+*.storysource.json
+
+# Style Dictionary temp
+tokens/build/
+tokens/output/
+src/scss/base/_variables.scss
+
+# Logs
+logs/
+*.log
+
+# Coverage / Tests
+coverage/
+.nyc_output/
+
+# Misc
+*.tgz
+*.zip
+*.tar
+
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
+
+*storybook.log

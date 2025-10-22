@@ -1,0 +1,70 @@
+@use '../base/variables' as *;
+@use 'sass:string'; // <-- 1. Import the built-in string module
+
+// Manually create the map of spacing tokens.
+$spacing-map: (
+  "0": $crusher-spacing-0,
+  "1": $crusher-spacing-1,
+  "2": $crusher-spacing-2,
+  "3": $crusher-spacing-3,
+  "4": $crusher-spacing-4,
+  "6": $crusher-spacing-6,
+  "8": $crusher-spacing-8,
+  "10": $crusher-spacing-10,
+  "12": $crusher-spacing-12
+);
+
+// A simple utility generator for padding and margin
+$sides: (top, bottom, left, right);
+
+@each $space-key, $space-value in $spacing-map {
+  // Margin utilities
+  .m-#{$space-key} { margin: #{$space-value}; }
+  .mx-#{$space-key} { margin-left: #{$space-value}; margin-right: #{$space-value}; }
+  .my-#{$space-key} { margin-top: #{$space-value}; margin-bottom: #{$space-value}; }
+  @each $side in $sides {
+    // 2. Use the modern string.slice function
+    .m#{string.slice($side, 1, 1)}-#{$space-key} { margin-#{$side}: #{$space-value}; }
+  }
+
+  // Padding utilities
+  .p-#{$space-key} { padding: #{$space-value}; }
+  .px-#{$space-key} { padding-left: #{$space-value}; padding-right: #{$space-value}; }
+  .py-#{$space-key} { padding-top: #{$space-value}; padding-bottom: #{$space-value}; }
+  @each $side in $sides {
+    // 3. Use the modern string.slice function here too
+    .p#{string.slice($side, 1, 1)}-#{$space-key} { padding-#{$side}: #{$space-value}; }
+  }
+}
+
+// Flexbox utilities
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+
+/* Shadows (tokenized) */
+.u-shadow-0 { box-shadow: var(--crusher-shadow-0); }
+.u-shadow-1 { box-shadow: var(--crusher-shadow-1); }
+.u-shadow-2 { box-shadow: var(--crusher-shadow-2); }
+
+/* Radii */
+.u-radius-sm { border-radius: var(--crusher-radius-sm); }
+.u-radius-md { border-radius: var(--crusher-radius-md); }
+.u-radius-lg { border-radius: var(--crusher-radius-lg); }
+.u-radius-full { border-radius: var(--crusher-radius-full); }
+
+/* Focus ring (accessible) */
+:root { --crusher-focus-ring: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%); }
+:where(button, [href], input, textarea, select):focus-visible {
+  outline: none;
+  box-shadow: var(--crusher-focus-ring);
+  border-radius: var(--crusher-radius-md);
+}
+.u-focusable:focus { outline: none; box-shadow: var(--crusher-focus-ring); }
+
+/* Bento grid */
+.u-grid-bento {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--crusher-spacing-bentoGap, var(--crusher-spacing-6));
+}

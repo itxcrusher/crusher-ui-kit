@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: var(--crusher-background-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--crusher-color-brand-primary);
+  border-radius: 6px;
+}
