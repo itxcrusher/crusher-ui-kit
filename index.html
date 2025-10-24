@@ -1,62 +1,443 @@
 <!DOCTYPE html>
-<html lang="en" class="" data-theme="glass" data-mode="light">
+<html lang="en" data-theme="glass" data-mode="light" data-density="comfortable">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crusher UI Kit - Demo</title>
-    
-    <!-- CSS is imported via main.js in dev and bundled to dist in build -->
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crusher UI Kit – Everything Demo</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Icons for demo only (tooltips/chevrons etc. are pure CSS; this is for button glyphs in samples) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    /* Small helpers just for this page */
+    .stack { display:flex; flex-direction:column; gap:1rem; }
+    .row { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
+    .grid { display:grid; gap:1rem; }
+    .demo-container { max-width: 1100px; margin-inline:auto; padding: 24px; }
+    .section { margin: 32px 0; }
+    .muted { color: var(--crusher-fg-muted); }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: color-mix(in srgb, var(--crusher-fg) 90%, transparent); padding: 0 6px; border-radius: 4px; }
+    .hr { height:1px; background: var(--crusher-border); opacity:.6; margin: 24px 0; }
+    .pill { padding:.25rem .5rem; border:1px solid var(--crusher-border); border-radius:9999px; font-size: .85rem; }
+  </style>
 </head>
-<body style="background-image: linear-gradient(to right top, #61dafb, #d946ef, #f97316, #3b82f6); min-height: 100vh;">
 
-    <main class="container py-12">
-        <header class="py-12" style="text-align: center;">
-            <h1 style="font-size: 2.5rem; color: var(--crusher-text-primary);">Crusher UI Kit</h1>
-            <p class="mt-4" style="font-size: 1.125rem; color: var(--crusher-text-secondary);">A modern, token-driven UI Kit with a stunning Glassmorphism theme.</p>
-        </header>
+<!-- <body style="min-height:100vh; background-image: linear-gradient(120deg,#0ea5e9 0%, #a855f7 35%, #f97316 70%, #22c55e 100%); background-attachment: fixed;"> -->
+<body style="min-height:100vh; background: var(--crusher-background-canvas);">
+  <!-- Global centers (toasts etc.) -->
+  <crusher-toast-center></crusher-toast-center>
+  <crusher-command-palette id="palette" placeholder="Jump to anything…"></crusher-command-palette>
 
-        <hr style="border: 0; height: 1px; background-color: var(--crusher-border-primary); opacity: 0.5; margin: 3rem 0;">
+  <!-- App shell (simple for demo): Menubar + top controls -->
+  <header class="demo-container section">
+    <crusher-menubar id="topbar" collapse-at="720">
+      <button id="menu-file" slot="menu">File</button>
+      <button id="menu-edit" slot="menu">Edit</button>
+      <button id="menu-view" slot="menu">View</button>
+      <button id="menu-tools" slot="menu">Tools</button>
 
-        <section id="components" class="py-12">
-            <crusher-section-title class="mb-12">Components</crusher-section-title>
-            <crusher-card class="mb-12">
-                <h3 class="mb-4">Card & Button</h3>
-                <p class="mb-6">The card features our signature Glassmorphism effect. Inside, the `<crusher-button>` component provides interactive elements.</p>
-                <div class="flex items-center" style="gap: 1rem;">
-                    <crusher-button>Primary</crusher-button>
-                    <crusher-button variant="secondary">Secondary</crusher-button>
-                </div>
-            </crusher-card>
-             <crusher-card class="mb-12">
-                <h3 class="mb-4">Form Elements</h3>
-                <p class="mb-6">A collection of smart form components, including inputs and text areas, that are fully themeable and accessible.</p>
-                <crusher-input label="Your Email" type="email" placeholder="you@example.com"></crusher-input>
-                <crusher-textarea label="Your Message" rows="3"></crusher-textarea>
-             </crusher-card>
-             <crusher-card class="mb-12">
-                <h3 class="mb-4">Data Visualization</h3>
-                <p class="mb-6">Components for displaying data, such as skill levels or chronological events.</p>
-                <crusher-skill-bar label="Cloud Infrastructure" percentage="95"></crusher-skill-bar>
-                <crusher-timeline class="mt-8">
-                    <crusher-timeline-item>
-                      <h4 style="font-size: var(--crusher-font-size-lg); font-weight: var(--crusher-font-weight-semibold);">Phase 1: Foundation</h4>
-                    </crusher-timeline-item>
-                    <crusher-timeline-item>
-                      <h4 style="font-size: var(--crusher-font-size-lg); font-weight: var(--crusher-font-weight-semibold);">Phase 2: Components</h4>
-                    </crusher-timeline-item>
-                </crusher-timeline>
-             </crusher-card>
-        </section>
-    </main>
+      <div data-for="menu-file">
+        <div value="new">New…</div>
+        <div value="open">Open…</div>
+        <div class="sep"></div>
+        <div value="exit">Exit</div>
+      </div>
+      <div data-for="menu-edit">
+        <div value="undo">Undo</div>
+        <div value="redo">Redo</div>
+        <div class="sep"></div>
+        <div value="prefs">Preferences</div>
+      </div>
+      <div data-for="menu-view">
+        <div value="zoom-in">Zoom In</div>
+        <div value="zoom-out">Zoom Out</div>
+      </div>
+      <div data-for="menu-tools">
+        <div submenu>
+          Generators
+          <div slot="submenu">
+            <div value="gen-readme">Generate README</div>
+            <div value="gen-summary">Generate Summary</div>
+          </div>
+        </div>
+        <div value="palette">Open Command Palette</div>
+      </div>
+    </crusher-menubar>
 
-    <crusher-style-switcher></crusher-style-switcher>
-    
-    <script type="module" src="/src/js/main.js"></script>
+    <div class="hr"></div>
+
+    <!-- Theme / Mode / Density / Brand Controls -->
+    <crusher-card>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); align-items:center;">
+        <div class="stack">
+          <h3>Live Controls</h3>
+          <p class="muted">Switch theme dialects, light/dark, density, and live brand color.</p>
+          <div class="row">
+            <span class="pill">Shortcut: <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> for Palette</span>
+            <span class="pill">Resize window to test Menubar overflow</span>
+          </div>
+        </div>
+        <div class="stack">
+          <label>Mode</label>
+          <crusher-select id="ctl-mode" placeholder="Select mode">
+            <div value="light">light</div>
+            <div value="dark">dark</div>
+          </crusher-select>
+        </div>
+        <div class="stack">
+          <label>Dialect</label>
+          <crusher-select id="ctl-theme" placeholder="Select dialect">
+            <div value="glass">glass</div>
+            <div value="minimal">minimal</div>
+            <div value="futuristic">futuristic</div>
+            <div value="neobrutal">neobrutal</div>
+            <div value="neumorph">neumorph</div>
+            <div value="brutal">brutal</div>
+            <div value="bento">bento</div>
+          </crusher-select>
+        </div>
+        <div class="stack">
+          <label>Density</label>
+          <crusher-select id="ctl-density" placeholder="Select density">
+            <div value="compact">compact</div>
+            <div value="cozy">cozy</div>
+            <div value="comfortable">comfortable</div>
+          </crusher-select>
+        </div>
+        <div class="stack">
+          <label>Brand color</label>
+          <input id="ctl-brand" type="color" value="#22c55e" style="inline-size:100%; block-size:40px; border-radius:8px; border:1px solid var(--crusher-border);" />
+        </div>
+      </div>
+    </crusher-card>
+  </header>
+
+  <main class="demo-container">
+    <!-- Typography / Section Title -->
+    <section class="section">
+      <crusher-section-title>Atoms</crusher-section-title>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(280px,1fr));">
+
+        <crusher-card class="stack">
+          <h3>Buttons</h3>
+          <div class="row">
+            <crusher-button id="btn-primary"><i class="fa fa-bolt" style="margin-right:.5rem;"></i>Primary</crusher-button>
+            <crusher-button variant="secondary">Secondary</crusher-button>
+            <crusher-button variant="outline">Outline</crusher-button>
+            <crusher-button loading>Loading…</crusher-button>
+            <crusher-button full-width>Full width</crusher-button>
+          </div>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Inputs</h3>
+          <crusher-input label="Email" type="email" placeholder="you@domain.com"></crusher-input>
+          <crusher-textarea label="Message" rows="3" placeholder="Write something…"></crusher-textarea>
+          <div class="row">
+            <crusher-checkbox>Accept terms</crusher-checkbox>
+            <crusher-switch>Enable feature</crusher-switch>
+          </div>
+          <div class="row">
+            <crusher-chip>Chip</crusher-chip>
+            <crusher-badge>Badge</crusher-badge>
+            <crusher-tooltip text="Hi 👋"><crusher-button variant="outline">Tooltip</crusher-button></crusher-tooltip>
+          </div>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Code Block</h3>
+          <crusher-code-block language="js">
+            <pre>
+{`const hello = (name) => console.log('Hello', name);
+hello('Crusher');`}
+            </pre>
+          </crusher-code-block>
+        </crusher-card>
+
+      </div>
+    </section>
+
+    <!-- Forms -->
+    <section class="section">
+      <crusher-section-title>Forms</crusher-section-title>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(320px,1fr));">
+
+        <crusher-card class="stack">
+          <h3>Field Scaffolding</h3>
+          <crusher-field required>
+            <crusher-label slot="label">Email</crusher-label>
+            <crusher-input name="email" placeholder="you@domain.com" required></crusher-input>
+            <crusher-hint slot="hint">We never share your email.</crusher-hint>
+            <crusher-error slot="error">Please enter a valid email.</crusher-error>
+          </crusher-field>
+
+          <crusher-field>
+            <crusher-label slot="label">About</crusher-label>
+            <crusher-textarea name="about" rows="4" placeholder="Say hello…"></crusher-textarea>
+            <crusher-hint slot="hint">Markdown supported.</crusher-hint>
+          </crusher-field>
+
+          <div class="row">
+            <crusher-button id="form-submit">Submit</crusher-button>
+            <crusher-button variant="secondary" id="form-validate">Validate</crusher-button>
+          </div>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Selects & Dropdowns</h3>
+
+          <crusher-select id="select-static" placeholder="Environment">
+            <div value="dev">Development</div>
+            <div value="stg">Staging</div>
+            <div value="prd">Production</div>
+          </crusher-select>
+
+          <crusher-select id="select-async" placeholder="OpenAI Model (async)"></crusher-select>
+
+          <crusher-dropdown id="create-dd" label="Create">
+            <div value="file">New File</div>
+            <div value="folder">New Folder</div>
+            <div class="sep"></div>
+            <div>
+              AI Tools
+              <div slot="submenu">
+                <div value="gen-summary">Generate Summary</div>
+                <div value="gen-readme">Generate README</div>
+              </div>
+            </div>
+          </crusher-dropdown>
+        </crusher-card>
+
+      </div>
+    </section>
+
+    <!-- Molecules / Overlays -->
+    <section class="section">
+      <crusher-section-title>Overlays & Navigation</crusher-section-title>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(320px,1fr));">
+
+        <crusher-card class="stack">
+          <h3>Modal</h3>
+          <div class="row">
+            <crusher-button id="open-modal">Open modal</crusher-button>
+          </div>
+          <crusher-modal id="modal">
+            <h3 slot="header">Confirm Action</h3>
+            Are you sure you want to proceed?
+            <div slot="footer" class="row" style="justify-content:flex-end;">
+              <crusher-button variant="subtle" id="cancel-modal">Cancel</crusher-button>
+              <crusher-button variant="primary" id="confirm-modal">Confirm</crusher-button>
+            </div>
+          </crusher-modal>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Tabs</h3>
+          <crusher-tabs id="tabs" value="settings">
+            <button id="settings" slot="tab">Settings</button>
+            <button id="logs" slot="tab">Logs</button>
+            <button id="metrics" slot="tab">Metrics</button>
+
+            <div slot="panel" id="settings-panel" aria-labelledby="settings">Settings content…</div>
+            <div slot="panel" id="logs-panel" aria-labelledby="logs" hidden>Logs content…</div>
+            <div slot="panel" id="metrics-panel" aria-labelledby="metrics" hidden>Metrics content…</div>
+          </crusher-tabs>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Command Palette</h3>
+          <p class="muted">Press <span class="kbd">⌘/Ctrl</span>+<span class="kbd">K</span> or use the button.</p>
+          <div class="row">
+            <crusher-button id="open-palette">Open Palette</crusher-button>
+            <crusher-button id="spawn-toast" variant="secondary">Show Toast</crusher-button>
+          </div>
+        </crusher-card>
+
+      </div>
+    </section>
+
+    <!-- Organisms -->
+    <section class="section">
+      <crusher-section-title>Organisms</crusher-section-title>
+
+      <div class="grid" style="grid-template-columns: 1fr;">
+        <crusher-card class="stack">
+          <h3>Timeline</h3>
+          <crusher-timeline>
+            <crusher-timeline-item>
+              <span slot="date" class="muted">Day 1</span>
+              <h4>Foundation</h4>
+              <p class="muted">Tokens, reset, typography.</p>
+            </crusher-timeline-item>
+            <crusher-timeline-item>
+              <span slot="date" class="muted">Day 5</span>
+              <h4>Components</h4>
+              <p class="muted">Buttons, inputs, overlays, data.</p>
+            </crusher-timeline-item>
+          </crusher-timeline>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Table (resizable + pinned + sortable + selectable)</h3>
+          <crusher-table id="table"></crusher-table>
+        </crusher-card>
+      </div>
+    </section>
+
+    <div class="section" style="text-align:center;">
+      <p class="muted">End of demo. Add or remove sections as Crusher grows.</p>
+    </div>
+  </main>
+
+  <!-- Optional floating theme tinkerer for quick checks -->
+  <crusher-style-switcher></crusher-style-switcher>
+
+  <!-- App script: wires everything together -->
+  <script type="module" src="/src/js/main.js"></script>
+  <script type="module">
+    // Toast helper
+    const toast = (opts) => window.crusherToast?.(opts);
+
+    // === THEME / MODE / DENSITY / BRAND ===
+    const $ = (id) => document.getElementById(id);
+    const ctlMode = $('ctl-mode');
+    const ctlTheme = $('ctl-theme');
+    const ctlDensity = $('ctl-density');
+    const ctlBrand = $('ctl-brand');
+
+    // sensible defaults in the selects
+    ctlMode.value = 'light';
+    ctlTheme.value = 'glass';
+    ctlDensity.value = 'comfortable';
+
+    // Optional: make the **page background** reflect the selected theme so differences are visible.
+    const themedBackgrounds = {
+      glass:      'linear-gradient(120deg,#60a5fa 0%, #a78bfa 35%, #22c55e 100%)',
+      minimal:    'linear-gradient(120deg,#f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%)',
+      futuristic: 'linear-gradient(120deg,#0ea5e9 0%, #22d3ee 40%, #a78bfa 80%)',
+      neobrutal:  'linear-gradient(120deg,#fde68a 0%, #f43f5e 50%, #7c3aed 100%)',
+      neumorph:   'linear-gradient(120deg,#e2e8f0 0%, #f8fafc 60%, #cbd5e1 100%)',
+      brutal:     'linear-gradient(120deg,#111827 0%, #fbbf24 50%, #111827 100%)',
+      bento:      'linear-gradient(120deg,#f0f9ff 0%, #d1fae5 50%, #e0e7ff 100%)',
+    };
+    const applyBackground = () => {
+      const t = ctlTheme.value || 'glass';
+      document.body.style.backgroundImage = themedBackgrounds[t] || themedBackgrounds.glass;
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.minHeight = '100vh';
+    };
+
+    // Apply root attributes + background
+    const applyRoot = () => {
+      document.documentElement.setAttribute('data-mode', ctlMode.value);
+      document.documentElement.setAttribute('data-theme', ctlTheme.value);
+      document.documentElement.setAttribute('data-density', ctlDensity.value);
+      applyBackground();
+    };
+
+    // Wire listeners
+    ctlMode.addEventListener('change', (e) => {
+      document.documentElement.setAttribute('data-mode', e.detail?.value || e.target.value);
+      toast?.({ title:'Mode', message: e.detail?.value || e.target.value });
+    });
+    ctlTheme.addEventListener('change', (e) => {
+      const theme = e.detail?.value || e.target.value;
+      document.documentElement.setAttribute('data-theme', theme);
+      applyBackground();
+      toast?.({ title:'Dialect', message: theme });
+    });
+    ctlDensity.addEventListener('change', (e) => {
+      document.documentElement.setAttribute('data-density', e.detail?.value || e.target.value);
+    });
+    ctlBrand.addEventListener('input', (e) => {
+      document.documentElement.style.setProperty('--crusher-color-brand-primary', e.target.value);
+      toast?.({ title:'Brand updated', message: e.target.value, variant: 'brand' });
+    });
+
+    // === SELECT (async) ===
+    const selectAsync = $('select-async');
+    selectAsync.items = []; selectAsync.loading = true;
+    setTimeout(() => {
+      selectAsync.items = [
+        { value:'gpt-4.1', label:'GPT-4.1' },
+        { value:'gpt-4o',  label:'GPT-4o'  },
+        { value:'o3-mini', label:'o3-mini' }
+      ];
+      selectAsync.loading = false;
+    }, 650);
+    $('select-static').addEventListener('change', e => toast?.({ title:'Environment', message: e.detail.value }));
+
+    // === DROPDOWN ===
+    $('create-dd').addEventListener('change', e => toast?.({ title:'Action', message: e.detail.value }));
+
+    // === MODAL ===
+    const modal = $('modal');
+    $('open-modal').onclick   = () => modal.open = true;
+    $('cancel-modal').onclick = () => modal.open = false;
+    $('confirm-modal').onclick = () => { toast?.({ title:'Confirmed', variant:'success' }); modal.open = false; };
+
+    // === MENUBAR ===
+    $('topbar').addEventListener('action', (e) => {
+      if (e.detail.value === 'palette') { $('open-palette').click(); return; }
+      toast?.({ title:'Menu', message: e.detail.value });
+    });
+
+    // === PALETTE ===
+    const palette = $('palette');
+    palette.provider = async (q) => {
+      await new Promise(r => setTimeout(r, 120));
+      return [
+        { id:'open-settings', label:'Open Settings', group:'Navigation', run: () => location.hash = '#/settings' },
+        { id:'open-logs',     label:'Open Logs',     group:'Navigation', run: () => location.hash = '#/logs' },
+        { id:'scale',         label:'Scale cluster to 5 nodes', group:'DevOps',  run: () => toast?.({ title:'Scaling', message:'→ 5 nodes', variant:'brand' }) },
+        { id:'tail',          label:'Tail app logs', group:'DevOps',  run: () => toast?.({ title:'Tailing', message:'app logs…', variant:'info' }) },
+        { id:'chat',          label:'Open AI Chat',  group:'AI',      run: () => location.hash = '#/ai' },
+      ];
+    };
+    $('open-palette').onclick = () => palette.open = true;
+    $('spawn-toast').onclick  = () => toast?.({ title:'Hello from Crusher', message:'Looks crisp.', variant:'success' });
+
+    // === TABLE ===
+    const t = $('table');
+    t.columns = [
+      { key: 'name',   label: 'Service', sortable: true, width: 220, minWidth: 140, pin: 'start' },
+      { key: 'region', label: 'Region', width: 140 },
+      { key: 'status', label: 'Status', sortable: true, width: 160 },
+      { key: 'cpu',    label: 'CPU (%)', sortable: true, align: 'end', width: 120, minWidth: 100, maxWidth: 200 },
+      { key: 'mem',    label: 'Memory (MB)', sortable: true, align: 'end', width: 140 },
+      { key: 'uptime', label: 'Uptime', width: 160, pin: 'end' }
+    ];
+    t.rows = Array.from({length: 24}).map((_,i) => ({
+      key: i+1,
+      name: ['auth','chat','search','vectorizer','api','ingress','cron'][i%7] + '-' + (i+1),
+      region: ['us-east-1','eu-west-1','ap-south-1'][i%3],
+      status: ['Running','Starting','Stopped'][i%3],
+      cpu: Math.floor(Math.random()*99),
+      mem: [256,512,1024,2048][i%4],
+      uptime: `${(i%9)+1}d ${(i*3)%24}h`
+    }));
+    t.selectable = true;
+    t.addEventListener('select', e => toast?.({ title:'Selected', message: `${e.detail.keys.length} row(s)` }));
+    t.addEventListener('sort',   e => toast?.({ title:'Sorted',   message: `${e.detail.key} ${e.detail.dir}` }));
+    t.addEventListener('resize', e => console.log('column widths', e.detail.widths));
+
+    // === FORM demo ===
+    $('form-validate').onclick = () => {
+      const field = document.querySelector('crusher-field');
+      const input = field.querySelector('crusher-input');
+      const error = field.querySelector('crusher-error');
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value || '');
+      field.invalid = !ok; error.hidden = ok;
+      toast?.({ title: ok ? 'Email OK' : 'Invalid email', variant: ok ? 'success' : 'error' });
+    };
+    $('form-submit').onclick = () => toast?.({ title:'Submitted', variant:'brand' });
+
+    // Initial apply
+    applyRoot();
+  </script>
 </body>
 </html>

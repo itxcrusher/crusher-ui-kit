@@ -1,30 +1,61 @@
 {
   "name": "crusher-ui-kit",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build:tokens": "node ./scripts/build-tokens.mjs",
+    "check:contrast": "node ./scripts/check-contrast.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "prepublishOnly": "npm run build:tokens && npm run build"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^4.1.1",
-    "@storybook/addon-a11y": "^9.1.13",
-    "@storybook/addon-docs": "^9.1.13",
-    "@storybook/addon-vitest": "^9.1.13",
-    "@storybook/web-components-vite": "^9.1.13",
     "lit": "^3.3.1",
     "sass": "^1.77.4",
-    "storybook": "^9.1.13",
-    "style-dictionary": "^4.4.0",
-    "vite": "^5.2.0",
-    "vitest": "^3.2.4",
-    "@vitest/browser": "^3.2.4",
-    "playwright": "^1.56.1",
-    "@vitest/coverage-v8": "^3.2.4"
+    "style-dictionary": "^5.0.2",
+    "vite": "^7.1.4",
+    "eslint": "^9.11.0",
+    "eslint-plugin-lit": "^1.12.0",
+    "eslint-plugin-wc": "^2.0.4",
+    "prettier": "^3.3.3"
+  },
+  "sideEffects": [
+    "src/css/**",
+    "src/scss/**",
+    "src/js/main.js"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/crusher-ui.esm.js",
+      "require": "./dist/crusher-ui.min.js",
+      "default": "./dist/crusher-ui.esm.js"
+    },
+    "./styles/tokens.css": "./src/css/tokens.css",
+    "./styles/modes.css": "./src/css/modes.css",
+    "./styles/semantic.css": "./src/css/semantic.css",
+    "./styles/bridge.css": "./src/css/bridge.css",
+    "./styles/code-theme.css": "./src/css/code-theme.css",
+    "./themes/*": "./src/css/themes/*.css"
+  },
+  "files": [
+    "dist",
+    "src/css",
+    "types",
+    "LICENSE",
+    "README.md"
+  ],
+  "types": "./types/index.d.ts",
+  "keywords": [
+    "design-tokens",
+    "lit",
+    "ui-kit",
+    "web-components",
+    "themes",
+    "style-dictionary"
+  ],
+  "author": "Muhammad Hassaan Javed",
+  "engines": {
+    "node": ">=20.19.0 || >=22.0.0"
   }
 }

@@ -7,5 +7,5 @@ html[data-mode="dark"] {
   --crusher-color-dark-background-surface: rgba(15,23,42,0.5);
   --crusher-color-dark-text-primary: #f8fafc;
   --crusher-color-dark-text-secondary: #94a3b8;
-  --crusher-color-dark-border: rgba(30,41,59,0.6);
+  --crusher-color-dark-border-primary: rgba(255, 255, 255, 0.22);
 }

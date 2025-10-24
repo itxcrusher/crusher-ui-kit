@@ -1,7 +1,8 @@
+// Import tokens first
 @use '../base/variables' as *;
-@use 'sass:string'; // <-- 1. Import the built-in string module
+@use 'sass:string';
 
-// Manually create the map of spacing tokens.
+// Spacing map
 $spacing-map: (
   "0": $crusher-spacing-0,
   "1": $crusher-spacing-1,
@@ -13,58 +14,60 @@ $spacing-map: (
   "10": $crusher-spacing-10,
   "12": $crusher-spacing-12
 );
-
-// A simple utility generator for padding and margin
 $sides: (top, bottom, left, right);
 
-@each $space-key, $space-value in $spacing-map {
-  // Margin utilities
-  .m-#{$space-key} { margin: #{$space-value}; }
-  .mx-#{$space-key} { margin-left: #{$space-value}; margin-right: #{$space-value}; }
-  .my-#{$space-key} { margin-top: #{$space-value}; margin-bottom: #{$space-value}; }
+// Margin & padding
+@each $k, $v in $spacing-map {
+  .m-#{$k}  { margin: #{$v}; }
+  .mx-#{$k} { margin-left: #{$v}; margin-right: #{$v}; }
+  .my-#{$k} { margin-top: #{$v}; margin-bottom: #{$v}; }
   @each $side in $sides {
-    // 2. Use the modern string.slice function
-    .m#{string.slice($side, 1, 1)}-#{$space-key} { margin-#{$side}: #{$space-value}; }
+    .m#{string.slice($side,1,1)}-#{$k} { margin-#{$side}: #{$v}; }
   }
 
-  // Padding utilities
-  .p-#{$space-key} { padding: #{$space-value}; }
-  .px-#{$space-key} { padding-left: #{$space-value}; padding-right: #{$space-value}; }
-  .py-#{$space-key} { padding-top: #{$space-value}; padding-bottom: #{$space-value}; }
+  .p-#{$k}  { padding: #{$v}; }
+  .px-#{$k} { padding-left: #{$v}; padding-right: #{$v}; }
+  .py-#{$k} { padding-top: #{$v}; padding-bottom: #{$v}; }
   @each $side in $sides {
-    // 3. Use the modern string.slice function here too
-    .p#{string.slice($side, 1, 1)}-#{$space-key} { padding-#{$side}: #{$space-value}; }
+    .p#{string.slice($side,1,1)}-#{$k} { padding-#{$side}: #{$v}; }
   }
 }
 
-// Flexbox utilities
-.flex { display: flex; }
+// Flex helpers
+.u-flex { display: flex; align-items: center; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
+.u-gap-2 { gap: var(--crusher-spacing-2); }
 
-/* Shadows (tokenized) */
+// Shadows & radius
 .u-shadow-0 { box-shadow: var(--crusher-shadow-0); }
 .u-shadow-1 { box-shadow: var(--crusher-shadow-1); }
 .u-shadow-2 { box-shadow: var(--crusher-shadow-2); }
 
-/* Radii */
 .u-radius-sm { border-radius: var(--crusher-radius-sm); }
 .u-radius-md { border-radius: var(--crusher-radius-md); }
 .u-radius-lg { border-radius: var(--crusher-radius-lg); }
 .u-radius-full { border-radius: var(--crusher-radius-full); }
 
-/* Focus ring (accessible) */
-:root { --crusher-focus-ring: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%); }
-:where(button, [href], input, textarea, select):focus-visible {
+// Focus ring
+:root {
+  --crusher-focus-ring: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%);
+}
+:where(button,[href],input,textarea,select):focus-visible {
   outline: none;
   box-shadow: var(--crusher-focus-ring);
   border-radius: var(--crusher-radius-md);
 }
 .u-focusable:focus { outline: none; box-shadow: var(--crusher-focus-ring); }
 
-/* Bento grid */
+// Grid helpers
 .u-grid-bento {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--crusher-spacing-bentoGap, var(--crusher-spacing-6));
+  gap: var(--crusher-spacing-6);
+}
+@for $i from 0 through 12 {
+  .u-gap-#{$i} { gap: var(--crusher-spacing-#{$i}); }
+  .u-m-#{$i}   { margin: var(--crusher-spacing-#{$i}); }
+  .u-p-#{$i}   { padding: var(--crusher-spacing-#{$i}); }
 }

@@ -2,7 +2,7 @@
 # Crusher UI Kit – Git Ignore
 # ==========================================
 
-# Node
+# Node / Package Managers
 node_modules/
 npm-debug.log*
 yarn-debug.log*
@@ -12,50 +12,62 @@ package-lock.json
 pnpm-lock.yaml
 yarn.lock
 
-# Build output
+# Build / Output Artifacts
 dist/
 build/
 .cache/
 .tmp/
 out/
+vite.config.timestamp*
 
-# Environment
+# Generated Token Files
+tokens/build/
+tokens/output/
+src/css/
+src/scss/base/_variables.scss
+
+# Storybook / Docs
+storybook-static/
+.storybook-out/
+*.storysource.json
+*.stories.*
+*.mdx
+
+# Environment Config
 .env
 .env.*
 !.env.example
 
-# OS / Editor
+# IDE / OS Metadata
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
 *.swp
+*.swo
 
-# Storybook
-storybook-static/
-*.storysource.json
-
-# Style Dictionary temp
-tokens/build/
-tokens/output/
-src/scss/base/_variables.scss
-
-# Logs
+# Logs / Coverage
 logs/
 *.log
-
-# Coverage / Tests
 coverage/
 .nyc_output/
+*.pid
 
-# Misc
-*.tgz
-*.zip
-*.tar
-
+# Sass / CSS Artifacts
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
 
+# Archives / Misc
+*.tgz
+*.zip
+*.tar
+
+# Test / Temporary
+*.test.js
+*.spec.js
+*.bench.js
+
+# Misc
 *storybook.log

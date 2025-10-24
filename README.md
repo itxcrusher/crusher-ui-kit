@@ -2,101 +2,150 @@
 
 ## Design Dialects on Demand — A modern, token-driven UI framework
 
----
-
-## 🌈 Overview
-
-**Crusher UI Kit** is a framework-agnostic design system built on **Web Components** and **Design Tokens**.
-It enables instant switching between multiple modern aesthetics — **Neumorphism**, **Glassmorphism**, **Brutalism**, **Neo-Brutalism**, **Minimalist**, **Futuristic**, and **Bento** — with full **dark/light** support.
-
-This isn’t just a CSS library. It’s a **brand engine** — composable, scalable, and themeable for apps, SaaS platforms, AI tools, dashboards, or mobile hybrids.
+**Modern, themeable Web Components for product-grade apps — infra consoles, AI tools, dashboards, you name it.**
+Tokens-first. Zero lock-in. Accessible. Fast. Framework-free.
 
 ---
 
-## 🧠 Core Philosophy
+## 🧩 Install
 
-* **Token-First Architecture** — every color, shadow, radius, and animation originates from a single JSON source.
-* **Framework-Agnostic Components** — clean Web Components usable in React, Vue, Angular, or native HTML.
-* **Design Dialects** — visually distinct design systems built from the same token base.
-* **Zero Lock-In** — no dependencies, no runtime frameworks.
-* **Accessible & Performant** — keyboard-friendly, WCAG-checked, SSR-safe.
+```bash
+npm i crusher-ui-kit
+```
+
+### Use
+
+**Import the full bundle:**
+
+```js
+import 'crusher-ui-kit/dist/crusher-ui.esm.js';
+import 'crusher-ui-kit/src/css/tokens.css';
+import 'crusher-ui-kit/src/css/modes.css';
+import 'crusher-ui-kit/src/css/semantic.css';
+import 'crusher-ui-kit/src/css/code-theme.css';
+import 'crusher-ui-kit/src/css/themes/glass.css';
+```
+
+**…or cherry-pick (recommended):**
+
+```js
+import 'crusher-ui-kit/src/components/atoms/crusher-button.js';
+import 'crusher-ui-kit/src/components/molecules/crusher-modal.js';
+import 'crusher-ui-kit/src/runtime/theme.js'; // mode/theme persistence
+import 'crusher-ui-kit/src/css/tokens.css';
+```
 
 ---
 
-## 🧩 Structure
+## 🎨 Theming
+
+Base tokens under `:root`, dark-mode overrides under `html[data-mode="dark"]`.
+
+Dialects:
+`html[data-theme="glass" | "minimal" | "futuristic" | "neobrutal" | "neumorph" | "brutal" | "bento"]`
+
+Example:
+
+```html
+<script type="module">
+  import { setTheme, setMode } from 'crusher-ui-kit/src/runtime/theme.js';
+  setTheme('glass');  
+  setMode('dark');
+</script>
+```
+
+---
+
+## ♿ Accessibility
+
+* **Modal:** traps focus, restores on close, locks scroll, supports Esc/overlay dismiss, emits `request-close` (cancelable).
+* **Tabs:** fully ARIA-compliant (`role="tablist/tab/tabpanel"`) with roving focus + live announcements.
+* **Select:** announces selections via `aria-live`, supports async data and keyboard type-ahead.
+* **Contrast:** checked automatically via `npm run check:contrast` (WCAG-compliant).
+
+---
+
+## 🧰 Scripts
+
+| Command                           | Purpose                         |
+| --------------------------------- | ------------------------------- |
+| `npm run dev`                     | Vite dev server                 |
+| `npm run build:tokens`            | Generate token + theme CSS      |
+| `npm run build`                   | Build distributable (ESM + CSS) |
+| `npm run lint` / `npm run format` | Code quality                    |
+| `npm run check:contrast`          | WCAG color contrast validation  |
+
+**Release flow:** Uses Changesets → creates release PR → publishes on merge.
+
+---
+
+## 💡 Types
+
+`types/index.d.ts` declares custom elements for IDE IntelliSense (TS / VSCode).
+
+---
+
+## 🧱 Project Structure
 
 ```bash
 crusher-ui-kit/
 ├── design/           → base tokens + theme overlays (JSON)
 ├── src/
-│   ├── components/   → Web Components (crusher-button, crusher-card, etc.)
-│   ├── css/          → generated tokens + themes
-│   ├── scss/         → authored styles and utilities
-│   ├── runtime/      → theme switching logic
-│   └── stories/      → Storybook demos
-└── dist/             → final distributable (minified JS + CSS)
+│   ├── components/   → Web Components (atoms, molecules, organisms)
+│   ├── css/          → generated token/theme CSS
+│   ├── scss/         → authored SCSS utilities
+│   ├── runtime/      → theme + mode switching
+│   └── js/           → entrypoint logic
+└── dist/             → compiled output
 ```
 
 ---
 
-## ⚙️ Getting Started
+## 🌈 Overview
 
-### 1. Install (coming soon)
+**Crusher UI Kit** is a **framework-agnostic design system** powered by Web Components and Design Tokens.
+It allows instant switching between modern aesthetics — **Neumorphism**, **Glassmorphism**, **Brutalism**, **Neo-Brutalism**, **Minimalist**, **Futuristic**, and **Bento** — all with **dark/light support**.
 
-```bash
-npm install @crusher/core
-```
-
-### 2. Import via CDN
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@crusher/core@latest/dist/crusher-ui.min.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@crusher/core@latest/dist/crusher-ui.min.js"></script>
-```
-
-### 3. Set a theme
-
-```html
-<html data-theme="glass" data-mode="light">
-```
-
-### 4. Toggle at runtime
-
-```js
-import { setTheme, setMode } from '@crusher/core/runtime';
-setTheme('brutal');
-setMode('dark');
-```
+This isn’t just CSS — it’s a *design engine* built for products that evolve.
 
 ---
 
-## 🧱 Components
+## 🧠 Core Philosophy
 
-| Component                                | Purpose                           |
-| ---------------------------------------- | --------------------------------- |
-| `<crusher-button>`                       | Branded interactive buttons       |
-| `<crusher-card>`                         | Glass or brutalist content blocks |
-| `<crusher-input>` / `<crusher-textarea>` | Accessible form controls          |
-| `<crusher-modal>`                        | Lightweight, tokenized modals     |
-| `<crusher-skill-bar>`                    | Animated progress bars            |
-| `<crusher-timeline>`                     | Data visualization timeline       |
-| `<crusher-style-switcher>`               | Theme + mode toggle panel         |
+* **Token-First Architecture** — one JSON source defines all design primitives.
+* **Framework-Agnostic** — use in React, Vue, Angular, or plain HTML.
+* **Design Dialects** — switch entire aesthetic systems instantly.
+* **Accessible & Performant** — built for real-world apps, not demos.
+* **Zero Lock-In** — no runtime dependency hell.
+
+---
+
+## 🧪 Tech Stack
+
+* **Vite** — ultra-fast dev/build
+* **Style Dictionary** — token compilation
+* **Lit** — Web Components core
+* **Sass/SCSS** — utilities and authoring
+* **ESLint + Prettier** — code hygiene
+* **Changesets** — release management
 
 ---
 
 ## 🪄 Design Dialects
 
-Each dialect is a layer of token overrides:
+Each dialect overrides tokens for a distinct personality:
 
-* **Glass** – translucent surfaces, soft blur
-* **Brutal** – chunky borders, high contrast
-* **Neo-Brutal** – modernized brutalism
-* **Neumorph** – subtle depth, tactile lighting
-* **Minimal** – restrained palette, whitespace focus
-* **Futuristic** – glow, neon accents, motion cues
-* **Bento** – modular grids, adaptive layouts
+| Dialect        | Style Signature           |
+| -------------- | ------------------------- |
+| **Glass**      | Soft transparency + blur  |
+| **Brutal**     | Bold contrast, hard edges |
+| **NeoBrutal**  | Modern brutalism          |
+| **Neumorph**   | Subtle lighting, depth    |
+| **Minimal**    | Whitespace and clarity    |
+| **Futuristic** | Glows, neon, motion       |
+| **Bento**      | Modular grid layouts      |
 
-Switch instantly using:
+Switch instantly with:
 
 ```js
 setTheme('neobrutal');
@@ -104,53 +153,33 @@ setTheme('neobrutal');
 
 ---
 
-## 🌗 Dark / Light Modes
+## 🌗 Modes
 
-Dark mode tokens are automatically generated via `modes.css`.
-You can toggle globally with `data-mode="dark"` or programmatically with `setMode('dark')`.
+Light and dark modes are tokenized in `modes.css`.
+Switch globally:
 
----
-
-## 🧰 Development
-
-### Local dev
-
-```bash
-npm run dev
-```
-
-### Build tokens
-
-```bash
-npm run build:tokens
-```
-
-### Build package
-
-```bash
-npm run build
-```
-
-### Storybook
-
-```bash
-npm run storybook
+```js
+setMode('dark');
 ```
 
 ---
 
-## 🧪 Tech Stack
+## 🧩 Components Overview
 
-* **Vite** – blazing-fast dev + bundling
-* **Style Dictionary** – multi-platform token generation
-* **Web Components (Lit)** – interoperable core
-* **Sass/SCSS** – design utilities and layouts
-* **Storybook** – component documentation
-* **Rollup** (planned) – for npm/CDN release builds
+| Component                                | Purpose                         |
+| ---------------------------------------- | ------------------------------- |
+| `<crusher-button>`                       | Tokenized button                |
+| `<crusher-card>`                         | Glass/brutal cards              |
+| `<crusher-input>` / `<crusher-textarea>` | Accessible forms                |
+| `<crusher-modal>`                        | Tokenized modal with trap focus |
+| `<crusher-skill-bar>`                    | Animated progress bars          |
+| `<crusher-timeline>`                     | Structured timelines            |
+| `<crusher-style-switcher>`               | Theme/mode toggler              |
 
 ---
 
 ## 💬 Credits
 
-Created and maintained by **Hassaan (itxcrusher)**
-For updates, follow: [muhammadhassaanjaved.com](https://muhammadhassaanjaved.com)
+Built and maintained by **Hassaan (itxcrusher)**  
+🌐 [muhammadhassaanjaved.com](https://muhammadhassaanjaved.com)  
+Follow updates → future releases, token presets, and dialect packs.
