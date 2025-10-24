@@ -8,17 +8,22 @@
     "check:contrast": "node ./scripts/check-contrast.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build:tokens && npm run build"
+    "prepublishOnly": "npm run build:tokens && npm run build",
+    "changeset": "changeset",
+    "release:prepare": "npx changeset",
+    "release:version": "npx changeset version",
+    "release:publish": "npm publish --provenance --access public"
   },
   "devDependencies": {
-    "lit": "^3.3.1",
-    "sass": "^1.77.4",
-    "style-dictionary": "^5.0.2",
-    "vite": "^7.1.4",
+    "@changesets/cli": "^2.29.7",
     "eslint": "^9.11.0",
     "eslint-plugin-lit": "^1.12.0",
     "eslint-plugin-wc": "^2.0.4",
-    "prettier": "^3.3.3"
+    "lit": "^3.3.1",
+    "prettier": "^3.3.3",
+    "sass": "^1.77.4",
+    "style-dictionary": "^5.0.2",
+    "vite": "^7.1.4"
   },
   "sideEffects": [
     "src/css/**",
