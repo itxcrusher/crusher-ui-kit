@@ -1,0 +1,47 @@
+/* src/css/bridge.css */
+html {
+  /* Resolve core backgrounds depending on mode */
+  --crusher-background-canvas: var(--color-light-background-canvas);
+  --crusher-background-surface: var(--color-light-background-surface);
+  --crusher-text-primary: var(--color-light-text-primary);
+  --crusher-text-secondary: var(--color-light-text-secondary);
+  --crusher-border-primary: var(--color-light-border-primary);
+}
+
+html[data-mode="dark"] {
+  --crusher-background-canvas: var(--color-dark-background-canvas);
+  --crusher-background-surface: var(--color-dark-background-surface);
+  --crusher-text-primary: var(--color-dark-text-primary);
+  --crusher-text-secondary: var(--color-dark-text-secondary);
+  --crusher-border-primary: var(--color-dark-border-primary);
+}
+
+/* Card + surface elevation control */
+.crusher-surface {
+  background: var(--crusher-background-surface);
+  color: var(--crusher-text-primary);
+  border: 1px solid var(--crusher-border-primary);
+  -webkit-backdrop-filter: blur(var(--effect-blur-md, 0));
+  backdrop-filter: blur(var(--effect-blur-md, 0));
+  box-shadow: var(--component-elevation, var(--shadow-1));
+  border-radius: var(--component-radius, 0.5rem);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+/* put in semantic.css or bridge.css */
+:root {
+  --crusher-surface-bg: var(--crusher-background-surface);
+  --crusher-surface-border: var(--crusher-border-primary);
+  --crusher-surface-radius: var(--component-radius, var(--crusher-radius-md));
+  --crusher-surface-shadow: var(--component-elevation, var(--crusher-shadow-1));
+  --crusher-surface-blur: var(--effect-blur-md, 0);
+}
+
+/* globals.css or bridge.css */
+@media (prefers-reduced-motion: no-preference) {
+  * { transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s; }
+}
+:where(button,[role="button"],a,input,textarea,select):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 var(--state-focus-ring-width, 2px) var(--state-focus-ring-color, var(--crusher-color-brand-primary));
+  border-radius: var(--component-radius, var(--crusher-radius-md));
+}

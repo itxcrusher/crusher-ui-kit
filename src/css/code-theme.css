@@ -1,0 +1,24 @@
+/* Code surface defaults. Override per dialect/theme if desired. */
+:root {
+  --code-bg: color-mix(in srgb, var(--crusher-text-primary) 5%, transparent);
+  --code-fg: var(--crusher-text-primary);
+  --code-border: var(--crusher-border-primary);
+  --code-pill-bg: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent);
+  --code-pill-fg: var(--crusher-text-secondary);
+
+  /* tokens */
+  --code-token-comment: #6b7280;
+  --code-token-punc: #94a3b8;
+  --code-token-kw: #7c3aed;
+  --code-token-op: #ef4444;
+  --code-token-num: #06b6d4;
+  --code-token-str: #16a34a;
+  --code-token-fn: #3b82f6;
+  --code-token-bool: #f59e0b;
+  --code-token-class: #22d3ee;
+}
+
+html[data-mode="dark"] {
+  --code-bg: color-mix(in srgb, var(--crusher-text-primary) 12%, transparent);
+  --code-pill-bg: color-mix(in srgb, var(--crusher-text-primary) 16%, transparent);
+}

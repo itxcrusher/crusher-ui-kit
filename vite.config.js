@@ -16,7 +16,7 @@ export default defineConfig({
       name: 'CrusherUI',
       formats: ['es', 'umd'],
       fileName: (format) =>
-        format === 'umd' ? 'crusher-ui.min' : 'crusher-ui.esm'
+        format === 'umd' ? 'crusher-ui.min.js' : 'crusher-ui.esm.js'
     },
     outDir: 'dist',
     minify: true,

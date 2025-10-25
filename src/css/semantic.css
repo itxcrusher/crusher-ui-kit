@@ -1,0 +1,80 @@
+/* ===== Mode → Semantic Bridge ===============================================
+   Picks from light/dark tokens and exposes the neutral names that components use.
+   ============================================================================ */
+
+/* LIGHT */
+html[data-mode="light"] {
+  --crusher-background-canvas:  var(--crusher-color-light-background-canvas);
+  --crusher-background-surface: var(--crusher-color-light-background-surface);
+  --crusher-text-primary:       var(--crusher-color-light-text-primary);
+  --crusher-text-secondary:     var(--crusher-color-light-text-secondary);
+  --crusher-border-primary:     var(--crusher-color-light-border-primary);
+}
+
+/* DARK */
+html[data-mode="dark"] {
+  --crusher-background-canvas:  var(--crusher-color-dark-background-canvas);
+  --crusher-background-surface: var(--crusher-color-dark-background-surface);
+  --crusher-text-primary:       var(--crusher-color-dark-text-primary);
+  --crusher-text-secondary:     var(--crusher-color-dark-text-secondary);
+  --crusher-border-primary:     var(--crusher-color-dark-border-primary);
+}
+
+/* Brand passthrough (theme can change these) */
+:root {
+  --crusher-color-brand-primary:   var(--crusher-color-brand-primary);
+  --crusher-color-brand-secondary: var(--crusher-color-brand-secondary);
+  --crusher-color-brand-accent-orange: var(--crusher-color-brand-accent-orange);
+  --crusher-color-brand-accent-pink:   var(--crusher-color-brand-accent-pink);
+  --crusher-color-brand-accent-red:    var(--crusher-color-brand-accent-red);
+}
+
+/* Fonts, spacing, radius, shadows are already prefixed by base tokens.
+   Theme overlays can override them thanks to Step 1’s prefix fix. */
+
+/* Non-visual semantic aliases */
+:root {
+  --crusher-surface: var(--crusher-background-surface);
+  --crusher-border: var(--crusher-border-primary);
+  --crusher-fg: var(--crusher-text-primary);
+  --crusher-fg-muted: var(--crusher-text-secondary);
+
+  /* Layering */
+  --crusher-z-dropdown: 100;
+  --crusher-z-tooltip:  200;
+  --crusher-z-toast:    900;
+  --crusher-z-modal:   1000;
+  --crusher-z-palette: 1100;
+
+  /* Density (compact|cozy|comfortable) */
+  --crusher-density: comfortable;
+  --crusher-density-pad: var(--crusher-spacing-3); /* comfortable */
+  --crusher-density-row: 40px;                     /* comfortable row height */
+
+  /* Table defaults */
+  --crusher-table-header-bg: color-mix(in srgb, var(--crusher-fg) 6%, transparent);
+  --crusher-table-hover-bg:  color-mix(in srgb, var(--crusher-fg) 8%, transparent);
+  --crusher-table-selected-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent);
+}
+
+/* Density overrides */
+html[data-density="compact"],
+:root[data-density="compact"] {
+  --crusher-density: compact;
+  --crusher-density-pad: var(--crusher-spacing-2);
+  --crusher-density-row: 32px;
+}
+html[data-density="cozy"],
+:root[data-density="cozy"] {
+  --crusher-density: cozy;
+  --crusher-density-pad: calc(var(--crusher-spacing-2) + 2px);
+  --crusher-density-row: 36px;
+}
+
+/* RTL friendliness (logical props) */
+:root, :host {
+  --crusher-pad-inline: var(--crusher-density-pad);
+  --crusher-pad-block:  var(--crusher-density-pad);
+}
+
+html[dir="rtl"] * { direction: rtl; }
