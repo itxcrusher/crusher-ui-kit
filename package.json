@@ -1,7 +1,9 @@
 {
-  "name": "crusher-ui-kit",
+  "name": "crusher-ui",
   "version": "0.1.0",
   "type": "module",
+  "main": "./dist/crusher-ui.min.js",
+  "module": "./dist/crusher-ui.esm.js",
   "scripts": {
     "dev": "vite",
     "build:tokens": "node ./scripts/build-tokens.mjs",
@@ -38,6 +40,11 @@
       "require": "./dist/crusher-ui.min.js",
       "default": "./dist/crusher-ui.esm.js"
     },
+    "./runtime": {
+      "types": "./types/runtime.d.ts",
+      "import": "./src/runtime/command-palette.js",
+      "default": "./src/runtime/command-palette.js"
+    },
     "./styles/tokens.css": "./src/css/tokens.css",
     "./styles/modes.css": "./src/css/modes.css",
     "./styles/semantic.css": "./src/css/semantic.css",
@@ -50,11 +57,19 @@
   "files": [
     "dist",
     "src/css",
+    "src/runtime",
     "types",
     "LICENSE",
     "README.md"
   ],
   "types": "./types/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "runtime": [
+        "types/runtime.d.ts"
+      ]
+    }
+  },
   "keywords": [
     "design-tokens",
     "lit",
