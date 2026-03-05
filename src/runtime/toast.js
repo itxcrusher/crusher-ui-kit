@@ -4,8 +4,16 @@
 //  - action: { label, onClick } (optional)
 
 const EVT = 'crusher:toast';
+const HAS_BROWSER_RUNTIME = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+function requireBrowserRuntime() {
+  if (!HAS_BROWSER_RUNTIME) {
+    throw new Error('crusher-ui-kit/runtime requires a browser environment (window/document).');
+  }
+}
 
 export function showToast(opts = {}) {
+  requireBrowserRuntime();
   const detail = {
     id: crypto.randomUUID?.() || String(Date.now() + Math.random()),
     title: opts.title ?? '',
@@ -20,4 +28,4 @@ export function showToast(opts = {}) {
 }
 
 // attach to window for convenience
-if (!window.crusherToast) window.crusherToast = showToast;
+if (HAS_BROWSER_RUNTIME && !window.crusherToast) window.crusherToast = showToast;

@@ -29,11 +29,29 @@ import 'crusher-ui-kit/styles/dialect-overrides.css';
 import 'crusher-ui-kit/themes/glass.css';
 ```
 
+Theme imports are extension-qualified by contract:
+`import 'crusher-ui-kit/themes/<theme>.css'`
+
 **Runtime helper export (browser):**
 
 ```js
 import { openPalette } from 'crusher-ui-kit/runtime';
 openPalette();
+```
+
+**Static HTML (no bundler, ESM + importmap):**
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/crusher-ui-kit@0.1.0/dist/crusher-ui.min.css" />
+<script type="importmap">
+{
+  "imports": {
+    "lit": "https://cdn.jsdelivr.net/npm/lit@3.3.1/index.js",
+    "lit/": "https://cdn.jsdelivr.net/npm/lit@3.3.1/"
+  }
+}
+</script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/crusher-ui-kit@0.1.0/dist/crusher-ui.esm.js"></script>
 ```
 
 ---
@@ -144,10 +162,10 @@ Each dialect overrides tokens for a distinct personality:
 | **Futuristic** | Glows, neon, motion       |
 | **Bento**      | Modular grid layouts      |
 
-Switch instantly with:
+Switch instantly with the root attribute contract:
 
 ```js
-setTheme('neobrutal');
+document.documentElement.setAttribute('data-theme', 'neobrutal');
 ```
 
 ---
@@ -158,7 +176,7 @@ Light and dark modes are tokenized in `modes.css`.
 Switch globally:
 
 ```js
-setMode('dark');
+document.documentElement.setAttribute('data-mode', 'dark');
 ```
 
 ---
