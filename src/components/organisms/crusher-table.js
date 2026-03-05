@@ -38,7 +38,7 @@ export class CrusherTable extends LitElement {
   static styles = css`
     :host { display:block; }
     .wrap {
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
@@ -57,7 +57,7 @@ export class CrusherTable extends LitElement {
       font-weight: var(--crusher-font-weight-semibold);
       padding: 0 var(--crusher-pad-inline);
       height: var(--crusher-density-row);
-      border-bottom: 1px solid var(--crusher-border);
+      border-bottom: var(--crusher-component-border-weight) solid var(--crusher-border);
       backdrop-filter: saturate(110%);
       -webkit-backdrop-filter: saturate(110%);
       white-space: nowrap;
@@ -67,7 +67,7 @@ export class CrusherTable extends LitElement {
     tbody td {
       padding: 0 var(--crusher-pad-inline);
       height: var(--crusher-density-row);
-      border-bottom: 1px solid color-mix(in srgb, var(--crusher-border) 60%, transparent);
+      border-bottom: var(--crusher-component-border-weight) solid color-mix(in srgb, var(--crusher-border) 60%, transparent);
       color: var(--crusher-fg);
       vertical-align: middle;
       background: var(--crusher-surface);
@@ -78,41 +78,69 @@ export class CrusherTable extends LitElement {
     .end { text-align: end; }
     .center { text-align: center; }
 
-    .sort { display: inline-flex; gap: .25rem; align-items: center; cursor: pointer; user-select: none; }
-    .sort svg { width: 12px; height: 12px; opacity: .6; }
+    .sort { display: inline-flex; gap: var(--crusher-spacing-1); align-items: center; cursor: pointer; user-select: none; }
+    .sort svg {
+      width: var(--crusher-font-size-xs);
+      height: var(--crusher-font-size-xs);
+      opacity: var(--crusher-opacity-muted);
+    }
 
     .busy, .empty {
       display:flex; align-items:center; justify-content:center;
-      color: var(--crusher-fg-muted); height: 160px;
+      color: var(--crusher-fg-muted); height: calc(var(--crusher-spacing-10) * 4);
     }
     .spinner {
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
+      width: var(--crusher-font-size-sm);
+      height: var(--crusher-font-size-sm);
+      border-radius: var(--crusher-radius-full);
+      border: var(--crusher-focus-width) solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
       border-top-color: var(--crusher-fg);
-      animation: spin .9s linear infinite; margin-inline-end: 8px;
+      animation: spin .9s linear infinite;
+      margin-inline-end: var(--crusher-spacing-2);
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Checkbox column */
-    .chk { width: 40px; text-align: center; position: sticky; left: 0; z-index: 4; background: var(--crusher-table-header-bg); }
+    .chk {
+      width: var(--crusher-spacing-10);
+      text-align: center;
+      position: sticky;
+      left: 0;
+      z-index: 4;
+      background: var(--crusher-table-header-bg);
+    }
     .chk-body { position: sticky; left: 0; background: var(--crusher-surface); z-index: 2; }
 
     /* Column resizing */
-    .th-wrap { position: relative; display: inline-flex; align-items:center; gap:.25rem; }
+    .th-wrap { position: relative; display: inline-flex; align-items:center; gap:var(--crusher-spacing-1); }
     .resizer {
-      position: absolute; top: 0; inset-inline-end: -4px; width: 8px; height: 100%;
+      position: absolute;
+      top: 0;
+      inset-inline-end: calc(var(--crusher-spacing-1) * -1);
+      width: var(--crusher-spacing-2);
+      height: 100%;
       cursor: col-resize; touch-action: none; opacity: 0;
     }
     th:hover .resizer { opacity: 1; }
     .guide {
       position: absolute; top: 0; bottom: 0; width: 0;
-      border-inline-end: 1px dashed color-mix(in srgb, var(--crusher-fg) 50%, transparent);
+      border-inline-end: var(--crusher-component-border-weight) dashed color-mix(in srgb, var(--crusher-fg) 50%, transparent);
       pointer-events: none; z-index: 999;
     }
 
     /* Pinned columns */
-    .pin-start { position: sticky; left: var(--_pinLeft, 0px); z-index: 2; box-shadow: 1px 0 0 0 color-mix(in srgb, var(--crusher-border) 70%, transparent); }
-    .pin-end   { position: sticky; right: var(--_pinRight, 0px); z-index: 2; box-shadow: -1px 0 0 0 color-mix(in srgb, var(--crusher-border) 70%, transparent); }
+    .pin-start {
+      position: sticky;
+      left: var(--_pinLeft, 0);
+      z-index: 2;
+      box-shadow: var(--crusher-component-border-weight) 0 0 0 color-mix(in srgb, var(--crusher-border) 70%, transparent);
+    }
+    .pin-end   {
+      position: sticky;
+      right: var(--_pinRight, 0);
+      z-index: 2;
+      box-shadow: calc(var(--crusher-component-border-weight) * -1) 0 0 0 color-mix(in srgb, var(--crusher-border) 70%, transparent);
+    }
     thead .pin-start, thead .pin-end { z-index: 5; } /* headers above cells */
   `;
 

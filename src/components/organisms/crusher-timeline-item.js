@@ -4,9 +4,9 @@ export class CrusherTimelineItem extends LitElement {
   static styles = css`
     :host {
       /* marker column width is fixed; content is flexible */
-      --tl-col: 28px;                 /* width of the marker column */
-      --tl-dot: 12px;                 /* dot size */
-      --tl-line-w: 2px;               /* vertical line width */
+      --tl-col: calc(var(--crusher-spacing-6) + var(--crusher-spacing-1)); /* width of the marker column */
+      --tl-dot: var(--crusher-spacing-3);                                   /* dot size */
+      --tl-line-w: var(--crusher-focus-width);                              /* vertical line width */
       --tl-gap: var(--crusher-spacing-3);
 
       display: grid;
@@ -26,7 +26,7 @@ export class CrusherTimelineItem extends LitElement {
       content: "";
       position: absolute;
       left: calc((var(--tl-col) - var(--tl-line-w)) / 2); /* center in marker col */
-      top: calc(var(--tl-dot) + 2px); /* start under the dot */
+      top: calc(var(--tl-dot) + var(--crusher-focus-offset)); /* start under the dot */
       bottom: 0;
       width: var(--tl-line-w);
       background: var(--crusher-color-brand-primary);
@@ -37,12 +37,12 @@ export class CrusherTimelineItem extends LitElement {
     .dot {
       position: absolute;
       left: calc((var(--tl-col) - var(--tl-dot)) / 2);
-      top: 2px;
+      top: var(--crusher-focus-offset);
       width: var(--tl-dot);
       height: var(--tl-dot);
       border-radius: var(--crusher-radius-full);
       background: var(--crusher-color-brand-primary);
-      border: 2px solid var(--crusher-background-surface);
+      border: var(--crusher-focus-width) solid var(--crusher-background-surface);
       z-index: 1; /* dot above the line */
     }
 
@@ -57,12 +57,19 @@ export class CrusherTimelineItem extends LitElement {
       display: inline-block;
       margin-bottom: var(--crusher-spacing-2);
       color: var(--crusher-text-secondary);
-      font-size: var(--crusher-font-size-sm, .875rem);
+      font-size: var(--crusher-font-size-sm);
     }
 
     /* Optional density presets */
-    :host([compact]) { --tl-col: 24px; --tl-dot: 10px; padding-bottom: var(--crusher-spacing-6); }
-    :host([flush])   { --tl-col: 20px; --tl-dot: 10px; }
+    :host([compact]) {
+      --tl-col: var(--crusher-spacing-6);
+      --tl-dot: calc(var(--crusher-spacing-2) + var(--crusher-focus-offset));
+      padding-bottom: var(--crusher-spacing-6);
+    }
+    :host([flush]) {
+      --tl-col: calc(var(--crusher-spacing-4) + var(--crusher-spacing-1));
+      --tl-dot: calc(var(--crusher-spacing-2) + var(--crusher-focus-offset));
+    }
   `;
 
   render() {

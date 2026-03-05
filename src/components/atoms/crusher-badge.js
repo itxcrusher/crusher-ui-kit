@@ -19,18 +19,21 @@ export class CrusherBadge extends LitElement {
   static styles = css`
     :host { display: inline-block; }
     .badge {
-      display: inline-flex; align-items: center; gap: .35em;
+      display: inline-flex; align-items: center; gap: var(--crusher-spacing-1);
       font-family: var(--crusher-font-family-body);
       font-weight: var(--crusher-font-weight-medium);
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       background: var(--crusher-background-surface);
       color: var(--crusher-text-primary);
       border-radius: var(--crusher-radius-md);
       line-height: 1;
       white-space: nowrap;
     }
-    .sm { padding: .25rem .5rem; font-size: var(--crusher-font-size-sm); }
-    .md { padding: .35rem .65rem; font-size: var(--crusher-font-size-base); }
+    .sm { padding: var(--crusher-spacing-1) var(--crusher-spacing-2); font-size: var(--crusher-font-size-sm); }
+    .md {
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-3);
+      font-size: var(--crusher-font-size-base);
+    }
     .pill { border-radius: var(--crusher-radius-full); }
 
     /* tones via border + subtle bg wash */

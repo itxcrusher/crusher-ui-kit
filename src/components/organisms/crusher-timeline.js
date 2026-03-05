@@ -11,7 +11,7 @@ export class CrusherTimeline extends LitElement {
       background: var(--crusher-background-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       border-radius: var(--crusher-radius-lg);
       padding: var(--crusher-spacing-8);
     }

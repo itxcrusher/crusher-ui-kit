@@ -22,11 +22,11 @@ export class CrusherCodeBlock extends LitElement {
       padding: var(--crusher-spacing-4);
       overflow: auto;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 0.9rem;
+      font-size: var(--crusher-font-size-sm);
       line-height: 1.6;
       color: var(--code-fg, var(--crusher-text-primary));
       background: var(--code-bg, color-mix(in srgb, var(--crusher-text-primary) 6%, transparent));
-      border: 1px solid var(--code-border, var(--crusher-border-primary));
+      border: var(--crusher-component-border-weight) solid var(--code-border, var(--crusher-border-primary));
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-1);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
@@ -39,37 +39,45 @@ export class CrusherCodeBlock extends LitElement {
 
     /* Toolbar */
     .toolbar {
-      position: absolute; top: 8px; right: 8px; display: flex; gap: 6px;
+      position: absolute;
+      top: var(--crusher-spacing-2);
+      right: var(--crusher-spacing-2);
+      display: flex;
+      gap: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2);
     }
     .btn {
       background: var(--crusher-background-surface);
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       color: var(--crusher-text-primary);
-      padding: .25rem .5rem; border-radius: var(--crusher-radius-md);
+      padding: var(--crusher-spacing-1) var(--crusher-spacing-2); border-radius: var(--crusher-radius-md);
       cursor: pointer; font-size: var(--crusher-font-size-sm);
     }
 
     /* Language pill */
     .badge {
-      position: absolute; top: 8px; left: 12px;
-      font-size: 12px; padding: 2px 6px; border-radius: 999px;
+      position: absolute;
+      top: var(--crusher-spacing-2);
+      left: var(--crusher-spacing-3);
+      font-size: var(--crusher-font-size-xs);
+      padding: var(--crusher-focus-offset) var(--crusher-spacing-2);
+      border-radius: var(--crusher-radius-full);
       color: var(--code-pill-fg, var(--crusher-text-secondary));
       background: var(--code-pill-bg, color-mix(in srgb, var(--crusher-text-primary) 8%, transparent));
-      border: 1px solid var(--code-border, var(--crusher-border-primary));
+      border: var(--crusher-component-border-weight) solid var(--code-border, var(--crusher-border-primary));
     }
 
     /* Token theming (Prism/Shiki style). Users can override via CSS variables. */
     .surface .token.comment,
     .surface .token.prolog,
-    .surface .token.doctype { color: var(--code-token-comment, #6b7280); }
-    .surface .token.punctuation { color: var(--code-token-punc, #94a3b8); }
-    .surface .token.keyword { color: var(--code-token-kw, #7c3aed); }
-    .surface .token.operator { color: var(--code-token-op, #ef4444); }
-    .surface .token.number { color: var(--code-token-num, #06b6d4); }
-    .surface .token.string { color: var(--code-token-str, #16a34a); }
-    .surface .token.function { color: var(--code-token-fn, #3b82f6); }
-    .surface .token.boolean { color: var(--code-token-bool, #f59e0b); }
-    .surface .token.class-name { color: var(--code-token-class, #22d3ee); }
+    .surface .token.doctype { color: var(--code-token-comment, var(--crusher-text-secondary)); }
+    .surface .token.punctuation { color: var(--code-token-punc, var(--crusher-text-secondary)); }
+    .surface .token.keyword { color: var(--code-token-kw, var(--crusher-color-brand-secondary)); }
+    .surface .token.operator { color: var(--code-token-op, var(--crusher-color-brand-accent-red)); }
+    .surface .token.number { color: var(--code-token-num, var(--crusher-color-brand-secondary)); }
+    .surface .token.string { color: var(--code-token-str, var(--crusher-color-brand-primary)); }
+    .surface .token.function { color: var(--code-token-fn, var(--crusher-color-brand-secondary)); }
+    .surface .token.boolean { color: var(--code-token-bool, var(--crusher-color-brand-accent-orange)); }
+    .surface .token.class-name { color: var(--code-token-class, var(--crusher-color-brand-secondary)); }
   `;
 
   _getText() {

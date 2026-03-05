@@ -50,8 +50,8 @@ export class CrusherToastCenter extends LitElement {
   static styles = css`
     :host {
       position: fixed;
-      right: clamp(8px, 4vw, 24px);
-      bottom: clamp(8px, 4vw, 24px);
+      right: clamp(var(--crusher-spacing-2), 4vw, var(--crusher-spacing-6));
+      bottom: clamp(var(--crusher-spacing-2), 4vw, var(--crusher-spacing-6));
       z-index: var(--crusher-z-toast, 1100);
       display: grid;
       gap: var(--crusher-spacing-3);
@@ -59,8 +59,8 @@ export class CrusherToastCenter extends LitElement {
     }
     .toast {
       pointer-events: auto;
-      min-width: 280px;
-      max-width: min(92vw, 420px);
+      min-width: calc(var(--crusher-spacing-10) * 7);
+      max-width: min(92vw, calc(var(--crusher-spacing-10) * 10.5));
       display: grid;
       grid-template-columns: auto 1fr auto;
       align-items: start;
@@ -70,23 +70,24 @@ export class CrusherToastCenter extends LitElement {
       background: var(--crusher-background-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       box-shadow: var(--crusher-shadow-2);
-      transform: translateY(8px);
+      transform: translateY(var(--crusher-spacing-2));
       opacity: 0;
       animation: toast-in var(--crusher-motion-duration-fast, 120ms) ease-out forwards;
     }
     @keyframes toast-in { to { transform: translateY(0); opacity: 1; } }
 
     .dot {
-      inline-size: 10px; block-size: 10px;
+      inline-size: calc(var(--crusher-spacing-2) + var(--crusher-focus-offset));
+      block-size: calc(var(--crusher-spacing-2) + var(--crusher-focus-offset));
       border-radius: var(--crusher-radius-full);
-      margin-top: 4px;
+      margin-top: var(--crusher-spacing-1);
     }
     .title {
       font-weight: var(--crusher-font-weight-semibold);
       color: var(--crusher-text-primary);
-      margin-bottom: 2px;
+      margin-bottom: var(--crusher-focus-offset);
       line-height: 1.2;
     }
     .msg { color: var(--crusher-text-secondary); font-size: var(--crusher-font-size-sm); }
@@ -94,15 +95,16 @@ export class CrusherToastCenter extends LitElement {
     .spacer { flex: 1; }
     .btn {
       background: transparent;
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       color: var(--crusher-text-primary);
       border-radius: var(--crusher-radius-md);
-      padding: 0.25rem 0.5rem;
+      padding: var(--crusher-spacing-1) var(--crusher-spacing-2);
       cursor: pointer;
       transition: background var(--crusher-motion-duration-base, 200ms);
     }
     .btn:hover { background: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent); }
-    .close { border: none; padding: 0.25rem; border-radius: var(--crusher-radius-full); }
+    .close { border: none; padding: var(--crusher-spacing-1); border-radius: var(--crusher-radius-full); }
+    .action-row-top { margin-top: var(--crusher-spacing-2); }
   `;
 
   render() {
@@ -115,7 +117,7 @@ export class CrusherToastCenter extends LitElement {
             ${t.title ? html`<div class="title">${t.title}</div>` : null}
             ${t.message ? html`<div class="msg">${t.message}</div>` : null}
             ${t.action ? html`
-              <div class="row" style="margin-top:6px">
+              <div class="row action-row-top">
                 <span class="spacer"></span>
                 <button class="btn" @click=${() => { t.action?.onClick?.(); this._dismiss(t.id); }}>
                   ${t.action.label}
@@ -148,3 +150,4 @@ if (!customElements.get(TAG)) {
     ensure();
   }
 }
+

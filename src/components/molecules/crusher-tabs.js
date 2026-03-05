@@ -16,22 +16,23 @@ export class CrusherTabs extends LitElement {
   static styles = css`
     :host { display: block; }
     .list {
-      display: flex; gap: .25rem; overflow-x: auto;
-      border-bottom: 1px solid var(--crusher-border);
+      display: flex; gap: var(--crusher-spacing-1); overflow-x: auto;
+      border-bottom: var(--crusher-component-border-weight) solid var(--crusher-border);
     }
     ::slotted([slot="tab"]) {
       appearance:none; background:transparent; border:none; cursor:pointer;
-      padding: .5rem .75rem; border-radius: var(--crusher-radius-md) var(--crusher-radius-md) 0 0;
+      padding: var(--crusher-spacing-2) var(--crusher-spacing-3);
+      border-radius: var(--crusher-radius-md) var(--crusher-radius-md) 0 0;
       color: var(--crusher-fg-muted); white-space: nowrap;
     }
     ::slotted([slot="tab"][aria-selected="true"]) {
       color: var(--crusher-fg);
       background: var(--crusher-surface);
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-bottom-color: transparent;
     }
     .panel {
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: 0 var(--crusher-radius-lg) var(--crusher-radius-lg) var(--crusher-radius-lg);
       padding: var(--crusher-spacing-6);
       background: var(--crusher-surface);
@@ -40,7 +41,17 @@ export class CrusherTabs extends LitElement {
       box-shadow: var(--crusher-shadow-1);
     }
 
-    .sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .sr {
+      position:absolute;
+      width:var(--crusher-component-border-weight);
+      height:var(--crusher-component-border-weight);
+      padding:0;
+      margin:calc(var(--crusher-component-border-weight) * -1);
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
   `;
 
   connectedCallback() {

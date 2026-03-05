@@ -9,27 +9,28 @@ export class CrusherStyleSwitcher extends LitElement {
       right: 0;
       top: var(--crusher-spacing-12);
       padding: var(--crusher-spacing-4);
-      width: 200px;
+      width: calc(var(--crusher-spacing-10) * 5);
       border-radius: var(--crusher-radius-md);
-      z-index: 101;
-      transition: transform 0.3s ease;
+      z-index: calc(var(--crusher-z-dropdown) + 1);
+      transition: transform var(--crusher-motion-duration-slow) var(--crusher-motion-easing-inout);
       transform: translateX(100%);
       background: var(--crusher-background-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
     }
     .style-switcher.open { transform: translateX(calc(-1 * var(--crusher-spacing-6))); }
     .s-icon {
-      position: absolute; height: 40px; width: 40px; text-align: center;
+      position: absolute; height: var(--crusher-spacing-10); width: var(--crusher-spacing-10); text-align: center;
       font-size: var(--crusher-font-size-lg); color: var(--crusher-text-primary);
-      right: 100%; border: 1px solid var(--crusher-border-primary);
-      margin-right: var(--crusher-spacing-6); cursor: pointer; transition: all 0.3s ease;
+      right: 100%; border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
+      margin-right: var(--crusher-spacing-6); cursor: pointer;
+      transition: all var(--crusher-motion-duration-slow) var(--crusher-motion-easing-inout);
       border-radius: var(--crusher-radius-full); background: var(--crusher-background-surface);
       display: inline-flex; align-items: center; justify-content: center;
     }
     .style-switcher-toggler { top: 0; }
-    .day-night { top: 55px; }
+    .day-night { top: calc(var(--crusher-spacing-12) - var(--crusher-spacing-1)); }
 
     h4 {
       margin: 0 0 var(--crusher-spacing-3);
@@ -39,8 +40,15 @@ export class CrusherStyleSwitcher extends LitElement {
     }
     .colors { display: flex; flex-wrap: wrap; justify-content: space-between; }
     .colors span {
-      display: inline-block; height: 30px; width: 30px;
+      display: inline-block;
+      height: calc(var(--crusher-spacing-8) - var(--crusher-focus-offset));
+      width: calc(var(--crusher-spacing-8) - var(--crusher-focus-offset));
       border-radius: var(--crusher-radius-full); cursor: pointer;
+    }
+    .dialect-row { gap: var(--crusher-spacing-2); }
+    .dialect-btn {
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
+      font-size: var(--crusher-font-size-sm);
     }
   `;
 
@@ -103,9 +111,9 @@ export class CrusherStyleSwitcher extends LitElement {
         </div>
 
         <h4 style="margin-top: var(--crusher-spacing-4)">Dialects</h4>
-        <div class="colors" style="gap: 8px;">
+        <div class="colors dialect-row">
           ${['glass','brutal','neumorph','neobrutal','minimal','futuristic','bento'].map(t => html`
-            <button class="btn" style="padding:.375rem .5rem; font-size: var(--crusher-font-size-sm);"
+            <button class="btn dialect-btn"
               @click=${() => this._setTheme(t)}>${t}</button>
           `)}
         </div>

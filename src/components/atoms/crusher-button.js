@@ -40,7 +40,7 @@ export class CrusherButton extends LitElement {
 
       /* Shape & elevation come from dialect */
       border-radius: var(--ctl-radius, var(--crusher-component-radius, var(--crusher-radius-md)));
-      border-width: var(--ctl-border-weight, var(--crusher-component-border-weight, 1px));
+      border-width: var(--ctl-border-weight, var(--crusher-component-border-weight));
       border-style: solid;
       border-color: var(--btn-border, transparent);
       box-shadow: var(--ctl-elev, var(--crusher-component-elevation, var(--crusher-shadow-2)));
@@ -48,21 +48,21 @@ export class CrusherButton extends LitElement {
       -webkit-backdrop-filter: var(--ctl-backdrop, none);
 
       transition:
-        transform var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
-        opacity   var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
-        box-shadow var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
-        background-color var(--crusher-transition-duration-base, .2s),
-        color var(--crusher-transition-duration-base, .2s),
-        border-color var(--crusher-transition-duration-base, .2s),
-        text-shadow var(--crusher-transition-duration-base, .2s), 
-        letter-spacing var(--crusher-transition-duration-base, .2s);
+        transform var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)) var(--crusher-transition-easing-inout, var(--crusher-motion-easing-inout)),
+        opacity   var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)) var(--crusher-transition-easing-inout, var(--crusher-motion-easing-inout)),
+        box-shadow var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)) var(--crusher-transition-easing-inout, var(--crusher-motion-easing-inout)),
+        background-color var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)),
+        color var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)),
+        border-color var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)),
+        text-shadow var(--crusher-transition-duration-base, var(--crusher-motion-duration-base)),
+        letter-spacing var(--crusher-transition-duration-base, var(--crusher-motion-duration-base));
     }
     .btn:focus-visible {
       outline: none;
-      box-shadow: var(--btn-focus-ring, 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%));
+      box-shadow: var(--btn-focus-ring, 0 0 0 var(--crusher-state-focus-ring-width) color-mix(in srgb, var(--crusher-color-brand-primary), var(--crusher-color-base-white) 80%));
     }
     .btn:hover {
-      transform: var(--ctl-hover-lift, var(--crusher-component-control-hover-lift, translateY(-2px)));
+      transform: var(--ctl-hover-lift, var(--crusher-component-control-hover-lift));
       box-shadow: var(--ctl-elev-hover, var(--ctl-elev));
       text-shadow: var(--btn-text-shadow-hover, none);
     }
@@ -129,7 +129,7 @@ export class CrusherButton extends LitElement {
     /* Loading / Disabled */
     .btn[aria-busy="true"],
     .btn:disabled {
-      opacity: 0.7;
+      opacity: var(--crusher-opacity-disabled);
       cursor: not-allowed;
       transform: none;
       box-shadow: none;

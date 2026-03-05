@@ -22,20 +22,22 @@ export class CrusherTooltip extends LitElement {
     :host { position: relative; display: inline-block; }
     .bubble {
       position: fixed; /* fixed for viewport-stable placement */
-      max-width: 320px;
-      padding: .35rem .5rem;
+      max-width: calc(var(--crusher-spacing-10) * 8);
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
       font-size: var(--crusher-font-size-sm);
       color: var(--crusher-text-primary);
       background: var(--crusher-background-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       border-radius: var(--crusher-radius-md);
       box-shadow: var(--crusher-shadow-1);
       white-space: nowrap;
-      opacity: 0; transform: translateY(4px) scale(.98);
-      transition: opacity 120ms ease, transform 120ms ease;
-      pointer-events: none; z-index: 10;
+      opacity: 0; transform: translateY(var(--crusher-spacing-1)) scale(.98);
+      transition:
+        opacity var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
+        transform var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout);
+      pointer-events: none; z-index: var(--crusher-z-tooltip, var(--crusher-z-dropdown));
     }
     :host([data-open]) .bubble { opacity: 1; transform: translateY(0) scale(1); }
 

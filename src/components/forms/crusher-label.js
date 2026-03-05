@@ -11,7 +11,7 @@ export class CrusherLabel extends LitElement {
       font-size: var(--crusher-font-size-sm);
       color: var(--crusher-fg-muted);
     }
-    :host([required]) label::after { content: ' *'; color: var(--code-token-op, #ef4444); }
+    :host([required]) label::after { content: ' *'; color: var(--code-token-op, var(--crusher-color-brand-accent-red)); }
   `;
   render() { return html`<label for=${this.for || ''} part="label"><slot></slot></label>`; }
 }

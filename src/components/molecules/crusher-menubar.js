@@ -19,16 +19,17 @@ export class CrusherMenubar extends LitElement {
   static styles = css`
     :host { display: block; position: relative; z-index: var(--crusher-z-dropdown); }
     .bar {
-      display: flex; gap: .25rem; align-items: center; flex-wrap: nowrap;
+      display: flex; gap: var(--crusher-spacing-1); align-items: center; flex-wrap: nowrap;
       background: var(--crusher-surface);
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-md);
-      padding-block: .25rem; padding-inline: .25rem;
+      padding-block: var(--crusher-spacing-1); padding-inline: var(--crusher-spacing-1);
       overflow: hidden;
     }
     ::slotted([slot="menu"]) {
       appearance: none; background: transparent; border: none; cursor: default;
-      padding: .375rem .5rem; border-radius: var(--crusher-radius-md);
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
+      border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg); white-space: nowrap;
     }
     ::slotted([slot="menu"][hidden]) { display: none !important; }
@@ -37,37 +38,38 @@ export class CrusherMenubar extends LitElement {
     }
 
     .menu {
-      position: absolute; min-width: 220px;
+      position: absolute; min-width: calc(var(--crusher-spacing-10) * 5.5);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      padding: .25rem; display: none;
-      margin-top: .25rem;
+      padding: var(--crusher-spacing-1); display: none;
+      margin-top: var(--crusher-spacing-1);
     }
     .menu[open] { display: block; }
 
     .item {
-      display:flex; align-items:center; gap:.5rem;
-      padding: .45rem .5rem; border-radius: var(--crusher-radius-md);
+      display:flex; align-items:center; gap:var(--crusher-spacing-2);
+      padding: calc(var(--crusher-spacing-2) - var(--crusher-focus-offset)) var(--crusher-spacing-2);
+      border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg); cursor: default;
     }
     .item[aria-disabled="true"] { opacity:.5; cursor: not-allowed; }
     .item[aria-selected="true"] { background: color-mix(in srgb, var(--crusher-fg) 10%, transparent); }
 
-    .sep { height:1px; background: var(--crusher-border); margin:.25rem 0; }
+    .sep { height:var(--crusher-component-border-weight); background: var(--crusher-border); margin:var(--crusher-spacing-1) 0; }
     .item[submenu]::after { content: '›'; margin-inline-start: auto; opacity:.65; }
     .submenu {
-      position: absolute; top: 0; inset-inline-start: 100%; min-width: 220px;
+      position: absolute; top: 0; inset-inline-start: 100%; min-width: calc(var(--crusher-spacing-10) * 5.5);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      padding: .25rem; display: none; margin-inline-start: .25rem;
+      padding: var(--crusher-spacing-1); display: none; margin-inline-start: var(--crusher-spacing-1);
     }
     .item[sub-open] > .submenu { display: block; }
   `;

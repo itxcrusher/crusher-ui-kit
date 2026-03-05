@@ -18,8 +18,8 @@ export class CrusherSectionTitle extends LitElement {
     .title::before {
       content: '';
       position: absolute;
-      height: 4px;
-      width: 50px;
+      height: calc(var(--crusher-focus-width) * 2);
+      width: calc(var(--crusher-spacing-12) + (var(--crusher-spacing-1) / 2));
       background-color: var(--crusher-color-brand-primary);
       left: 0;
       bottom: 0;
@@ -28,11 +28,11 @@ export class CrusherSectionTitle extends LitElement {
     .title::after {
       content: '';
       position: absolute;
-      height: 4px;
-      width: 25px;
+      height: calc(var(--crusher-focus-width) * 2);
+      width: calc(var(--crusher-spacing-6) + (var(--crusher-focus-width) / 2));
       background-color: var(--crusher-color-brand-primary);
       left: 0;
-      bottom: -8px; /* Position it below the first line */
+      bottom: calc(var(--crusher-spacing-2) * -1); /* Position it below the first line */
     }
   `;
 

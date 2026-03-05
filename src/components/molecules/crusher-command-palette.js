@@ -46,35 +46,44 @@ export class CrusherCommandPalette extends LitElement {
     :host { position: fixed; inset: 0; display: none; z-index: var(--crusher-z-palette); }
     :host([open]) { display: block; }
 
-    .overlay { position: absolute; inset: 0; background: rgba(0,0,0,.5); }
+    .overlay { position: absolute; inset: 0; background: color-mix(in srgb, var(--crusher-color-dark-background-canvas) 50%, transparent); }
     .panel {
       position: absolute; left: 50%; top: 12%;
       transform: translateX(-50%);
-      width: min(800px, 92vw);
+      width: min(calc(var(--crusher-spacing-10) * 20), 92vw);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
       display: grid; grid-template-rows: auto 1fr;
     }
-    .search { padding: .5rem .75rem; }
+    .search { padding: var(--crusher-spacing-2) var(--crusher-spacing-3); }
     .search input {
-      width: 100%; padding: .6rem .7rem; border-radius: var(--crusher-radius-md);
-      border: 1px solid var(--crusher-border); background: transparent; color: var(--crusher-fg);
+      width: 100%;
+      padding: var(--crusher-spacing-2) calc((var(--crusher-spacing-2) + var(--crusher-spacing-3)) / 2);
+      border-radius: var(--crusher-radius-md);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border); background: transparent; color: var(--crusher-fg);
     }
-    .results { max-height: 60vh; overflow: auto; padding: .25rem; }
-    .group { padding: .4rem .5rem; font-size: var(--crusher-font-size-sm); color: var(--crusher-fg-muted); }
+    .results { max-height: 60vh; overflow: auto; padding: var(--crusher-spacing-1); }
+    .group {
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
+      font-size: var(--crusher-font-size-sm);
+      color: var(--crusher-fg-muted);
+    }
     .item {
-      padding: .45rem .5rem; border-radius: var(--crusher-radius-md);
-      display:flex; align-items:center; gap:.5rem; cursor: pointer;
+      padding: calc(var(--crusher-spacing-2) - var(--crusher-focus-offset)) var(--crusher-spacing-2);
+      border-radius: var(--crusher-radius-md);
+      display:flex; align-items:center; gap:var(--crusher-spacing-2); cursor: pointer;
     }
     .item[aria-selected="true"] { background: color-mix(in srgb, var(--crusher-fg) 10%, transparent); }
-    .busy, .empty { padding: .75rem; color: var(--crusher-fg-muted); }
+    .busy, .empty { padding: var(--crusher-spacing-3); color: var(--crusher-fg-muted); }
     .spinner {
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
+      width: var(--crusher-font-size-sm);
+      height: var(--crusher-font-size-sm);
+      border-radius: var(--crusher-radius-full);
+      border: var(--crusher-focus-width) solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
       border-top-color: var(--crusher-fg);
       animation: spin .9s linear infinite;
     }

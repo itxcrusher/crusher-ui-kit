@@ -22,47 +22,50 @@ export class CrusherDropdown extends LitElement {
   static styles = css`
     :host { position: relative; display: inline-block; }
     .trigger {
-      display:flex; align-items:center; gap:.5rem;
+      display:flex; align-items:center; gap:var(--crusher-spacing-2);
       background: var(--crusher-surface);
       color: var(--crusher-fg);
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-md);
-      padding: .5rem .75rem; cursor: pointer;
+      padding: var(--crusher-spacing-2) var(--crusher-spacing-3); cursor: pointer;
     }
     .panel {
-      position: absolute; min-width: 200px; max-width: 360px;
+      position: absolute;
+      min-width: calc(var(--crusher-spacing-10) * 5);
+      max-width: calc(var(--crusher-spacing-10) * 9);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      padding: .25rem; margin-top: .35rem;
+      padding: var(--crusher-spacing-1);
+      margin-top: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2);
       display: none; z-index: var(--crusher-z-dropdown,100);
     }
     :host([open]) .panel { display: block; }
 
     .item {
-      display:flex; align-items:center; gap:.5rem;
-      padding: .5rem .5rem; border-radius: var(--crusher-radius-md);
+      display:flex; align-items:center; gap:var(--crusher-spacing-2);
+      padding: var(--crusher-spacing-2) var(--crusher-spacing-2); border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg); cursor: pointer; position: relative;
     }
     .item[aria-selected="true"] {
       background: color-mix(in srgb, var(--crusher-fg) 10%, transparent);
     }
     .item[aria-current="true"]::after { content:"✓"; margin-left:auto; opacity:.7; }
-    .sep { height:1px; background: var(--crusher-border); margin:.25rem 0; }
+    .sep { height:var(--crusher-component-border-weight); background: var(--crusher-border); margin:var(--crusher-spacing-1) 0; }
 
     .item[submenu]::after { content:'›'; margin-left:auto; opacity:.65; }
     .submenu {
-      position: absolute; left: 100%; top: 0; min-width: 200px;
+      position: absolute; left: 100%; top: 0; min-width: calc(var(--crusher-spacing-10) * 5);
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      padding: .25rem; display: none;
+      padding: var(--crusher-spacing-1); display: none;
     }
     .item[sub-open] > .submenu { display: block; }
   `;

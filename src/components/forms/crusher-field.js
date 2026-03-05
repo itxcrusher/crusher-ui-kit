@@ -18,7 +18,7 @@ export class CrusherField extends LitElement {
 
   static styles = css`
     :host { display: block; }
-    .stack { display: grid; gap: .375rem; }
+    .stack { display: grid; gap: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2); }
   `;
 
   firstUpdated() {

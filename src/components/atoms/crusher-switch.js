@@ -8,20 +8,25 @@ class CrusherSwitch extends HTMLElement {
         }
         input{display:none;}
         .slider{
-          position:relative;width:40px;height:22px;
+          position:relative;
+          width:var(--crusher-spacing-10);
+          height:calc(var(--crusher-spacing-6) - var(--crusher-focus-offset));
           background:var(--crusher-border-primary);
           border-radius:var(--crusher-radius-full);
           transition:background var(--crusher-transition-duration-base);
         }
         .slider::before{
-          content:"";position:absolute;left:2px;top:2px;
-          width:18px;height:18px;background:var(--crusher-color-base-white);
-          border-radius:50%;transition:transform var(--crusher-transition-duration-base);
+          content:"";position:absolute;left:var(--crusher-focus-offset);top:var(--crusher-focus-offset);
+          width:calc(var(--crusher-spacing-4) + var(--crusher-focus-offset));
+          height:calc(var(--crusher-spacing-4) + var(--crusher-focus-offset));
+          background:var(--crusher-color-base-white);
+          border-radius:var(--crusher-radius-full);
+          transition:transform var(--crusher-transition-duration-base);
         }
         input:checked + .slider{
           background:var(--crusher-color-brand-primary);
         }
-        input:checked + .slider::before{transform:translateX(18px);}
+        input:checked + .slider::before{transform:translateX(calc(var(--crusher-spacing-4) + var(--crusher-focus-offset)));}
       </style>
       <label>
         <input type="checkbox">

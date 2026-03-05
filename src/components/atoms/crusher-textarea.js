@@ -13,12 +13,16 @@ export class CrusherTextarea extends LitElement {
       width: 100%; padding: var(--crusher-spacing-3) var(--crusher-spacing-4);
       font-size: var(--crusher-font-size-base); font-family: var(--crusher-font-family-body);
       color: var(--crusher-fg); background: var(--crusher-surface);
-      border: 1px solid var(--crusher-border); border-radius: var(--crusher-radius-md);
-      transition: all 0.2s ease; box-sizing: border-box; resize: vertical;
+      border: var(--crusher-component-border-weight) solid var(--crusher-border); border-radius: var(--crusher-radius-md);
+      transition: all var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout); box-sizing: border-box; resize: vertical;
     }
-    .textarea:focus { outline: 2px solid var(--crusher-color-brand-primary); outline-offset: 2px; border-color: transparent; }
-    .textarea::placeholder { color: var(--crusher-fg-muted); opacity: .8; }
-    .textarea[aria-invalid="true"] { border-color: color-mix(in srgb, var(--code-token-op, #ef4444) 70%, transparent); }
+    .textarea:focus {
+      outline: var(--crusher-focus-width) solid var(--crusher-color-brand-primary);
+      outline-offset: var(--crusher-focus-offset);
+      border-color: transparent;
+    }
+    .textarea::placeholder { color: var(--crusher-fg-muted); opacity: var(--crusher-opacity-muted); }
+    .textarea[aria-invalid="true"] { border-color: color-mix(in srgb, var(--code-token-op, var(--crusher-color-brand-accent-red)) 70%, transparent); }
   `;
 
   static properties = {

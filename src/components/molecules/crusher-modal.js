@@ -20,30 +20,31 @@ export class CrusherModal extends LitElement {
   static styles = css`
     .wrapper {
       position: fixed; inset: 0;
-      z-index: 1000; display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+      z-index: var(--crusher-z-modal); display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout);
     }
     :host([open]) .wrapper { opacity: 1; pointer-events: auto; }
 
-    .overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+    .overlay { position: absolute; inset: 0; background: color-mix(in srgb, var(--crusher-color-dark-background-canvas) 50%, transparent); }
 
     .modal {
-      position: relative; z-index: 1; width: min(92vw, 720px); max-height: 90vh;
-      display: flex; flex-direction: column; transform: translateY(8px);
+      position: relative; z-index: 1; width: min(92vw, calc(var(--crusher-spacing-10) * 18)); max-height: 90vh;
+      display: flex; flex-direction: column; transform: translateY(var(--crusher-spacing-2));
       background: var(--crusher-background-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border-primary);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border-primary);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      transition: transform 0.2s ease;
+      transition: transform var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout);
     }
     :host([open]) .modal { transform: translateY(0); }
 
     .header, .footer { padding: var(--crusher-spacing-4) var(--crusher-spacing-6); }
-    .header { border-bottom: 1px solid var(--crusher-border-primary); }
+    .header { border-bottom: var(--crusher-component-border-weight) solid var(--crusher-border-primary); }
     .body   { padding: var(--crusher-spacing-6); overflow: auto; flex: 1; }
-    .footer { border-top: 1px solid var(--crusher-border-primary); display:flex; gap: var(--crusher-spacing-3); justify-content: flex-end; }
+    .footer { border-top: var(--crusher-component-border-weight) solid var(--crusher-border-primary); display:flex; gap: var(--crusher-spacing-3); justify-content: flex-end; }
   `;
 
   connectedCallback() {

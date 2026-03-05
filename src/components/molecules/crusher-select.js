@@ -29,53 +29,63 @@ export class CrusherSelect extends LitElement {
   }
 
   static styles = css`
-    :host { position: relative; display: inline-block; min-width: 220px; }
+    :host { position: relative; display: inline-block; min-width: calc(var(--crusher-spacing-10) * 5.5); }
     .control {
-      display:flex; align-items:center; gap:.5rem; justify-content: space-between;
+      display:flex; align-items:center; gap:var(--crusher-spacing-2); justify-content: space-between;
       background: var(--crusher-surface); color: var(--crusher-fg);
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-md);
-      padding: .5rem .6rem; cursor: pointer;
+      padding: var(--crusher-spacing-2) calc((var(--crusher-spacing-2) + var(--crusher-spacing-3)) / 2); cursor: pointer;
     }
     .value { color: var(--crusher-fg); }
     .placeholder { color: var(--crusher-fg-muted); }
 
     .panel {
-      position: absolute; inset: auto 0 auto 0; top: calc(100% + .35rem);
-      max-height: 260px; overflow: auto;
+      position: absolute; inset: auto 0 auto 0; top: calc(100% + ((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2));
+      max-height: calc(var(--crusher-spacing-10) * 6.5); overflow: auto;
       background: var(--crusher-surface);
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: 1px solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-shadow-2);
-      padding: .25rem; display: none; z-index: var(--crusher-z-dropdown,100);
+      padding: var(--crusher-spacing-1); display: none; z-index: var(--crusher-z-dropdown,100);
     }
     :host([open]) .panel { display: block; }
 
-    .search { padding:.25rem; position: sticky; top: 0; background: inherit; }
+    .search { padding:var(--crusher-spacing-1); position: sticky; top: 0; background: inherit; }
     .search input {
-      width:100%; padding:.5rem .6rem; border-radius: var(--crusher-radius-md);
-      border: 1px solid var(--crusher-border);
+      width:100%; padding:var(--crusher-spacing-2) calc((var(--crusher-spacing-2) + var(--crusher-spacing-3)) / 2); border-radius: var(--crusher-radius-md);
+      border: var(--crusher-component-border-weight) solid var(--crusher-border);
       background: transparent; color: var(--crusher-fg); outline: none;
     }
 
-    .item { display:flex; align-items:center; gap:.5rem;
-      padding: .5rem .5rem; border-radius: var(--crusher-radius-md);
+    .item { display:flex; align-items:center; gap:var(--crusher-spacing-2);
+      padding: var(--crusher-spacing-2) var(--crusher-spacing-2); border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg); cursor: pointer; }
     .item[aria-selected="true"] { background: color-mix(in srgb, var(--crusher-fg) 10%, transparent); }
     .item[aria-current="true"]::after { content:"✓"; margin-left:auto; opacity:.7; }
 
-    .empty, .busy { color: var(--crusher-fg-muted); padding:.75rem; display:flex; align-items:center; gap:.5rem; }
+    .empty, .busy { color: var(--crusher-fg-muted); padding:var(--crusher-spacing-3); display:flex; align-items:center; gap:var(--crusher-spacing-2); }
     .spinner {
-      width: 14px; height: 14px; border-radius: 50%;
-      border: 2px solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
+      width: var(--crusher-font-size-sm); height: var(--crusher-font-size-sm); border-radius: var(--crusher-radius-full);
+      border: var(--crusher-focus-width) solid color-mix(in srgb,var(--crusher-fg) 25%, transparent);
       border-top-color: var(--crusher-fg);
       animation: spin .9s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .sr { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .sr {
+      position:absolute;
+      width:var(--crusher-component-border-weight);
+      height:var(--crusher-component-border-weight);
+      padding:0;
+      margin:calc(var(--crusher-component-border-weight) * -1);
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
   `;
 
   connectedCallback() {
@@ -223,3 +233,4 @@ export class CrusherSelect extends LitElement {
 }
 
 customElements.define('crusher-select', CrusherSelect);
+
