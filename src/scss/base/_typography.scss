@@ -1,7 +1,6 @@
 @use 'variables' as *; // kept for compatibility; not redefining CSS vars here
 
-/* Fonts (author CSS). Tokens already expose font family/size variables. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@700&display=swap');
+/* Fonts are loaded by the host app/demo HTML, not by the published library CSS. */
 
 /* Base typography consumes token variables emitted by Style Dictionary */
 body {
