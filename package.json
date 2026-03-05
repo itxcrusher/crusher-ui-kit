@@ -1,5 +1,5 @@
 {
-  "name": "crusher-ui",
+  "name": "crusher-ui-kit",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/crusher-ui.min.js",
