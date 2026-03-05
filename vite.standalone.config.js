@@ -24,7 +24,7 @@ export default defineConfig({
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.name && assetInfo.name.endsWith('.css'))
-            return 'crusher-ui.min.css';
+            return 'crusher-ui.standalone.min.css';
           return assetInfo.name || 'asset-[hash][extname]';
         }
       }

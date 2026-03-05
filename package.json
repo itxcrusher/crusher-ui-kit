@@ -39,11 +39,11 @@
   "exports": {
     ".": {
       "node": {
-        "import": "./src/runtime/root-node.js",
-        "require": "./dist/crusher-ui.min.js"
+        "import": "./src/runtime/root-node.cjs",
+        "require": "./src/runtime/root-node.cjs"
       },
       "import": "./dist/crusher-ui.esm.js",
-      "require": "./dist/crusher-ui.min.js",
+      "require": "./src/runtime/root-node.cjs",
       "default": "./dist/crusher-ui.esm.js"
     },
     "./standalone": {
