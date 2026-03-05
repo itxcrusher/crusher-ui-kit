@@ -26,3 +26,7 @@ jobs:
 
       - name: Build Library
         run: npm run build
+
+      - name: Validate Package Contracts
+        run: |
+          node --input-type=module -e "const ids=['crusher-ui-kit','crusher-ui-kit/runtime','crusher-ui-kit/themes/glass.css','crusher-ui-kit/standalone']; for (const id of ids) { console.log(id, '->', import.meta.resolve(id)); }"
