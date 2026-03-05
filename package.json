@@ -8,7 +8,9 @@
     "dev": "vite",
     "build:tokens": "node ./scripts/build-tokens.mjs",
     "check:contrast": "node ./scripts/check-contrast.mjs",
-    "build": "vite build",
+    "build:core": "vite build",
+    "build:standalone": "vite build --config vite.standalone.config.js",
+    "build": "npm run build:core && npm run build:standalone",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:tokens && npm run check:contrast && npm run build",
     "changeset": "changeset",
@@ -36,9 +38,17 @@
   ],
   "exports": {
     ".": {
+      "node": {
+        "import": "./src/runtime/root-node.js",
+        "require": "./dist/crusher-ui.min.js"
+      },
       "import": "./dist/crusher-ui.esm.js",
       "require": "./dist/crusher-ui.min.js",
       "default": "./dist/crusher-ui.esm.js"
+    },
+    "./standalone": {
+      "import": "./dist/crusher-ui.standalone.esm.js",
+      "default": "./dist/crusher-ui.standalone.esm.js"
     },
     "./runtime": {
       "types": "./types/runtime.d.ts",

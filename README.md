@@ -15,7 +15,7 @@ npm i crusher-ui-kit
 
 ### Use
 
-**Library + exported CSS layers:**
+**Bundler apps (Vite/Next/etc):**
 
 ```js
 import 'crusher-ui-kit';
@@ -39,19 +39,11 @@ import { openPalette } from 'crusher-ui-kit/runtime';
 openPalette();
 ```
 
-**Static HTML (no bundler, ESM + importmap):**
+**Static HTML (no bundler, drop-in):**
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/crusher-ui-kit@0.1.0/dist/crusher-ui.min.css" />
-<script type="importmap">
-{
-  "imports": {
-    "lit": "https://cdn.jsdelivr.net/npm/lit@3.3.1/index.js",
-    "lit/": "https://cdn.jsdelivr.net/npm/lit@3.3.1/"
-  }
-}
-</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/crusher-ui-kit@0.1.0/dist/crusher-ui.esm.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/crusher-ui-kit@0.1.0/dist/crusher-ui.standalone.esm.js"></script>
 ```
 
 ---
