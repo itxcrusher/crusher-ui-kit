@@ -1,0 +1,106 @@
+/* ==========================================
+   DIALECT OVERRIDES (per theme)
+   Contract used by components:
+     --ctl-radius, --ctl-border-weight, --ctl-elev, --ctl-elev-hover, --ctl-backdrop, --ctl-hover-lift
+     --btn-*-bg/fg/border/shadow/letter/text-shadow
+   ========================================== */
+
+/* ===== Glassmorphism ===== */
+html[data-theme="glass"] {
+  --ctl-radius: var(--crusher-radius-lg);
+  --ctl-border-weight: 1px;
+  --ctl-elev: var(--crusher-shadow-2);
+  --ctl-elev-hover: 0 12px 36px rgba(0,0,0,0.18);
+  --ctl-backdrop: blur(var(--crusher-effect-blur-md));
+
+  /* Buttons */
+  --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 12%);
+  --btn-subtle-border: var(--btn-outline-border);
+  --btn-border: var(--btn-outline-border);
+
+  --btn-primary-shadow: 0 6px 18px color-mix(in srgb, var(--btn-primary-bg) 35%, transparent);
+  --btn-secondary-shadow: 0 6px 18px color-mix(in srgb, var(--btn-secondary-bg) 35%, transparent);
+}
+
+/* ===== Futuristic / Neon ===== */
+html[data-theme="futuristic"] {
+  --ctl-radius: 999px;
+  --ctl-border-weight: 1px;
+  --ctl-elev: 0 0 0 1px color-mix(in srgb, var(--crusher-color-brand-primary) 35%, var(--crusher-border-primary));
+  --ctl-elev-hover: 0 0 12px color-mix(in srgb, var(--crusher-color-brand-primary) 35%, transparent);
+  --ctl-backdrop: blur(calc(var(--crusher-effect-blur-md) / 2));
+  --ctl-hover-lift: translateY(-1px);
+
+  /* Button typography flavor */
+  --btn-primary-letter: 0.02em;
+  --btn-secondary-letter: 0.02em;
+  --btn-danger-letter: 0.02em;
+
+  /* Neon-ish edges */
+  --btn-primary-border: color-mix(in srgb, var(--crusher-color-brand-primary) 40%, var(--crusher-border-primary));
+  --btn-secondary-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 40%, var(--crusher-border-primary));
+  --btn-danger-border: color-mix(in srgb, var(--crusher-color-brand-accent-red) 40%, var(--crusher-border-primary));
+
+  --btn-primary-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
+  --btn-secondary-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
+  --btn-danger-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
+}
+
+/* ===== Minimal ===== */
+html[data-theme="minimal"] {
+  --ctl-radius: var(--crusher-radius-md);
+  --ctl-border-weight: 1px;
+  --ctl-elev: var(--crusher-shadow-1);
+  --ctl-elev-hover: var(--crusher-shadow-2);
+  --ctl-backdrop: none;
+  --ctl-hover-lift: translateY(-1px);
+
+  --btn-ghost-bg: color-mix(in srgb, var(--crusher-text-primary) 6%, transparent);
+  --btn-subtle-shadow: var(--ctl-elev);
+}
+
+/* ===== Brutal ===== */
+html[data-theme="brutal"] {
+  --ctl-radius: var(--crusher-radius-sm);
+  --ctl-border-weight: 2px;
+  --ctl-elev: 6px 6px 0 0 rgba(0,0,0,0.9);
+  --ctl-elev-hover: 8px 8px 0 0 rgba(0,0,0,0.9);
+  --ctl-backdrop: none;
+  --ctl-hover-lift: translateY(-1px);
+
+  --btn-outline-border: #111; /* strong line in light */
+  html[data-mode="dark"] & { --btn-outline-border: #fafafa; }
+  --btn-ghost-bg: transparent;
+  --btn-primary-letter: 0.01em; /* subtle punch */
+}
+
+/* ===== NeoBrutal ===== */
+html[data-theme="neobrutal"] {
+  --ctl-radius: var(--crusher-radius-md);
+  --ctl-border-weight: 2px;
+  --ctl-elev: 0 0 0 3px currentColor, 6px 6px 0 0 rgba(0,0,0,0.85);
+  --ctl-elev-hover: 0 0 0 3px currentColor, 8px 8px 0 0 rgba(0,0,0,0.85);
+  --ctl-backdrop: none;
+
+  --btn-primary-border: currentColor;
+  --btn-secondary-border: currentColor;
+  --btn-danger-border: currentColor;
+}
+
+/* ===== Neumorphism ===== */
+html[data-theme="neumorph"] {
+  --ctl-radius: var(--crusher-radius-lg);
+  --ctl-border-weight: 0px;
+  --ctl-elev: 8px 8px 16px rgba(0,0,0,0.08), -8px -8px 16px rgba(255,255,255,0.6);
+  --ctl-elev-hover: 10px 10px 18px rgba(0,0,0,0.10), -10px -10px 18px rgba(255,255,255,0.65);
+  --ctl-backdrop: none;
+  --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary) 50%, transparent);
+}
+
+/* ===== Bento (curved, airy) ===== */
+html[data-theme="bento"] {
+  --ctl-radius: var(--crusher-radius-lg);
+  --ctl-elev: 0 8px 24px rgba(0,0,0,0.08);
+  --ctl-elev-hover: 0 10px 28px rgba(0,0,0,0.10);
+  --ctl-backdrop: none;
+}

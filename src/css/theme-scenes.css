@@ -1,0 +1,79 @@
+/* src/css/theme-scenes.css */
+/* A fixed, non-interactive background canvas that themes can restyle */
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  /* default fallback */
+  background: var(--crusher-background-canvas);
+}
+
+/* ===== GLASS ===== */
+:root[data-theme="glass"] .scene {
+  --blob1: radial-gradient(800px 600px at 10% 20%, rgba(255,255,255,0.35), transparent 60%);
+  --blob2: radial-gradient(600px 500px at 80% 10%, rgba(255,0,200,0.15), transparent 60%);
+  --blob3: radial-gradient(700px 600px at 30% 90%, rgba(34,197,94,0.18), transparent 60%);
+  background:
+    var(--blob1),
+    var(--blob2),
+    var(--blob3),
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-brand-secondary) 10%, transparent), transparent 40%),
+    var(--crusher-background-canvas);
+  backdrop-filter: blur(var(--effect-blur-md, 16px));
+  -webkit-backdrop-filter: blur(var(--effect-blur-md, 16px));
+}
+
+/* ===== FUTURISTIC ===== */
+:root[data-theme="futuristic"] .scene {
+  background:
+    radial-gradient(1200px 800px at 80% 20%, rgba(34,211,238,0.08), transparent 60%),
+    radial-gradient(1000px 700px at 10% 80%, rgba(167,139,250,0.08), transparent 60%),
+    linear-gradient(180deg, rgba(7, 12, 24, 0.95), rgba(2, 6, 23, 0.98));
+  mask-image: radial-gradient(120% 90% at 50% 35%, #000 60%, transparent 100%);
+}
+:root[data-theme="futuristic"] .grid-overlay {
+  position: absolute; inset: -2rem;
+  pointer-events: none;
+  background-image:
+    linear-gradient(transparent 95%, rgba(255,255,255,0.06) 95%),
+    linear-gradient(90deg, transparent 95%, rgba(255,255,255,0.06) 95%);
+  background-size: 24px 24px;
+  mask: linear-gradient(0deg, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+/* ===== BRUTAL ===== */
+:root[data-theme="brutal"] .scene {
+  background: linear-gradient(0deg, #fff, #fff);
+}
+
+/* ===== NEOBRUTAL ===== */
+:root[data-theme="neobrutal"] .scene {
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(124,58,237,0.08), transparent 60%),
+    radial-gradient(1200px 600px at 90% 80%, rgba(6,182,212,0.08), transparent 60%),
+    #fafafa;
+}
+
+/* ===== MINIMAL ===== */
+:root[data-theme="minimal"] .scene {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-text-primary) 4%, transparent), transparent 40%),
+    var(--crusher-background-canvas);
+}
+
+/* ===== NEUMORPH ===== */
+:root[data-theme="neumorph"] .scene {
+  background:
+    radial-gradient(1000px 700px at 10% 20%, rgba(255,255,255,0.04), transparent 60%),
+    radial-gradient(900px 600px at 90% 80%, rgba(0,0,0,0.25), transparent 60%),
+    var(--crusher-background-canvas);
+}
+
+/* ===== BENTO ===== */
+:root[data-theme="bento"] .scene {
+  background:
+    radial-gradient(600px 400px at 20% 20%, color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent), transparent 65%),
+    radial-gradient(600px 400px at 80% 30%, color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent), transparent 65%),
+    var(--crusher-background-canvas);
+}

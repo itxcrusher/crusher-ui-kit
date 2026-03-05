@@ -23,36 +23,49 @@ export class CrusherButton extends LitElement {
   }
 
   static styles = css`
-    :host {
-      display: inline-flex;
-      --btn-radius: var(--crusher-component-radius, var(--crusher-radius-md));
-      --btn-elev:  var(--crusher-component-elevation, var(--crusher-shadow-2));
-      --btn-hov-lift: var(--crusher-component-control-hoverLift, translateY(-2px));
-      --btn-focus: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%);
-    }
+    :host { display: inline-flex; }
 
-    /* Base control */
+    /* ===== Base control driven by bridge+dialect variables ===== */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: var(--crusher-spacing-2);
-      border-radius: var(--btn-radius);
-      border: 1px solid transparent;
-      box-shadow: var(--btn-elev);
+
       font-family: var(--crusher-font-family-body);
       font-weight: var(--crusher-font-weight-semibold);
       line-height: 1;
+      user-select: none;
       cursor: pointer;
+
+      /* Shape & elevation come from dialect */
+      border-radius: var(--ctl-radius, var(--crusher-component-radius, var(--crusher-radius-md)));
+      border-width: var(--ctl-border-weight, var(--crusher-component-border-weight, 1px));
+      border-style: solid;
+      border-color: var(--btn-border, transparent);
+      box-shadow: var(--ctl-elev, var(--crusher-component-elevation, var(--crusher-shadow-2)));
+      backdrop-filter: var(--ctl-backdrop, none);
+      -webkit-backdrop-filter: var(--ctl-backdrop, none);
+
       transition:
         transform var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
         opacity   var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
         box-shadow var(--crusher-transition-duration-base, .2s) var(--crusher-transition-easing-inout, ease),
-        background-color var(--crusher-transition-duration-base, .2s);
-      user-select: none;
+        background-color var(--crusher-transition-duration-base, .2s),
+        color var(--crusher-transition-duration-base, .2s),
+        border-color var(--crusher-transition-duration-base, .2s),
+        text-shadow var(--crusher-transition-duration-base, .2s), 
+        letter-spacing var(--crusher-transition-duration-base, .2s);
     }
-    .btn:focus-visible { outline: none; box-shadow: var(--btn-focus); }
-    .btn:hover { transform: var(--btn-hov-lift); }
+    .btn:focus-visible {
+      outline: none;
+      box-shadow: var(--btn-focus-ring, 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%));
+    }
+    .btn:hover {
+      transform: var(--ctl-hover-lift, var(--crusher-component-control-hover-lift, translateY(-2px)));
+      box-shadow: var(--ctl-elev-hover, var(--ctl-elev));
+      text-shadow: var(--btn-text-shadow-hover, none);
+    }
     .btn:active { transform: translateY(0); }
 
     /* Sizes */
@@ -63,38 +76,54 @@ export class CrusherButton extends LitElement {
     /* Width */
     .btn--full { width: 100%; }
 
-    /* Variants – built on semantic layer */
+    /* ===== Variants (purely variable-driven) ===== */
     .btn--primary {
-      background: var(--state-control-bg-default, var(--crusher-color-brand-primary));
-      color: var(--state-control-fg-default, var(--crusher-color-base-white));
-      border-color: color-mix(in srgb, currentColor 12%, transparent);
+      background: var(--btn-primary-bg, var(--state-control-bg-default));
+      color:      var(--btn-primary-fg, var(--state-control-fg-default));
+      border-color: var(--btn-primary-border, color-mix(in srgb, currentColor 12%, transparent));
+      box-shadow: var(--btn-primary-shadow, var(--ctl-elev));
+      letter-spacing: var(--btn-primary-letter, normal);
+      text-shadow: var(--btn-primary-text-shadow, none);
     }
     .btn--secondary {
-      background: var(--crusher-color-brand-secondary);
-      color: var(--crusher-color-base-white);
-      border-color: color-mix(in srgb, currentColor 12%, transparent);
+      background: var(--btn-secondary-bg, var(--crusher-color-brand-secondary));
+      color:      var(--btn-secondary-fg, var(--crusher-color-base-white));
+      border-color: var(--btn-secondary-border, color-mix(in srgb, currentColor 12%, transparent));
+      box-shadow: var(--btn-secondary-shadow, var(--ctl-elev));
+      letter-spacing: var(--btn-secondary-letter, normal);
+      text-shadow: var(--btn-secondary-text-shadow, none);
     }
     .btn--destructive {
-      background: var(--crusher-color-brand-accent-red);
-      color: var(--crusher-color-base-white);
-      border-color: color-mix(in srgb, currentColor 12%, transparent);
+      background: var(--btn-danger-bg, var(--crusher-color-brand-accent-red));
+      color:      var(--btn-danger-fg, var(--crusher-color-base-white));
+      border-color: var(--btn-danger-border, color-mix(in srgb, currentColor 12%, transparent));
+      box-shadow: var(--btn-danger-shadow, var(--ctl-elev));
+      letter-spacing: var(--btn-danger-letter, normal);
+      text-shadow: var(--btn-danger-text-shadow, none);
     }
     .btn--outline {
-      background: transparent;
-      color: var(--crusher-text-primary);
-      border-color: var(--crusher-border-primary);
-      box-shadow: none;
+      background: var(--btn-outline-bg, transparent);
+      color:      var(--btn-outline-fg, var(--crusher-text-primary));
+      border-color: var(--btn-outline-border, var(--crusher-border-primary));
+      box-shadow: var(--btn-outline-shadow, none);
+      letter-spacing: var(--btn-outline-letter, normal);
+      text-shadow: var(--btn-outline-text-shadow, none);
     }
     .btn--ghost {
-      background: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent);
-      color: var(--crusher-text-primary);
-      border-color: transparent;
-      box-shadow: none;
+      background: var(--btn-ghost-bg, color-mix(in srgb, var(--crusher-text-primary) 8%, transparent));
+      color:      var(--btn-ghost-fg, var(--crusher-text-primary));
+      border-color: var(--btn-ghost-border, transparent);
+      box-shadow: var(--btn-ghost-shadow, none);
+      letter-spacing: var(--btn-ghost-letter, normal);
+      text-shadow: var(--btn-ghost-text-shadow, none);
     }
     .btn--subtle {
-      background: var(--crusher-background-surface);
-      color: var(--crusher-text-primary);
-      border-color: var(--crusher-border-primary);
+      background: var(--btn-subtle-bg, var(--crusher-background-surface));
+      color:      var(--btn-subtle-fg, var(--crusher-text-primary));
+      border-color: var(--btn-subtle-border, var(--crusher-border-primary));
+      box-shadow: var(--btn-subtle-shadow, var(--ctl-elev));
+      letter-spacing: var(--btn-subtle-letter, normal);
+      text-shadow: var(--btn-subtle-text-shadow, none);
     }
 
     /* Loading / Disabled */
@@ -106,7 +135,7 @@ export class CrusherButton extends LitElement {
       box-shadow: none;
     }
 
-    /* Icon slot sizing */
+    /* Slot icon sizing */
     ::slotted([slot="icon"]) {
       inline-size: 1.2em;
       block-size: 1.2em;
@@ -115,14 +144,10 @@ export class CrusherButton extends LitElement {
       justify-content: center;
     }
 
-    /* Expose parts for deep theming */
-    .btn { 
-      /* parts are forwarded via <slot part="…">, but also expose the control itself */
-      /* no-op selector to make intent clear */ 
-    }
+    /* Simple spinner */
+    @keyframes spin { to { transform: rotate(360deg) } }
   `;
 
-  /** prevent clicks while disabled/loading */
   _onClick(e) {
     if (this.disabled || this.loading) {
       e.preventDefault();
@@ -149,18 +174,10 @@ export class CrusherButton extends LitElement {
         aria-busy=${this.loading ? 'true' : 'false'}
         @click=${this._onClick}
       >
-        <!-- optional leading icon -->
         <slot name="icon" part="icon"></slot>
-
-        <!-- label -->
-        <span part="label">
-          <slot></slot>
-        </span>
-
-        <!-- loading spinner -->
+        <span part="label"><slot></slot></span>
         ${this.loading ? html`
           <span part="spinner" aria-hidden="true" style="display:inline-flex">
-            <!-- tiny CSS spinner -->
             <svg viewBox="0 0 50 50" width="16" height="16" style="animation: spin 1s linear infinite;">
               <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="6" opacity="0.2"/>
               <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="6"
@@ -169,11 +186,7 @@ export class CrusherButton extends LitElement {
           </span>
         ` : null}
       </button>
-      <style>
-        @keyframes spin { to { transform: rotate(360deg) } }
-      </style>
     `;
   }
 }
-
 customElements.define('crusher-button', CrusherButton);

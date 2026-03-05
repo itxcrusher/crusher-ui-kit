@@ -6,6 +6,7 @@ import '../css/modes.css';
 import '../css/semantic.css';
 import '../css/bridge.css';
 import '../css/code-theme.css';
+import '../css/dialect-overrides.css';
 
 // Pick ONE dialect you want visible on the demo page
 import '../css/themes/glass.css';

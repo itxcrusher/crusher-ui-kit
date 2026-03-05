@@ -8,6 +8,10 @@ import '../css/modes.css';
 import '../css/semantic.css';
 import '../css/bridge.css';
 import '../css/code-theme.css';
+import '../css/theme-scenes.css';
+import '../css/dialect-overrides.css';
+
+// Per-theme token overlays (generated)
 import '../css/themes/glass.css';
 import '../css/themes/brutal.css';
 import '../css/themes/neumorph.css';
@@ -30,6 +34,9 @@ import '../components/atoms/crusher-textarea.js';
 import '../components/atoms/crusher-checkbox.js';
 import '../components/atoms/crusher-switch.js';
 import '../components/atoms/crusher-chip.js';
+import '../components/atoms/crusher-code-block.js';
+import '../components/atoms/crusher-tooltip.js';
+import '../components/atoms/crusher-badge.js';
 
 // --- Molecules ---
 import '../components/molecules/crusher-card.js';

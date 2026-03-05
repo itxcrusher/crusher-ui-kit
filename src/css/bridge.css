@@ -1,22 +1,12 @@
-/* src/css/bridge.css */
-html {
-  /* Resolve core backgrounds depending on mode */
-  --crusher-background-canvas: var(--color-light-background-canvas);
-  --crusher-background-surface: var(--color-light-background-surface);
-  --crusher-text-primary: var(--color-light-text-primary);
-  --crusher-text-secondary: var(--color-light-text-secondary);
-  --crusher-border-primary: var(--color-light-border-primary);
-}
+/* ===============================
+   BRIDGE: Tokens → Component Vars
+   =============================== */
 
-html[data-mode="dark"] {
-  --crusher-background-canvas: var(--color-dark-background-canvas);
-  --crusher-background-surface: var(--color-dark-background-surface);
-  --crusher-text-primary: var(--color-dark-text-primary);
-  --crusher-text-secondary: var(--color-dark-text-secondary);
-  --crusher-border-primary: var(--color-dark-border-primary);
-}
+/* src/css/bridge.css
+   Keep bridge minimal; semantic.css already maps light/dark.
+*/
 
-/* Card + surface elevation control */
+/* ===== Generic surface primitive ===== */
 .crusher-surface {
   background: var(--crusher-background-surface);
   color: var(--crusher-text-primary);
@@ -25,23 +15,72 @@ html[data-mode="dark"] {
   backdrop-filter: blur(var(--effect-blur-md, 0));
   box-shadow: var(--component-elevation, var(--shadow-1));
   border-radius: var(--component-radius, 0.5rem);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-/* put in semantic.css or bridge.css */
-:root {
-  --crusher-surface-bg: var(--crusher-background-surface);
-  --crusher-surface-border: var(--crusher-border-primary);
-  --crusher-surface-radius: var(--component-radius, var(--crusher-radius-md));
-  --crusher-surface-shadow: var(--component-elevation, var(--crusher-shadow-1));
-  --crusher-surface-blur: var(--effect-blur-md, 0);
+  transition: background-color 0.25s, box-shadow 0.25s, color 0.25s, border-color 0.25s;
 }
 
-/* globals.css or bridge.css */
+/* ===== Global transition hygiene ===== */
 @media (prefers-reduced-motion: no-preference) {
-  * { transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s; }
+  * { transition: background-color .25s, color .25s, border-color .25s, box-shadow .25s, transform .2s; }
 }
+
+/* ===== Focus ring (fallback) ===== */
 :where(button,[role="button"],a,input,textarea,select):focus-visible {
   outline: none;
   box-shadow: 0 0 0 var(--state-focus-ring-width, 2px) var(--state-focus-ring-color, var(--crusher-color-brand-primary));
   border-radius: var(--component-radius, var(--crusher-radius-md));
+}
+
+/* ===============================
+   CONTROL CONTRACT (defaults)
+   These power all control-like components (Button, Input, Select, etc.)
+   Dialects override these at [data-theme] scope.
+   =============================== */
+
+:root {
+  /* Shape & depth */
+  --ctl-radius: var(--crusher-component-radius, var(--crusher-radius-md));
+  --ctl-border-weight: var(--crusher-component-border-weight, 1px);
+  --ctl-elev: var(--crusher-component-elevation, var(--crusher-shadow-2));
+  --ctl-elev-hover: var(--ctl-elev); /* dialects can lift further */
+  --ctl-backdrop: none; /* e.g., blur(var(--crusher-effect-blur-md)) */
+  --ctl-hover-lift: var(--crusher-component-control-hover-lift, translateY(-2px));
+
+  /* Focus */
+  --btn-focus-ring: 0 0 0 3px color-mix(in srgb, var(--crusher-color-brand-primary), #fff 80%);
+
+  /* Variant defaults (safe & theme-agnostic) */
+  --btn-primary-bg: var(--state-control-bg-default);
+  --btn-primary-fg: var(--state-control-fg-default);
+  --btn-primary-border: color-mix(in srgb, currentColor 12%, transparent);
+  --btn-primary-shadow: var(--ctl-elev);
+  --btn-primary-letter: normal;
+  --btn-primary-text-shadow: none;
+
+  --btn-secondary-bg: var(--crusher-color-brand-secondary);
+  --btn-secondary-fg: var(--crusher-color-base-white);
+  --btn-secondary-border: color-mix(in srgb, currentColor 12%, transparent);
+  --btn-secondary-shadow: var(--ctl-elev);
+
+  --btn-danger-bg: var(--crusher-color-brand-accent-red);
+  --btn-danger-fg: var(--crusher-color-base-white);
+  --btn-danger-border: color-mix(in srgb, currentColor 12%, transparent);
+  --btn-danger-shadow: var(--ctl-elev);
+
+  --btn-outline-bg: transparent;
+  --btn-outline-fg: var(--crusher-text-primary);
+  --btn-outline-border: var(--crusher-border-primary);
+  --btn-outline-shadow: none;
+
+  --btn-ghost-bg: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent);
+  --btn-ghost-fg: var(--crusher-text-primary);
+  --btn-ghost-border: transparent;
+  --btn-ghost-shadow: none;
+
+  --btn-subtle-bg: var(--crusher-background-surface);
+  --btn-subtle-fg: var(--crusher-text-primary);
+  --btn-subtle-border: var(--crusher-border-primary);
+  --btn-subtle-shadow: var(--ctl-elev);
+
+  /* Theme-agnostic border placeholder to avoid 'transparent' borders snapping layout */
+  --btn-border: var(--btn-outline-border);
 }

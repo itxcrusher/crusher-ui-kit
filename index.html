@@ -131,6 +131,8 @@
             <crusher-button loading>Loading…</crusher-button>
             <crusher-button full-width>Full width</crusher-button>
           </div>
+          <div class="u-flex" style="gap:.5rem; margin-top:.75rem; flex-wrap:wrap;">
+          </div>
         </crusher-card>
 
         <crusher-card class="stack">
@@ -158,33 +160,6 @@ hello('Crusher');`}
           </crusher-code-block>
         </crusher-card>
 
-      </div>
-    </section>
-
-    <!-- Forms -->
-    <section class="section">
-      <crusher-section-title>Forms</crusher-section-title>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(320px,1fr));">
-
-        <crusher-card class="stack">
-          <h3>Field Scaffolding</h3>
-          <crusher-field required>
-            <crusher-label slot="label">Email</crusher-label>
-            <crusher-input name="email" placeholder="you@domain.com" required></crusher-input>
-            <crusher-hint slot="hint">We never share your email.</crusher-hint>
-            <crusher-error slot="error">Please enter a valid email.</crusher-error>
-          </crusher-field>
-
-          <crusher-field>
-            <crusher-label slot="label">About</crusher-label>
-            <crusher-textarea name="about" rows="4" placeholder="Say hello…"></crusher-textarea>
-            <crusher-hint slot="hint">Markdown supported.</crusher-hint>
-          </crusher-field>
-
-          <div class="row">
-            <crusher-button id="form-submit">Submit</crusher-button>
-            <crusher-button variant="secondary" id="form-validate">Validate</crusher-button>
-          </div>
         </crusher-card>
 
         <crusher-card class="stack">
@@ -440,4 +415,5 @@ hello('Crusher');`}
     applyRoot();
   </script>
 </body>
+</html>
 </html>
