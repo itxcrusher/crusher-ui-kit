@@ -6,7 +6,7 @@ class CrusherCheckbox extends HTMLElement {
         input {
           appearance:none;
           width:var(--crusher-spacing-4); height:var(--crusher-spacing-4);
-          border:var(--crusher-focus-width) solid var(--crusher-border-primary);
+          border:var(--crusher-component-border-weight) solid var(--crusher-border-primary);
           border-radius:var(--crusher-radius-sm);
           transition:background var(--crusher-transition-duration-base) var(--crusher-transition-easing-inout);
         }
