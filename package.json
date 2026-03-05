@@ -52,7 +52,7 @@
     "./styles/code-theme.css": "./src/css/code-theme.css",
     "./styles/theme-scenes.css": "./src/css/theme-scenes.css",
     "./styles/dialect-overrides.css": "./src/css/dialect-overrides.css",
-    "./themes/*": "./src/css/themes/*.css"
+    "./themes/*.css": "./src/css/themes/*.css"
   },
   "files": [
     "dist",

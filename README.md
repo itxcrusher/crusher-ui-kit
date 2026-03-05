@@ -15,24 +15,25 @@ npm i crusher-ui-kit
 
 ### Use
 
-**Import the full bundle:**
+**Library + exported CSS layers:**
 
 ```js
-import 'crusher-ui-kit/dist/crusher-ui.esm.js';
-import 'crusher-ui-kit/src/css/tokens.css';
-import 'crusher-ui-kit/src/css/modes.css';
-import 'crusher-ui-kit/src/css/semantic.css';
-import 'crusher-ui-kit/src/css/code-theme.css';
-import 'crusher-ui-kit/src/css/themes/glass.css';
+import 'crusher-ui-kit';
+import 'crusher-ui-kit/styles/tokens.css';
+import 'crusher-ui-kit/styles/modes.css';
+import 'crusher-ui-kit/styles/semantic.css';
+import 'crusher-ui-kit/styles/bridge.css';
+import 'crusher-ui-kit/styles/code-theme.css';
+import 'crusher-ui-kit/styles/theme-scenes.css';
+import 'crusher-ui-kit/styles/dialect-overrides.css';
+import 'crusher-ui-kit/themes/glass.css';
 ```
 
-**…or cherry-pick (recommended):**
+**Runtime helper export (browser):**
 
 ```js
-import 'crusher-ui-kit/src/components/atoms/crusher-button.js';
-import 'crusher-ui-kit/src/components/molecules/crusher-modal.js';
-import 'crusher-ui-kit/src/runtime/theme.js'; // mode/theme persistence
-import 'crusher-ui-kit/src/css/tokens.css';
+import { openPalette } from 'crusher-ui-kit/runtime';
+openPalette();
 ```
 
 ---
@@ -48,9 +49,8 @@ Example:
 
 ```html
 <script type="module">
-  import { setTheme, setMode } from 'crusher-ui-kit/src/runtime/theme.js';
-  setTheme('glass');  
-  setMode('dark');
+  document.documentElement.setAttribute('data-theme', 'glass');
+  document.documentElement.setAttribute('data-mode', 'dark');
 </script>
 ```
 
@@ -72,7 +72,6 @@ Example:
 | `npm run dev`                     | Vite dev server                 |
 | `npm run build:tokens`            | Generate token + theme CSS      |
 | `npm run build`                   | Build distributable (ESM + CSS) |
-| `npm run lint` / `npm run format` | Code quality                    |
 | `npm run check:contrast`          | WCAG color contrast validation  |
 
 **Release flow:** Uses Changesets → creates release PR → publishes on merge.
