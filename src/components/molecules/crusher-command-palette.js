@@ -1,5 +1,7 @@
 import { LitElement, html, css } from 'lit';
 
+const PALETTE_EVT = 'crusher:palette';
+
 /* Tiny fuzzy: score 0..1, with lightweight acronym bonuses */
 function fuzzyScore(query, text) {
   if (!query) return 0;
@@ -37,6 +39,7 @@ export class CrusherCommandPalette extends LitElement {
     this._idx = 0;
     this._debounce = 0;
     this._docKey = (e) => this._onDocKey(e);
+    this._paletteEvent = (e) => this._onPaletteEvent(e);
   }
 
   static styles = css`
@@ -81,15 +84,17 @@ export class CrusherCommandPalette extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener('keydown', this._docKey);
-    window.crusherPalette = this; // tiny global for demos
+    window.addEventListener(PALETTE_EVT, this._paletteEvent);
   }
   disconnectedCallback() {
     document.removeEventListener('keydown', this._docKey);
+    window.removeEventListener(PALETTE_EVT, this._paletteEvent);
     super.disconnectedCallback();
   }
 
   openPalette() { this._open(); }
   closePalette() { this._close(); }
+  togglePalette() { this.open ? this._close() : this._open(); }
 
   _open() { this.open = true; this.updateComplete.then(() => this.renderRoot.querySelector('input')?.focus()); }
   _close() { this.open = false; this.query = ''; this._idx = 0; }
@@ -133,9 +138,25 @@ export class CrusherCommandPalette extends LitElement {
     return Array.from(map.entries()); // [group, items[]]
   }
 
+  _onPaletteEvent(e) {
+    const detail = e?.detail || {};
+    if (detail.toggle || detail.action === 'toggle') {
+      this.togglePalette();
+      return;
+    }
+    if (detail.open === true || detail.action === 'open') {
+      this._open();
+      return;
+    }
+    if (detail.open === false || detail.action === 'close') {
+      this._close();
+    }
+  }
+
   _onDocKey(e) {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-      e.preventDefault(); this.open ? this._close() : this._open(); return;
+      if (e.defaultPrevented) return;
+      e.preventDefault(); this.togglePalette(); return;
     }
     if (!this.open) return;
     const groups = this._filtered();

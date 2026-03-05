@@ -27,6 +27,9 @@ jobs:
       - name: Build Tokens
         run: npm run build:tokens
 
+      - name: Check Contrast
+        run: npm run check:contrast
+
       - name: Build Library
         run: npm run build
 

@@ -15,6 +15,7 @@ declare global {
     'crusher-card': HTMLElement;
     'crusher-command-palette': HTMLElement;
     'crusher-dropdown': HTMLElement;
+    'crusher-menubar': HTMLElement;
     'crusher-modal': HTMLElement;
     'crusher-select': HTMLElement;
     'crusher-skill-bar': HTMLElement;
@@ -23,6 +24,7 @@ declare global {
     'crusher-toast-center': HTMLElement;
     // organisms
     'crusher-section-title': HTMLElement;
+    'crusher-table': HTMLElement;
     'crusher-timeline-item': HTMLElement;
     'crusher-timeline': HTMLElement;
     // forms
