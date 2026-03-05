@@ -1,26 +1,187 @@
 # 01 Architecture
 
 ## Scope
-Maps the current codebase layout and runtime boundaries.
+Defines the architectural boundaries of Crusher UI Kit and how the codebase is structured.
 
-## Contract
-- Directory ownership:
-  - `design/`: token and theme JSON sources
-  - `scripts/`: token generation and contrast guard
-  - `src/css/`: generated token/theme CSS + authored bridge/semantic files
-  - `src/scss/`: authored base/layout/utility Sass
-  - `src/components/`: custom elements (atoms, molecules, organisms, forms)
-  - `src/runtime/`: global helpers/events (`theme`, `toast`, `command-palette`)
-  - `src/js/main.js`: package/dev entry that registers components and imports styles
-  - `dist/`: build output from Vite library build
-- Build flow:
-  1. `npm run build:tokens` -> generates token and theme CSS assets
-  2. `npm run build` -> bundles library via `vite.config.js` from `src/js/main.js`
-- Runtime contract:
-  - UI state is represented by `data-theme`, `data-mode`, `data-density` on `document.documentElement`
-  - Global runtime events include `crusher:themechange`, `crusher:toast`, `crusher:palette`
+## High Level System
+
+Crusher UI Kit consists of four major layers:
+
+1. Token System
+2. CSS System
+3. Component System
+4. Runtime System
+
+Each layer has strict responsibilities.
+
+---
+
+## Directory Responsibilities
+
+design/
+Source of truth for all design tokens and theme dialects.
+
+design/tokens/
+Base token definitions.
+
+design/themes/
+Theme overlays representing visual dialects.
+
+---
+
+scripts/
+Build utilities for token generation and contrast checks.
+
+---
+
+src/css/
+Generated token CSS and authored semantic bridge layers.
+
+tokens.css  
+modes.css  
+themes/*.css  
+
+These files are consumed by components and runtime.
+
+---
+
+src/scss/
+Author-maintained structural styling.
+
+base/  
+layout/  
+utilities/
+
+These define layout rules and base resets, not design tokens.
+
+---
+
+src/components/
+
+Custom elements organized by component complexity:
+
+atoms/  
+Small standalone components.
+
+forms/  
+Form primitives and validation helpers.
+
+molecules/  
+Composite interactive components.
+
+organisms/  
+Large UI structures.
+
+All public elements use the prefix:
+
+crusher-*
+
+This naming is part of the public API.
+
+---
+
+src/runtime/
+
+Global utilities and UI orchestration.
+
+theme.js  
+Controls theme, mode, density switching.
+
+toast.js  
+Global toast event system.
+
+command-palette.js  
+Keyboard command system.
+
+---
+
+src/js/main.js
+
+Library entry point.
+
+Responsibilities:
+
+register all components  
+load base styles  
+initialize runtime helpers  
+
+This entry must work for:
+
+Vite dev  
+npm installs  
+library builds
+
+---
+
+dist/
+
+Library build output produced by Vite.
+
+Files include:
+
+crusher-ui.esm.js  
+crusher-ui.min.js  
+crusher-ui.min.css
+
+dist is build output and must never be manually edited.
+
+---
+
+## Build Flow
+
+Token build
+
+npm run build:tokens
+
+Generates:
+
+src/css/tokens.css  
+src/css/modes.css  
+src/css/themes/*.css  
+src/scss/base/_variables.scss
+
+Library build
+
+npm run build
+
+Bundles the library from:
+
+src/js/main.js
+
+Output goes to:
+
+dist/
+
+---
+
+## Runtime Contract
+
+Global UI state lives on:
+
+document.documentElement
+
+Attributes used:
+
+data-theme  
+data-mode  
+data-density
+
+Runtime events:
+
+crusher:themechange  
+crusher:toast  
+crusher:palette
+
+Components must react through CSS variables rather than internal JS styling.
+
+---
 
 ## Do Not Do
-- Do not move token source files into `src/` or component files into `design/`.
-- Do not bypass `src/js/main.js` for library registration behavior.
-- Do not change attribute/event names without documenting a compatibility strategy.
+
+Do not move token sources into src/.
+
+Do not place component logic inside design/.
+
+Do not bypass src/js/main.js for library registration.
+
+Do not change global attribute names without compatibility documentation.
