@@ -14,11 +14,11 @@ export default defineConfig({
     lib: {
       entry: resolve(dirname, 'src/js/main.js'),
       name: 'CrusherUI',
-      formats: ['es', 'umd'],
-      fileName: (format) =>
-        format === 'umd' ? 'crusher-ui.min.js' : 'crusher-ui.esm.js'
+      formats: ['es'],
+      fileName: () => 'crusher-ui.esm.js'
     },
     outDir: 'dist',
+    emptyOutDir: true,
     minify: true,
     sourcemap: true,
     rollupOptions: {
@@ -28,8 +28,7 @@ export default defineConfig({
           if (assetInfo.name && assetInfo.name.endsWith('.css'))
             return 'crusher-ui.min.css';
           return assetInfo.name || 'asset-[hash][extname]';
-        },
-        globals: { lit: 'Lit' }
+        }
       }
     }
   }

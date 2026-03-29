@@ -17,6 +17,7 @@ The local verification path is green when dependencies are installed:
 - `npm run build:tokens`
 - `npm run check:contrast`
 - `npm run build`
+- `npm run check:package`
 - `npm pack --dry-run`
 
 ## Stable Parts
@@ -30,7 +31,7 @@ The local verification path is green when dependencies are installed:
 - Package contract is materially hardened:
   - root package entry for bundlers
   - `./standalone` entry for static/drop-in ESM
-  - `./runtime` entry for command palette helpers
+  - `./runtime` entry for theme, toast, and palette helpers
 - Runtime contract is stable at the root attribute/event level:
   - attributes: `data-theme`, `data-mode`, `data-density`, `dir="rtl"`
   - events: `crusher:themechange`, `crusher:toast`, `crusher:palette`
@@ -43,7 +44,7 @@ The local verification path is green when dependencies are installed:
 - This repo is web-first. It can drive static sites, modern web frameworks, dashboards, SaaS apps, AI tools, infra consoles, and hybrid/mobile-web surfaces.
 - It is not yet a native mobile UI framework. The reusable mobile-ready layer today is primarily tokens and design language, not native rendered components.
 - `dist/` is generated build output and is intentionally gitignored. A fresh clone requires `npm ci` and `npm run build` before static artifacts exist locally.
-- Public runtime exports are still narrower than the internal runtime capabilities.
+- the weaker legacy browser-global UMD path has been retired from the public contract in favor of bundler ESM + standalone ESM.
 
 ## Do Not Do
 - Do not treat the demo page as the whole framework.

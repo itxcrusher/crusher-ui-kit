@@ -24,10 +24,11 @@ Canonical order:
 - Vite dev mode:
   - Keep style imports centralized in `src/js/main.js` (current source of truth).
 - npm package mode:
-  - JS entry uses `exports["."]` (`dist/crusher-ui.esm.js` / `dist/crusher-ui.min.js`).
+  - JS entry uses `exports["."]` (`dist/crusher-ui.esm.js` for bundlers, browser-only guard for Node).
+  - Runtime helpers use `exports["./runtime"]`.
   - Prefer style entrypoints from package exports under `./styles/*` and `./themes/*` for granular imports.
 - CDN/static HTML mode:
-  - `dist` path: load `dist/crusher-ui.min.css` + `dist` JS for simple static delivery (single bundled CSS, lower control).
+  - `dist` path: load `dist/crusher-ui.min.css` + `dist/crusher-ui.standalone.esm.js` for simple static delivery (single bundled CSS, drop-in ESM).
   - exports path: when using npm-aware tooling, import `./styles/*` + `./themes/*` for explicit layer control (more control, more import wiring).
 - Global state contract:
   - Consumers toggle only `data-theme`, `data-mode`, and `data-density`; CSS layering handles the rest.

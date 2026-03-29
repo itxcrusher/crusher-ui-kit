@@ -21,12 +21,17 @@ Done when:
 Goal:
 Define the supported public framework API clearly.
 
+Current status:
+- `./runtime` is the supported runtime entrypoint
+- package contract checks exist beyond simple path resolution
+- bundler ESM and standalone ESM are the active delivery contract
+
 Tasks:
 - decide the public runtime surface for theme/mode/density, toast, and palette
 - export supported runtime modules intentionally
 - keep npm/static/bundler contracts aligned
 - strengthen package smoke checks beyond simple resolution
-- decide whether to fix or retire the weaker UMD/browser-global path
+- keep the public build contract centered on bundler ESM + standalone ESM
 
 Done when:
 - consumers know exactly what is public and how to import it

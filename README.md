@@ -32,10 +32,21 @@ import 'crusher-ui-kit/themes/glass.css';
 Theme imports are extension-qualified by contract:
 `import 'crusher-ui-kit/themes/<theme>.css'`
 
-**Runtime helper export (browser):**
+**Runtime helpers (browser):**
 
 ```js
-import { openPalette } from 'crusher-ui-kit/runtime';
+import {
+  setTheme,
+  setMode,
+  setDensity,
+  showToast,
+  openPalette
+} from 'crusher-ui-kit/runtime';
+
+setTheme('glass');
+setMode('dark');
+setDensity('comfortable');
+showToast({ title: 'Crusher ready' });
 openPalette();
 ```
 
@@ -81,7 +92,8 @@ Example:
 | --------------------------------- | ------------------------------- |
 | `npm run dev`                     | Vite dev server                 |
 | `npm run build:tokens`            | Generate token + theme CSS      |
-| `npm run build`                   | Build distributable (ESM + CSS) |
+| `npm run build`                   | Build distributable (bundler ESM + standalone ESM + CSS) |
+| `npm run check:package`           | Verify runtime/package contracts |
 | `npm run check:contrast`          | WCAG color contrast validation  |
 
 **Release flow:** Uses Changesets → creates release PR → publishes on merge.

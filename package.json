@@ -2,17 +2,18 @@
   "name": "crusher-ui-kit",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/crusher-ui.min.js",
+  "main": "./src/runtime/root-node.cjs",
   "module": "./dist/crusher-ui.esm.js",
   "scripts": {
     "dev": "vite",
     "build:tokens": "node ./scripts/build-tokens.mjs",
     "check:contrast": "node ./scripts/check-contrast.mjs",
+    "check:package": "node ./scripts/check-package-contract.mjs",
     "build:core": "vite build",
     "build:standalone": "vite build --config vite.standalone.config.js",
     "build": "npm run build:core && npm run build:standalone",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build:tokens && npm run check:contrast && npm run build",
+    "prepublishOnly": "npm run build:tokens && npm run check:contrast && npm run build && npm run check:package",
     "changeset": "changeset",
     "release:prepare": "npx changeset",
     "release:version": "npx changeset version",
@@ -52,8 +53,8 @@
     },
     "./runtime": {
       "types": "./types/runtime.d.ts",
-      "import": "./src/runtime/command-palette.js",
-      "default": "./src/runtime/command-palette.js"
+      "import": "./src/runtime/index.js",
+      "default": "./src/runtime/index.js"
     },
     "./styles/tokens.css": "./src/css/tokens.css",
     "./styles/modes.css": "./src/css/modes.css",

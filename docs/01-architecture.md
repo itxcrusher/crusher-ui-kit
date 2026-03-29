@@ -84,6 +84,9 @@ src/runtime/
 
 Global utilities and UI orchestration.
 
+index.js  
+Public runtime entry exported as `./runtime`.
+
 theme.js  
 Controls theme, mode, density switching.
 
@@ -120,8 +123,9 @@ Library build output produced by Vite.
 Files include:
 
 crusher-ui.esm.js  
-crusher-ui.min.js  
-crusher-ui.min.css
+crusher-ui.min.css  
+crusher-ui.standalone.esm.js  
+crusher-ui.standalone.min.css
 
 dist is build output and must never be manually edited.
 
