@@ -83,4 +83,12 @@
 
   /* Theme-agnostic border placeholder to avoid 'transparent' borders snapping layout */
   --btn-border: var(--btn-outline-border);
+
+  /* Card surface defaults. Dialects can override these without touching component internals. */
+  --crusher-card-bg: var(--crusher-background-surface);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 20%);
+  --crusher-card-shadow: var(--crusher-shadow-2);
+  --crusher-card-backdrop: blur(var(--crusher-effect-blur-md));
+  --crusher-card-hover-lift: translateY(calc(var(--crusher-spacing-1) * -1));
+  --crusher-card-hover-shadow: var(--crusher-shadow-2);
 }

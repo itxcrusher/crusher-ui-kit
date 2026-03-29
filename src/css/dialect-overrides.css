@@ -20,6 +20,11 @@ html[data-theme="glass"] {
 
   --btn-primary-shadow: 0 6px 18px color-mix(in srgb, var(--btn-primary-bg) 35%, transparent);
   --btn-secondary-shadow: 0 6px 18px color-mix(in srgb, var(--btn-secondary-bg) 35%, transparent);
+
+  --crusher-card-bg: color-mix(in srgb, var(--crusher-background-surface), transparent 0%);
+  --crusher-card-border: var(--crusher-border-primary);
+  --crusher-card-shadow: var(--crusher-shadow-2);
+  --crusher-card-backdrop: blur(var(--crusher-effect-blur-md));
 }
 
 /* ===== Futuristic / Neon ===== */
@@ -44,6 +49,15 @@ html[data-theme="futuristic"] {
   --btn-primary-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
   --btn-secondary-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
   --btn-danger-text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
+
+  --crusher-card-bg:
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-background-surface), transparent 20%), transparent 40%),
+    color-mix(in srgb, var(--crusher-color-dark-background-canvas) 35%, transparent);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 40%, var(--crusher-border-primary));
+  --crusher-card-shadow:
+    0 0 0 var(--crusher-component-border-weight) color-mix(in srgb, var(--crusher-color-brand-primary) 30%, transparent),
+    var(--crusher-shadow-2);
+  --crusher-card-backdrop: blur(calc(var(--crusher-effect-blur-md) / 2));
 }
 
 /* ===== Minimal ===== */
@@ -57,6 +71,11 @@ html[data-theme="minimal"] {
 
   --btn-ghost-bg: color-mix(in srgb, var(--crusher-text-primary) 6%, transparent);
   --btn-subtle-shadow: var(--ctl-elev);
+
+  --crusher-card-bg: var(--crusher-background-surface);
+  --crusher-card-border: var(--crusher-border-primary);
+  --crusher-card-shadow: var(--crusher-shadow-1);
+  --crusher-card-backdrop: none;
 }
 
 /* ===== Brutal ===== */

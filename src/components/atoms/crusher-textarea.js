@@ -22,7 +22,7 @@ export class CrusherTextarea extends LitElement {
       border-color: transparent;
     }
     .textarea::placeholder { color: var(--crusher-fg-muted); opacity: var(--crusher-opacity-muted); }
-    .textarea[aria-invalid="true"] { border-color: color-mix(in srgb, var(--code-token-op, var(--crusher-color-brand-accent-red)) 70%, transparent); }
+    .textarea[aria-invalid="true"] { border-color: color-mix(in srgb, var(--crusher-feedback-danger) 70%, transparent); }
   `;
 
   static properties = {

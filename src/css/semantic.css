@@ -38,6 +38,22 @@ html[data-mode="dark"] {
   --crusher-border: var(--crusher-border-primary);
   --crusher-fg: var(--crusher-text-primary);
   --crusher-fg-muted: var(--crusher-text-secondary);
+  --crusher-feedback-success: var(--crusher-color-brand-primary);
+  --crusher-feedback-info: var(--crusher-color-brand-secondary);
+  --crusher-feedback-warning: var(--crusher-color-brand-accent-orange);
+  --crusher-feedback-danger: var(--crusher-color-brand-accent-red);
+  --crusher-feedback-on-solid: var(--crusher-color-base-white);
+
+  /* Code token aliases derive from framework semantics instead of raw literals. */
+  --crusher-code-token-comment: var(--crusher-text-secondary);
+  --crusher-code-token-punc: var(--crusher-text-secondary);
+  --crusher-code-token-keyword: var(--crusher-feedback-info);
+  --crusher-code-token-operator: var(--crusher-feedback-danger);
+  --crusher-code-token-number: var(--crusher-feedback-info);
+  --crusher-code-token-string: var(--crusher-feedback-success);
+  --crusher-code-token-function: var(--crusher-feedback-info);
+  --crusher-code-token-boolean: var(--crusher-feedback-warning);
+  --crusher-code-token-class: var(--crusher-feedback-info);
 
   /* Layering */
   --crusher-z-dropdown: 100;

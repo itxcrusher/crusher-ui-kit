@@ -71,13 +71,13 @@ export class CrusherCodeBlock extends LitElement {
     .surface .token.prolog,
     .surface .token.doctype { color: var(--code-token-comment, var(--crusher-text-secondary)); }
     .surface .token.punctuation { color: var(--code-token-punc, var(--crusher-text-secondary)); }
-    .surface .token.keyword { color: var(--code-token-kw, var(--crusher-color-brand-secondary)); }
-    .surface .token.operator { color: var(--code-token-op, var(--crusher-color-brand-accent-red)); }
-    .surface .token.number { color: var(--code-token-num, var(--crusher-color-brand-secondary)); }
-    .surface .token.string { color: var(--code-token-str, var(--crusher-color-brand-primary)); }
-    .surface .token.function { color: var(--code-token-fn, var(--crusher-color-brand-secondary)); }
-    .surface .token.boolean { color: var(--code-token-bool, var(--crusher-color-brand-accent-orange)); }
-    .surface .token.class-name { color: var(--code-token-class, var(--crusher-color-brand-secondary)); }
+    .surface .token.keyword { color: var(--code-token-kw, var(--crusher-code-token-keyword)); }
+    .surface .token.operator { color: var(--code-token-op, var(--crusher-code-token-operator)); }
+    .surface .token.number { color: var(--code-token-num, var(--crusher-code-token-number)); }
+    .surface .token.string { color: var(--code-token-str, var(--crusher-code-token-string)); }
+    .surface .token.function { color: var(--code-token-fn, var(--crusher-code-token-function)); }
+    .surface .token.boolean { color: var(--code-token-bool, var(--crusher-code-token-boolean)); }
+    .surface .token.class-name { color: var(--code-token-class, var(--crusher-code-token-class)); }
   `;
 
   _getText() {

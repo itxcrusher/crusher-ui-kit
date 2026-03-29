@@ -7,15 +7,15 @@
   --code-pill-fg: var(--crusher-text-secondary);
 
   /* tokens */
-  --code-token-comment: #6b7280;
-  --code-token-punc: #94a3b8;
-  --code-token-kw: #7c3aed;
-  --code-token-op: #ef4444;
-  --code-token-num: #06b6d4;
-  --code-token-str: #16a34a;
-  --code-token-fn: #3b82f6;
-  --code-token-bool: #f59e0b;
-  --code-token-class: #22d3ee;
+  --code-token-comment: var(--crusher-code-token-comment);
+  --code-token-punc: var(--crusher-code-token-punc);
+  --code-token-kw: var(--crusher-code-token-keyword);
+  --code-token-op: var(--crusher-code-token-operator);
+  --code-token-num: var(--crusher-code-token-number);
+  --code-token-str: var(--crusher-code-token-string);
+  --code-token-fn: var(--crusher-code-token-function);
+  --code-token-bool: var(--crusher-code-token-boolean);
+  --code-token-class: var(--crusher-code-token-class);
 }
 
 html[data-mode="dark"] {

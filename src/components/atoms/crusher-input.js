@@ -22,7 +22,7 @@ export class CrusherInput extends LitElement {
       border-color: transparent;
     }
     .input::placeholder { color: var(--crusher-fg-muted); opacity: var(--crusher-opacity-muted); }
-    .input[aria-invalid="true"] { border-color: color-mix(in srgb, var(--code-token-op, var(--crusher-color-brand-accent-red)) 70%, transparent); }
+    .input[aria-invalid="true"] { border-color: color-mix(in srgb, var(--crusher-feedback-danger) 70%, transparent); }
   `;
 
   static properties = {

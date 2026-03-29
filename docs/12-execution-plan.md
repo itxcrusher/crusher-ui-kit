@@ -42,6 +42,10 @@ Done when:
 Goal:
 Make components mostly dialect-agnostic and token-driven.
 
+Current status:
+- remaining theme-specific component selectors have been removed from the current component set
+- feedback and code-token defaults are now routed through authored semantic aliases instead of ad hoc component fallbacks
+
 Tasks:
 - remove remaining theme-specific selectors from component internals where feasible
 - finish remaining token-compliance cleanup
