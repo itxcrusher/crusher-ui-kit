@@ -160,6 +160,18 @@ hello('Crusher');`}
           </crusher-code-block>
         </crusher-card>
 
+        <crusher-card class="stack">
+          <h3>Form Primitives</h3>
+          <crusher-field id="signup-field">
+            <crusher-label slot="label">Work email</crusher-label>
+            <crusher-input type="email" placeholder="team@company.com"></crusher-input>
+            <crusher-hint slot="hint">Use a valid address to clear the error state.</crusher-hint>
+            <crusher-error slot="error" hidden>Enter a valid email address.</crusher-error>
+          </crusher-field>
+          <div class="row">
+            <crusher-button id="form-validate" variant="outline">Validate</crusher-button>
+            <crusher-button id="form-submit">Submit</crusher-button>
+          </div>
         </crusher-card>
 
         <crusher-card class="stack">
@@ -401,8 +413,8 @@ hello('Crusher');`}
     t.addEventListener('resize', e => console.log('column widths', e.detail.widths));
 
     // === FORM demo ===
+    const field = $('signup-field');
     $('form-validate').onclick = () => {
-      const field = document.querySelector('crusher-field');
       const input = field.querySelector('crusher-input');
       const error = field.querySelector('crusher-error');
       const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value || '');
@@ -415,5 +427,4 @@ hello('Crusher');`}
     applyRoot();
   </script>
 </body>
-</html>
 </html>

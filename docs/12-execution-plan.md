@@ -1,58 +1,101 @@
 # 12 Execution Plan
 
 ## Scope
-Ordered tasks to move the current repo toward the North Star while preserving the existing public component and CSS contracts.
+Phase-by-phase plan to move Crusher UI Kit from a hardened UI kit into a reusable personal framework.
 
-## Ordered Tasks
-1. Enforce release quality gates in automation.
-Touchpoints: `package.json`, `.github/workflows/release.yml`.
-Done when: both publish paths run `npm run check:contrast` before build/publish.
+## Phase 1 - Baseline Recovery
+Goal:
+Make the repo truthful, runnable, and safe to iterate on.
 
-2. Add a CI workflow for pull requests.
-Touchpoints: `.github/workflows/ci.yml` (new).
-Done when: PRs run `npm ci`, `npm run build:tokens`, `npm run check:contrast`, `npm run build`.
+Tasks:
+- restore local verification (`npm ci`, tokens, contrast, build, pack)
+- fix demo integrity issues in `index.html`
+- refresh stale planning docs so they match current reality
 
-3. Resolve package contract vs README mismatch.
-Touchpoints: `README.md`, `package.json` `exports`/`files`.
-Done when: README examples only use supported import paths that exist in published package contents.
+Done when:
+- the baseline commands are green locally
+- the demo page is structurally valid and does not reference missing controls
+- `docs/10-12` reflect current repo state
 
-4. Complete public element typings.
-Touchpoints: `types/index.d.ts`.
-Done when: every `customElements.define('crusher-*', ...)` tag in `src/components/**` is represented in `HTMLElementTagNameMap`.
+## Phase 2 - Framework Contract Surface
+Goal:
+Define the supported public framework API clearly.
 
-5. Normalize command-palette global API.
-Touchpoints: `src/runtime/command-palette.js`, `src/components/molecules/crusher-command-palette.js`, docs.
-Done when: `window.crusherPalette` has one stable shape with documented methods.
+Tasks:
+- decide the public runtime surface for theme/mode/density, toast, and palette
+- export supported runtime modules intentionally
+- keep npm/static/bundler contracts aligned
+- strengthen package smoke checks beyond simple resolution
+- decide whether to fix or retire the weaker UMD/browser-global path
 
-6. Finish Phase 2 token-compliance cleanup.
-Touchpoints: `src/components/**`, `src/css/bridge.css`, `src/css/dialect-overrides.css`, token JSON if needed.
-Done when: hardcoded fallback colors are removed or intentionally centralized behind tokenized aliases.
+Done when:
+- consumers know exactly what is public and how to import it
+- the package contract is explicit across all supported delivery modes
+- build output warnings are either resolved or intentionally removed from the contract
 
-7. Move remaining theme-specific component selectors into dialect/token layers where feasible.
-Touchpoints: `src/components/molecules/crusher-card.js`, `src/css/dialect-overrides.css`, theme token files.
-Done when: component internals are mostly theme-agnostic and rely on variables.
+## Phase 3 - Token-First Decoupling
+Goal:
+Make components mostly dialect-agnostic and token-driven.
 
-8. Reconcile package publish allowlist.
-Touchpoints: `package.json` `files`, repository root legal/docs files.
-Done when: allowlisted files exist and match intended distributable assets.
+Tasks:
+- remove remaining theme-specific selectors from component internals where feasible
+- finish remaining token-compliance cleanup
+- keep visual behavior controlled through shared variables and dialect layers
 
-9. Add contract verification checks for CSS/runtime invariants.
-Touchpoints: new scripts under `scripts/`, docs under `docs/`.
-Done when: automated checks assert presence/order of core CSS layers and required root attributes/events.
+Done when:
+- component internals no longer encode theme behavior except where explicitly justified
+- switching themes feels systemic rather than component-specific
 
-10. Refresh permanent docs after contract changes.
-Touchpoints: `docs/00-05`, `docs/decisions/0001-css-layering-and-loading.md`, `AGENTS.md`.
-Done when: architecture, contract docs, and roadmap reflect actual implementation and automation.
+## Phase 4 - Framework Primitives
+Goal:
+Add the reusable surfaces that make this practical across many product types.
 
-11. Validate all three usage modes end-to-end before release.
-Touchpoints: dev app (`index.html` + `src/js/main.js`), npm import path examples, static dist consumption.
-Done when: each mode has a reproducible smoke-check procedure and passes.
+Tasks:
+- define layout and app-shell primitives
+- strengthen navigation and command surfaces
+- add data-heavy and dashboard-friendly foundations
+- prioritize primitives that multiple future apps will reuse
 
-12. Start Phase 6 expansion as scoped epics, not ad-hoc components.
-Touchpoints: new RFC/decision docs and corresponding source directories.
-Done when: expansion work is tracked as explicit proposals with acceptance criteria tied to token/runtime contracts.
+Done when:
+- a new project can assemble a serious product shell from the framework instead of from ad hoc app code
+
+## Phase 5 - Consumer Validation
+Goal:
+Prove the framework in real downstream apps.
+
+Tasks:
+- integrate into at least one real consumer project
+- fix friction in setup, theming, runtime usage, and packaging
+- then repeat with a second consumer project if needed
+
+Preferred order:
+1. `crusher-portfolio`
+2. `hassaan-portfolio`
+
+Done when:
+- downstream adoption feels routine, not custom
+- consumer projects do not need deep imports or one-off framework patches
+
+## Phase 6 - Domain Expansion
+Goal:
+Expand from general UI foundation into domain-ready packs.
+
+Examples:
+- AI workspace patterns
+- infra and dashboard surfaces
+- SaaS admin patterns
+- blockchain/productivity interfaces
+
+Done when:
+- new domain work is built on top of stable framework contracts, not mixed into unfinished core cleanup
+
+## Working Rule
+Each phase should end with:
+- verification
+- commit
+- push
 
 ## Do Not Do
-- Do not start expansion work before contract and release-gate gaps are closed.
-- Do not introduce new public APIs without typings, docs, and export strategy.
-- Do not merge roadmap tasks without a clear done condition.
+- Do not skip consumer validation and call it framework-ready.
+- Do not add domain packs before Phase 2 and Phase 3 are materially complete.
+- Do not let docs drift behind the implementation again.
