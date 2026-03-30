@@ -19,15 +19,15 @@ export class CrusherMenubar extends LitElement {
   static styles = css`
     :host { display: block; position: relative; z-index: var(--crusher-z-dropdown); }
     .bar {
-      display: flex; gap: var(--crusher-spacing-2); align-items: center; flex-wrap: nowrap;
-      background: var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent));
+      display: flex; gap: var(--crusher-menubar-gap, var(--crusher-spacing-2)); align-items: center; flex-wrap: nowrap;
+      background: var(--crusher-menubar-bg, var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent)));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
-      border-radius: var(--crusher-radius-lg);
-      box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-1));
-      padding-block: calc(var(--crusher-spacing-1) + 2px);
-      padding-inline: var(--crusher-spacing-4);
+      border: var(--crusher-component-border-weight) solid var(--crusher-menubar-border, var(--crusher-toolbar-border, var(--crusher-border)));
+      border-radius: var(--crusher-menubar-radius, var(--crusher-radius-lg));
+      box-shadow: var(--crusher-menubar-shadow, var(--crusher-toolbar-shadow, var(--crusher-shadow-1)));
+      padding-block: var(--crusher-menubar-padding-block, calc(var(--crusher-spacing-1) + 2px));
+      padding-inline: var(--crusher-menubar-padding-inline, var(--crusher-spacing-4));
       overflow: hidden;
     }
     ::slotted([slot="menu"]) {
@@ -35,8 +35,10 @@ export class CrusherMenubar extends LitElement {
       background: transparent;
       border: none;
       cursor: default;
-      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-4);
-      border-radius: var(--crusher-radius-md);
+      padding:
+        var(--crusher-menubar-item-padding-block, calc(var(--crusher-spacing-1) + 2px))
+        var(--crusher-menubar-item-padding-inline, calc(var(--crusher-spacing-4) + 2px));
+      border-radius: var(--crusher-menubar-item-radius, var(--crusher-radius-md));
       color: var(--crusher-fg);
       font: inherit;
       font-weight: var(--crusher-font-weight-medium);
@@ -48,12 +50,12 @@ export class CrusherMenubar extends LitElement {
         box-shadow var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout);
     }
     ::slotted([slot="menu"]:hover) {
-      background: var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent));
+      background: var(--crusher-menubar-item-bg-hover, var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent)));
     }
     ::slotted([slot="menu"][hidden]) { display: none !important; }
     ::slotted([slot="menu"][aria-expanded="true"]) {
-      background: var(--crusher-nav-item-bg-active, color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent));
-      box-shadow: inset 0 0 0 var(--crusher-component-border-weight) var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border)));
+      background: var(--crusher-menubar-item-bg-active, var(--crusher-nav-item-bg-active, color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent)));
+      box-shadow: inset 0 0 0 var(--crusher-component-border-weight) var(--crusher-menubar-item-border-active, var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border))));
     }
 
     .menu {
@@ -71,7 +73,7 @@ export class CrusherMenubar extends LitElement {
 
     .item {
       display:flex; align-items:center; gap:var(--crusher-spacing-2);
-      padding: calc(var(--crusher-spacing-2) - var(--crusher-focus-offset)) var(--crusher-spacing-2);
+      padding: var(--crusher-spacing-2) var(--crusher-spacing-3);
       border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg); cursor: default;
     }

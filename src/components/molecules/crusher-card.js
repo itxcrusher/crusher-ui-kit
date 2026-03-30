@@ -12,8 +12,8 @@ export class CrusherCard extends LitElement {
       backdrop-filter: var(--crusher-card-backdrop);
       border: var(--crusher-component-border-weight) solid var(--crusher-card-border);
       background-clip: padding-box;
-      border-radius: var(--crusher-radius-lg);
-      padding: var(--crusher-spacing-6);
+      border-radius: var(--crusher-card-radius, var(--crusher-radius-lg));
+      padding: var(--crusher-card-padding, var(--crusher-spacing-6));
       box-shadow: var(--crusher-card-shadow);
       transition: all var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout);
       overflow: hidden;

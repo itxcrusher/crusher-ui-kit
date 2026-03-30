@@ -155,8 +155,8 @@ export class CrusherNavList extends LitElement {
       color: var(--crusher-nav-badge-fg, var(--crusher-fg-muted));
       font-size: var(--crusher-font-size-xs);
       font-weight: var(--crusher-font-weight-semibold);
-      padding-inline: var(--crusher-spacing-2);
-      padding-block: calc(var(--crusher-spacing-1) / 2);
+      padding-inline: calc(var(--crusher-spacing-2) + 2px);
+      padding-block: var(--crusher-spacing-1);
       white-space: nowrap;
     }
   `;

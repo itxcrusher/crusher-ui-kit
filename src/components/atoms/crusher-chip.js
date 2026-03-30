@@ -42,6 +42,10 @@ class CrusherChip extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         :host {
+          display: inline-block;
+        }
+
+        .chip {
           --_chip-accent: ${accent};
           display: inline-flex;
           align-items: center;
@@ -71,7 +75,7 @@ class CrusherChip extends HTMLElement {
             box-shadow var(--crusher-transition-duration-fast);
         }
 
-        :host(:hover) {
+        :host(:hover) .chip {
           background: color-mix(in srgb, var(--_chip-accent) 18%, var(--crusher-background-surface));
           transform: translateY(calc(var(--crusher-component-border-weight) * -1));
           box-shadow:
@@ -79,7 +83,7 @@ class CrusherChip extends HTMLElement {
             0 12px 22px color-mix(in srgb, var(--_chip-accent) 12%, transparent);
         }
       </style>
-      <slot></slot>
+      <span class="chip"><slot></slot></span>
     `;
   }
 }

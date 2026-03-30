@@ -52,6 +52,7 @@
       font-weight: var(--crusher-font-weight-medium);
     }
     .hero-shell {
+      --crusher-card-padding: clamp(var(--crusher-spacing-6), 3vw, calc(var(--crusher-spacing-8) + var(--crusher-spacing-1)));
       --crusher-card-shadow: 0 22px 48px color-mix(in srgb, black 10%, transparent);
       --crusher-card-hover-shadow: var(--crusher-card-shadow);
       --crusher-card-hover-lift: translateY(0);
@@ -59,6 +60,8 @@
     .hero-layout {
       display: grid;
       gap: var(--crusher-spacing-6);
+      max-inline-size: 68rem;
+      margin-inline: auto;
     }
     .hero-menubar {
       display: grid;
@@ -96,13 +99,18 @@
       text-transform: uppercase;
     }
     .hero-title {
-      color: var(--crusher-fg);
+      color: var(--crusher-color-light-text-primary) !important;
       font-family: var(--crusher-font-family-display);
       font-size: clamp(2.35rem, 6vw, 4.5rem);
       font-weight: var(--crusher-font-weight-bold);
       letter-spacing: -0.04em;
       line-height: 0.96;
       max-inline-size: 12.5ch;
+      text-shadow: 0 1px 0 color-mix(in srgb, var(--crusher-color-base-white) 22%, transparent);
+    }
+    html[data-mode="dark"] .hero-title {
+      color: var(--crusher-color-dark-text-primary) !important;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
     }
     .hero-summary {
       font-size: var(--crusher-font-size-lg);
