@@ -18,7 +18,11 @@
     .row { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
     .grid { display:grid; gap:1rem; }
     .stack > :is(h1,h2,h3,h4,p,strong) { margin: 0; }
-    .demo-container { max-width: 1160px; margin-inline:auto; padding: 24px; }
+    .demo-container {
+      max-width: min(1480px, calc(100vw - clamp(2rem, 4vw, 5rem)));
+      margin-inline:auto;
+      padding: clamp(24px, 2vw, 32px);
+    }
     .section { margin: 32px 0; }
     .muted { color: var(--crusher-fg-muted); }
     .kbd {
@@ -60,7 +64,7 @@
     .hero-layout {
       display: grid;
       gap: var(--crusher-spacing-6);
-      max-inline-size: 68rem;
+      max-inline-size: min(100%, 78rem);
       margin-inline: auto;
     }
     .hero-menubar {
