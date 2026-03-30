@@ -336,6 +336,13 @@ hello('Crusher');`}
         </crusher-card>
 
         <crusher-card class="stack">
+          <h3>Skill Bars</h3>
+          <crusher-skill-bar label="System design" percentage="92"></crusher-skill-bar>
+          <crusher-skill-bar label="Frontend platform" percentage="88"></crusher-skill-bar>
+          <crusher-skill-bar label="Design systems" percentage="94"></crusher-skill-bar>
+        </crusher-card>
+
+        <crusher-card class="stack">
           <crusher-page-header
             eyebrow="Data surface"
             title="Service Fleet"
@@ -413,6 +420,11 @@ hello('Crusher');`}
     const tableFilters = $('table-filters');
     const filterStatus = $('filter-status');
     const filterRegion = $('filter-region');
+    const params = new URLSearchParams(location.search);
+    const allowedModes = new Set(['light', 'dark']);
+    const allowedThemes = new Set(['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento']);
+    const allowedDensity = new Set(['compact', 'cozy', 'comfortable']);
+    const pick = (value, fallback, allowed) => allowed.has(value) ? value : fallback;
 
     shellNav.items = [
       { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live' },
@@ -424,9 +436,10 @@ hello('Crusher');`}
     shellNav.value = 'overview';
 
     // sensible defaults in the selects
-    ctlMode.value = 'light';
-    ctlTheme.value = 'glass';
-    ctlDensity.value = 'comfortable';
+    ctlMode.value = pick(params.get('mode'), 'light', allowedModes);
+    ctlTheme.value = pick(params.get('theme'), 'glass', allowedThemes);
+    ctlDensity.value = pick(params.get('density'), 'comfortable', allowedDensity);
+    if (params.get('brand')) ctlBrand.value = params.get('brand');
 
     // Optional: make the **page background** reflect the selected theme so differences are visible.
     const themedBackgrounds = {
@@ -440,9 +453,21 @@ hello('Crusher');`}
     };
     const applyBackground = () => {
       const t = ctlTheme.value || 'glass';
-      document.body.style.backgroundImage = themedBackgrounds[t] || themedBackgrounds.glass;
+      const background = themedBackgrounds[t] || themedBackgrounds.glass;
+      document.documentElement.style.background = background;
+      document.documentElement.style.backgroundAttachment = 'fixed';
+      document.documentElement.style.minHeight = '100%';
+      document.body.style.background = background;
       document.body.style.backgroundAttachment = 'fixed';
       document.body.style.minHeight = '100vh';
+    };
+    const syncUrlState = () => {
+      const url = new URL(location.href);
+      url.searchParams.set('mode', ctlMode.value);
+      url.searchParams.set('theme', ctlTheme.value);
+      url.searchParams.set('density', ctlDensity.value);
+      url.searchParams.set('brand', ctlBrand.value);
+      history.replaceState(null, '', `${url.pathname}?${url.searchParams.toString()}`);
     };
 
     // Apply root attributes + background
@@ -450,25 +475,31 @@ hello('Crusher');`}
       document.documentElement.setAttribute('data-mode', ctlMode.value);
       document.documentElement.setAttribute('data-theme', ctlTheme.value);
       document.documentElement.setAttribute('data-density', ctlDensity.value);
+      document.documentElement.style.setProperty('--crusher-color-brand-primary', ctlBrand.value);
       applyBackground();
+      syncUrlState();
     };
 
     // Wire listeners
     ctlMode.addEventListener('change', (e) => {
       document.documentElement.setAttribute('data-mode', e.detail?.value || e.target.value);
+      syncUrlState();
       toast?.({ title:'Mode', message: e.detail?.value || e.target.value });
     });
     ctlTheme.addEventListener('change', (e) => {
       const theme = e.detail?.value || e.target.value;
       document.documentElement.setAttribute('data-theme', theme);
       applyBackground();
+      syncUrlState();
       toast?.({ title:'Dialect', message: theme });
     });
     ctlDensity.addEventListener('change', (e) => {
       document.documentElement.setAttribute('data-density', e.detail?.value || e.target.value);
+      syncUrlState();
     });
     ctlBrand.addEventListener('input', (e) => {
       document.documentElement.style.setProperty('--crusher-color-brand-primary', e.target.value);
+      syncUrlState();
       toast?.({ title:'Brand updated', message: e.target.value, variant: 'brand' });
     });
 
