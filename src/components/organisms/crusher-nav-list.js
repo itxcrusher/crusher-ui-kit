@@ -28,6 +28,11 @@ export class CrusherNavList extends LitElement {
     .section {
       display: grid;
       gap: var(--crusher-spacing-2);
+      background: var(--crusher-nav-panel-bg, color-mix(in srgb, var(--crusher-surface) 94%, transparent));
+      border: var(--crusher-component-border-weight) solid var(--crusher-nav-panel-border, color-mix(in srgb, var(--crusher-border) 78%, transparent));
+      border-radius: var(--crusher-radius-lg);
+      box-shadow: var(--crusher-nav-panel-shadow, none);
+      padding: var(--crusher-spacing-3);
     }
 
     .section-label {
@@ -67,14 +72,17 @@ export class CrusherNavList extends LitElement {
       padding: var(--crusher-spacing-3);
       text-align: start;
       text-decoration: none;
+      box-shadow: var(--crusher-nav-item-shadow, none);
       transition:
         background var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout),
         border-color var(--crusher-motion-duration-base) var(--crusher-motion-easing-inout),
+        box-shadow var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
         transform var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout);
     }
 
     .item:hover {
       background: var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent));
+      box-shadow: var(--crusher-nav-item-shadow-hover, none);
       transform: translateX(var(--crusher-component-border-weight));
     }
 
@@ -82,7 +90,9 @@ export class CrusherNavList extends LitElement {
       background: var(--crusher-nav-item-bg-active, color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent));
       border-color: var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border)));
       color: var(--crusher-nav-item-fg-active, var(--crusher-fg));
-      box-shadow: inset calc(var(--crusher-component-border-weight) * 2) 0 0 var(--crusher-color-brand-primary);
+      box-shadow:
+        inset calc(var(--crusher-component-border-weight) * 2) 0 0 var(--crusher-color-brand-primary),
+        var(--crusher-nav-item-shadow-active, none);
     }
 
     .item[disabled],
@@ -93,8 +103,25 @@ export class CrusherNavList extends LitElement {
 
     .icon {
       color: var(--crusher-nav-item-icon, var(--crusher-fg-muted));
-      font-size: var(--crusher-font-size-lg);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: var(--crusher-nav-item-icon-box, calc(var(--crusher-spacing-4) + var(--crusher-spacing-2)));
+      block-size: var(--crusher-nav-item-icon-box, calc(var(--crusher-spacing-4) + var(--crusher-spacing-2)));
+      border-radius: var(--crusher-radius-md);
+      background: var(--crusher-nav-item-icon-bg, color-mix(in srgb, var(--crusher-fg) 6%, transparent));
+      font-size: var(--crusher-font-size-sm);
+      font-weight: var(--crusher-font-weight-semibold);
       line-height: 1;
+    }
+
+    .icon.placeholder::before {
+      content: '';
+      inline-size: calc(var(--crusher-spacing-1) + 2px);
+      block-size: calc(var(--crusher-spacing-1) + 2px);
+      border-radius: var(--crusher-radius-full);
+      background: currentColor;
+      opacity: 0.6;
     }
 
     .copy {
@@ -122,6 +149,7 @@ export class CrusherNavList extends LitElement {
     .badge {
       align-self: center;
       background: var(--crusher-nav-badge-bg, color-mix(in srgb, var(--crusher-fg) 8%, transparent));
+      border: var(--crusher-component-border-weight) solid color-mix(in srgb, var(--crusher-nav-badge-fg, var(--crusher-fg-muted)) 14%, transparent);
       border-radius: var(--crusher-radius-full);
       color: var(--crusher-nav-badge-fg, var(--crusher-fg-muted));
       font-size: var(--crusher-font-size-xs);
@@ -166,7 +194,7 @@ export class CrusherNavList extends LitElement {
 
   _renderAction(item) {
     const content = html`
-      ${item.icon ? html`<span class="icon" aria-hidden="true">${item.icon}</span>` : html`<span class="icon" aria-hidden="true"></span>`}
+      ${item.icon ? html`<span class="icon" aria-hidden="true">${item.icon}</span>` : html`<span class="icon placeholder" aria-hidden="true"></span>`}
       <span class="copy">
         <span class="title">${item.label || item.value || item.href || ''}</span>
         ${item.hint ? html`<span class="hint">${item.hint}</span>` : null}

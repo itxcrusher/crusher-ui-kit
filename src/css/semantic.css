@@ -54,11 +54,18 @@ html[data-mode="dark"] {
   --crusher-shell-padding-block: var(--crusher-spacing-6);
   --crusher-shell-nav-width: 18rem;
   --crusher-shell-aside-width: 22rem;
+  --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-surface) 94%, transparent);
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-border) 78%, transparent);
+  --crusher-nav-panel-shadow: var(--crusher-shadow-1);
   --crusher-nav-item-bg: transparent;
   --crusher-nav-item-bg-hover: color-mix(in srgb, var(--crusher-fg) 6%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent);
   --crusher-nav-item-border: transparent;
   --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border));
+  --crusher-nav-item-shadow: none;
+  --crusher-nav-item-shadow-hover: none;
+  --crusher-nav-item-shadow-active: none;
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-fg) 6%, transparent);
   --crusher-nav-section-fg: var(--crusher-fg-muted);
   --crusher-nav-badge-bg: color-mix(in srgb, var(--crusher-fg) 8%, transparent);
   --crusher-nav-badge-fg: var(--crusher-fg-muted);
@@ -69,6 +76,9 @@ html[data-mode="dark"] {
   --crusher-stat-tone-warning: var(--crusher-feedback-warning);
   --crusher-stat-tone-danger: var(--crusher-feedback-danger);
   --crusher-stat-value-size: var(--crusher-font-size-4xl);
+  --crusher-stat-padding-block: var(--crusher-spacing-4);
+  --crusher-stat-padding-inline-end: var(--crusher-spacing-4);
+  --crusher-stat-padding-inline-start: calc(var(--crusher-spacing-4) + var(--crusher-spacing-2));
   --crusher-page-header-gap: var(--crusher-layout-gap-tight);
   --crusher-page-header-eyebrow: var(--crusher-color-brand-primary);
   --crusher-page-header-title-size: clamp(var(--crusher-font-size-3xl), 4vw, var(--crusher-font-size-5xl));

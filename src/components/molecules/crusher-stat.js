@@ -40,7 +40,9 @@ export class CrusherStat extends LitElement {
       gap: var(--crusher-layout-gap-tight, var(--crusher-spacing-4));
       min-inline-size: 0;
       overflow: hidden;
-      padding: var(--crusher-spacing-5);
+      padding-block: var(--crusher-stat-padding-block, var(--crusher-spacing-4));
+      padding-inline-end: var(--crusher-stat-padding-inline-end, var(--crusher-spacing-4));
+      padding-inline-start: var(--crusher-stat-padding-inline-start, calc(var(--crusher-spacing-4) + var(--crusher-spacing-2)));
       position: relative;
     }
 

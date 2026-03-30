@@ -33,6 +33,10 @@ html[data-theme="glass"] {
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-surface) 78%, transparent);
   --crusher-filter-search-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 12%);
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-border-primary) 68%, transparent);
+  --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-background-surface) 88%, transparent);
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 14%);
+  --crusher-nav-panel-shadow: 0 8px 22px color-mix(in srgb, black 8%, transparent);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-base-white) 70%, transparent);
 }
 html[data-theme="glass"][data-mode="dark"] {
   --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 24%);
@@ -82,8 +86,13 @@ html[data-theme="futuristic"] {
   --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 72%, var(--crusher-color-brand-primary) 8%);
   --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-primary) 26%, var(--crusher-border-primary));
+  --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-background-surface) 86%, transparent);
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-color-brand-primary) 28%, var(--crusher-border-primary));
+  --crusher-nav-panel-shadow: 0 0 0 1px color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent), 0 0 24px color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 20%, transparent);
   --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-primary) 54%, var(--crusher-border-primary));
+  --crusher-nav-item-shadow-active: 0 0 20px color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent);
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-color-brand-primary) 22%, var(--crusher-border-primary));
 }
 html[data-theme="futuristic"][data-mode="light"] {
@@ -119,6 +128,10 @@ html[data-theme="minimal"] {
   --crusher-filter-search-bg: var(--crusher-surface);
   --crusher-filter-search-border: color-mix(in srgb, var(--crusher-border) 92%, transparent);
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent);
+  --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-surface) 98%, transparent);
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-border) 92%, transparent);
+  --crusher-nav-panel-shadow: none;
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-text-primary) 5%, transparent);
 }
 html[data-theme="minimal"][data-mode="dark"] {
   --btn-subtle-bg: color-mix(in srgb, var(--crusher-background-surface) 94%, transparent);
@@ -149,8 +162,14 @@ html[data-theme="brutal"] {
   --crusher-filter-bar-border: var(--crusher-card-border);
   --crusher-filter-search-bg: var(--crusher-background-canvas);
   --crusher-filter-search-border: var(--crusher-card-border);
+  --crusher-nav-panel-bg: var(--crusher-background-surface);
+  --crusher-nav-panel-border: var(--crusher-card-border);
+  --crusher-nav-panel-shadow: 6px 6px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-background-surface));
   --crusher-nav-item-border-active: var(--crusher-card-border);
+  --crusher-nav-item-shadow-hover: 4px 4px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-nav-item-shadow-active: 4px 4px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent);
   --crusher-nav-badge-bg: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, transparent);
   --crusher-nav-badge-fg: var(--crusher-text-primary);
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-text-primary) 65%, transparent);
@@ -186,8 +205,14 @@ html[data-theme="neobrutal"] {
   --crusher-filter-bar-border: color-mix(in srgb, currentColor 82%, transparent);
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 92%, transparent);
   --crusher-filter-search-border: color-mix(in srgb, currentColor 78%, transparent);
+  --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-background-surface) 97%, var(--crusher-color-base-white) 3%);
+  --crusher-nav-panel-border: color-mix(in srgb, currentColor 82%, transparent);
+  --crusher-nav-panel-shadow: 0 0 0 3px color-mix(in srgb, currentColor 84%, transparent), 6px 6px 0 0 rgba(0,0,0,0.82);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent);
   --crusher-nav-item-border-active: color-mix(in srgb, currentColor 76%, transparent);
+  --crusher-nav-item-shadow-hover: 4px 4px 0 0 rgba(0,0,0,0.78);
+  --crusher-nav-item-shadow-active: 4px 4px 0 0 rgba(0,0,0,0.82);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, currentColor 10%, transparent);
   --crusher-page-header-divider: color-mix(in srgb, currentColor 28%, transparent);
 }
 
@@ -212,6 +237,10 @@ html[data-theme="neumorph"] {
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-surface) 98%, transparent);
   --crusher-filter-search-border: transparent;
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-border-primary) 42%, transparent);
+  --crusher-nav-panel-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-primary) 5%), color-mix(in srgb, var(--crusher-background-surface) 96%, black 4%));
+  --crusher-nav-panel-border: transparent;
+  --crusher-nav-panel-shadow: 8px 8px 18px rgba(0,0,0,0.08), -8px -8px 18px rgba(255,255,255,0.58);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-base-white) 82%, transparent);
 }
 html[data-theme="neumorph"][data-mode="dark"] {
   --ctl-elev: 10px 10px 20px rgba(0,0,0,0.45), -8px -8px 16px rgba(255,255,255,0.04);
@@ -228,6 +257,10 @@ html[data-theme="neumorph"][data-mode="dark"] {
   --crusher-filter-bar-border: transparent;
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 82%, var(--crusher-background-surface) 18%);
   --crusher-filter-search-border: transparent;
+  --crusher-nav-panel-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 95%, var(--crusher-color-base-white) 5%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
+  --crusher-nav-panel-border: transparent;
+  --crusher-nav-panel-shadow: 10px 10px 20px rgba(0,0,0,0.4), -8px -8px 16px rgba(255,255,255,0.04);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-base-white) 8%, transparent);
 }
 
 /* ===== Bento (curved, airy) ===== */
@@ -252,8 +285,12 @@ html[data-theme="bento"] {
   --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, var(--crusher-border-primary));
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-color-base-white) 88%, var(--crusher-color-brand-primary) 7%);
   --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, var(--crusher-border-primary));
+  --crusher-nav-panel-bg: linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-primary) 8%), color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-secondary) 6%));
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, var(--crusher-border-primary));
+  --crusher-nav-panel-shadow: 0 18px 38px color-mix(in srgb, var(--crusher-color-brand-secondary) 10%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent);
   --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-border-primary));
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent);
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, var(--crusher-border-primary));
 }
 html[data-theme="bento"][data-mode="dark"] {
@@ -272,4 +309,8 @@ html[data-theme="bento"][data-mode="dark"] {
   --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 76%, var(--crusher-color-brand-primary) 10%);
   --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 20%, var(--crusher-border-primary));
+  --crusher-nav-panel-bg: linear-gradient(135deg, color-mix(in srgb, var(--crusher-background-surface) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-background-surface) 90%, var(--crusher-color-brand-secondary) 10%));
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-border-primary));
+  --crusher-nav-panel-shadow: 0 18px 38px color-mix(in srgb, black 32%, transparent);
+  --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent);
 }

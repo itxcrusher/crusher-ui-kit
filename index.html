@@ -17,7 +17,8 @@
     .stack { display:flex; flex-direction:column; gap:1rem; }
     .row { display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; }
     .grid { display:grid; gap:1rem; }
-    .demo-container { max-width: 1100px; margin-inline:auto; padding: 24px; }
+    .stack > :is(h1,h2,h3,h4,p,strong) { margin: 0; }
+    .demo-container { max-width: 1160px; margin-inline:auto; padding: 24px; }
     .section { margin: 32px 0; }
     .muted { color: var(--crusher-fg-muted); }
     .kbd {
@@ -42,6 +43,126 @@
       font-size: var(--crusher-font-size-sm);
       font-weight: var(--crusher-font-weight-medium);
     }
+    .hero-shell {
+      --crusher-card-shadow: 0 22px 48px color-mix(in srgb, black 10%, transparent);
+      --crusher-card-hover-shadow: var(--crusher-card-shadow);
+      --crusher-card-hover-lift: translateY(0);
+    }
+    .hero-layout {
+      display: grid;
+      gap: var(--crusher-spacing-6);
+    }
+    .hero-menubar {
+      display: grid;
+      gap: var(--crusher-spacing-3);
+    }
+    .hero-menubar-head {
+      justify-content: space-between;
+    }
+    .hero-kicker {
+      color: var(--crusher-fg-muted);
+      font-size: var(--crusher-font-size-xs);
+      font-weight: var(--crusher-font-weight-semibold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-menubar-copy {
+      gap: var(--crusher-spacing-1);
+    }
+    .hero-grid {
+      display: grid;
+      gap: var(--crusher-spacing-6);
+      grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.95fr);
+      align-items: start;
+    }
+    .hero-copy {
+      gap: var(--crusher-spacing-4);
+      padding-block: var(--crusher-spacing-2);
+    }
+    .hero-eyebrow {
+      color: var(--crusher-color-brand-primary);
+      font-size: var(--crusher-font-size-xs);
+      font-weight: var(--crusher-font-weight-semibold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-title {
+      color: var(--crusher-fg);
+      font-family: var(--crusher-font-family-display);
+      font-size: clamp(2.35rem, 6vw, 4.5rem);
+      font-weight: var(--crusher-font-weight-bold);
+      letter-spacing: -0.04em;
+      line-height: 0.96;
+      max-inline-size: 11ch;
+    }
+    .hero-summary {
+      font-size: var(--crusher-font-size-lg);
+      line-height: 1.6;
+      max-inline-size: 56ch;
+    }
+    .hero-actions {
+      gap: var(--crusher-spacing-3);
+    }
+    .control-panel {
+      display: grid;
+      gap: var(--crusher-spacing-4);
+      background: var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent));
+      border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
+      border-radius: var(--crusher-radius-xl);
+      box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-1));
+      padding: var(--crusher-spacing-4);
+      -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
+      backdrop-filter: blur(var(--crusher-effect-blur-md));
+    }
+    .control-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: var(--crusher-spacing-3);
+    }
+    .control-headline {
+      gap: var(--crusher-spacing-1);
+    }
+    .control-kicker {
+      color: var(--crusher-color-brand-primary);
+      font-size: var(--crusher-font-size-xs);
+      font-weight: var(--crusher-font-weight-semibold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .control-grid {
+      display: grid;
+      gap: var(--crusher-spacing-4);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .control-field {
+      display: grid;
+      gap: var(--crusher-spacing-2);
+      min-inline-size: 0;
+    }
+    .control-field.full {
+      grid-column: 1 / -1;
+    }
+    .control-note {
+      gap: var(--crusher-spacing-2);
+    }
+    .context-rail {
+      gap: var(--crusher-spacing-4);
+    }
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--crusher-spacing-2);
+    }
+    @media (max-width: 880px) {
+      .hero-grid,
+      .control-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-title {
+        max-inline-size: 14ch;
+      }
+    }
   </style>
 </head>
 
@@ -57,83 +178,115 @@
 
   <!-- App shell (simple for demo): Menubar + top controls -->
   <header class="demo-container section">
-    <crusher-menubar id="topbar" collapse-at="720">
-      <button id="menu-file" slot="menu">File</button>
-      <button id="menu-edit" slot="menu">Edit</button>
-      <button id="menu-view" slot="menu">View</button>
-      <button id="menu-tools" slot="menu">Tools</button>
-
-      <div data-for="menu-file">
-        <div value="new">New…</div>
-        <div value="open">Open…</div>
-        <div class="sep"></div>
-        <div value="exit">Exit</div>
-      </div>
-      <div data-for="menu-edit">
-        <div value="undo">Undo</div>
-        <div value="redo">Redo</div>
-        <div class="sep"></div>
-        <div value="prefs">Preferences</div>
-      </div>
-      <div data-for="menu-view">
-        <div value="zoom-in">Zoom In</div>
-        <div value="zoom-out">Zoom Out</div>
-      </div>
-      <div data-for="menu-tools">
-        <div submenu>
-          Generators
-          <div slot="submenu">
-            <div value="gen-readme">Generate README</div>
-            <div value="gen-summary">Generate Summary</div>
+    <crusher-card class="hero-shell">
+      <div class="hero-layout">
+        <div class="hero-menubar">
+          <div class="hero-menubar-head row">
+            <div class="stack hero-menubar-copy">
+              <span class="hero-kicker">Local Proving Ground</span>
+              <strong>Live framework review surface for themes, runtime, and component quality.</strong>
+            </div>
+            <span class="pill">Static + bundler ready</span>
           </div>
+
+          <crusher-menubar id="topbar" collapse-at="720">
+            <button id="menu-file" slot="menu">File</button>
+            <button id="menu-edit" slot="menu">Edit</button>
+            <button id="menu-view" slot="menu">View</button>
+            <button id="menu-tools" slot="menu">Tools</button>
+
+            <div data-for="menu-file">
+              <div value="new">New…</div>
+              <div value="open">Open…</div>
+              <div class="sep"></div>
+              <div value="exit">Exit</div>
+            </div>
+            <div data-for="menu-edit">
+              <div value="undo">Undo</div>
+              <div value="redo">Redo</div>
+              <div class="sep"></div>
+              <div value="prefs">Preferences</div>
+            </div>
+            <div data-for="menu-view">
+              <div value="zoom-in">Zoom In</div>
+              <div value="zoom-out">Zoom Out</div>
+            </div>
+            <div data-for="menu-tools">
+              <div submenu>
+                Generators
+                <div slot="submenu">
+                  <div value="gen-readme">Generate README</div>
+                  <div value="gen-summary">Generate Summary</div>
+                </div>
+              </div>
+              <div value="palette">Open Command Palette</div>
+            </div>
+          </crusher-menubar>
         </div>
-        <div value="palette">Open Command Palette</div>
-      </div>
-    </crusher-menubar>
 
-    <div class="hr"></div>
-
-    <!-- Theme / Mode / Density / Brand Controls -->
-    <crusher-card>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); align-items:center;">
-        <div class="stack">
-          <h3>Live Controls</h3>
-          <p class="muted">Switch theme dialects, light/dark, density, and live brand color.</p>
-          <div class="row">
-            <span class="pill">Shortcut: <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> for Palette</span>
-            <span class="pill">Resize window to test Menubar overflow</span>
+        <div class="hero-grid">
+          <div class="hero-copy stack">
+            <span class="hero-eyebrow">Crusher UI Kit</span>
+            <h1 class="hero-title">Personal UI framework proving ground.</h1>
+            <p class="hero-summary muted">Refine dialects, layout primitives, and interaction contracts here before carrying the system into portfolio, SaaS, AI, infra, and product repos.</p>
+            <div class="row">
+              <span class="pill">7 dialects</span>
+              <span class="pill">Runtime-controlled light/dark</span>
+              <span class="pill">Static HTML + package consumers</span>
+            </div>
+            <div class="hero-actions row">
+              <crusher-button id="hero-open-palette"><i class="fa-solid fa-wand-magic-sparkles" style="margin-right:.5rem;"></i>Open palette</crusher-button>
+              <crusher-button id="hero-copy-state" variant="outline">Copy current state URL</crusher-button>
+            </div>
           </div>
-        </div>
-        <div class="stack">
-          <label>Mode</label>
-          <crusher-select id="ctl-mode" placeholder="Select mode">
-            <div value="light">light</div>
-            <div value="dark">dark</div>
-          </crusher-select>
-        </div>
-        <div class="stack">
-          <label>Dialect</label>
-          <crusher-select id="ctl-theme" placeholder="Select dialect">
-            <div value="glass">glass</div>
-            <div value="minimal">minimal</div>
-            <div value="futuristic">futuristic</div>
-            <div value="neobrutal">neobrutal</div>
-            <div value="neumorph">neumorph</div>
-            <div value="brutal">brutal</div>
-            <div value="bento">bento</div>
-          </crusher-select>
-        </div>
-        <div class="stack">
-          <label>Density</label>
-          <crusher-select id="ctl-density" placeholder="Select density">
-            <div value="compact">compact</div>
-            <div value="cozy">cozy</div>
-            <div value="comfortable">comfortable</div>
-          </crusher-select>
-        </div>
-        <div class="stack">
-          <label>Brand color</label>
-          <input id="ctl-brand" type="color" value="#22c55e" style="inline-size:100%; block-size:40px; border-radius:8px; border:1px solid var(--crusher-border);" />
+
+          <div class="control-panel">
+            <div class="control-top">
+              <div class="stack control-headline">
+                <span class="control-kicker">Live Controls</span>
+                <strong>Theme, mode, density, and brand</strong>
+              </div>
+              <span class="pill">Local review</span>
+            </div>
+            <p class="muted">Switch dialects, light/dark, density, and brand color, then keep the exact URL for follow-up review.</p>
+            <div class="control-grid">
+              <div class="control-field">
+                <label>Mode</label>
+                <crusher-select id="ctl-mode" placeholder="Select mode">
+                  <div value="light">light</div>
+                  <div value="dark">dark</div>
+                </crusher-select>
+              </div>
+              <div class="control-field">
+                <label>Dialect</label>
+                <crusher-select id="ctl-theme" placeholder="Select dialect">
+                  <div value="glass">glass</div>
+                  <div value="minimal">minimal</div>
+                  <div value="futuristic">futuristic</div>
+                  <div value="neobrutal">neobrutal</div>
+                  <div value="neumorph">neumorph</div>
+                  <div value="brutal">brutal</div>
+                  <div value="bento">bento</div>
+                </crusher-select>
+              </div>
+              <div class="control-field">
+                <label>Density</label>
+                <crusher-select id="ctl-density" placeholder="Select density">
+                  <div value="compact">compact</div>
+                  <div value="cozy">cozy</div>
+                  <div value="comfortable">comfortable</div>
+                </crusher-select>
+              </div>
+              <div class="control-field full">
+                <label>Brand color</label>
+                <input id="ctl-brand" type="color" value="#22c55e" style="inline-size:100%; block-size:40px; border-radius:8px; border:1px solid var(--crusher-border);" />
+              </div>
+            </div>
+            <div class="row control-note">
+              <span class="pill">Shortcut: <span class="kbd">⌘/Ctrl</span> + <span class="kbd">K</span> for Palette</span>
+              <span class="pill">Resize to test menubar overflow</span>
+            </div>
+          </div>
         </div>
       </div>
     </crusher-card>
@@ -191,13 +344,17 @@
         </crusher-stack>
 
         <crusher-card slot="aside">
-          <crusher-stack gap="var(--crusher-spacing-3)">
-            <strong>Context rail</strong>
-            <p class="muted">Attach filters, status, or command surfaces without bespoke layout CSS.</p>
+          <crusher-stack class="context-rail" gap="var(--crusher-spacing-3)">
+            <div class="stack" style="gap:var(--crusher-spacing-2);">
+              <strong>Context rail</strong>
+              <p class="muted">Attach filters, status, or command surfaces without bespoke layout CSS.</p>
+            </div>
             <crusher-stat label="Health" value="Green" meta="Core checks passing in CI and local builds" tone="success"></crusher-stat>
-            <crusher-chip>Live</crusher-chip>
-            <crusher-chip>Responsive</crusher-chip>
-            <crusher-chip>Reusable</crusher-chip>
+            <div class="chip-row">
+              <crusher-chip>Live</crusher-chip>
+              <crusher-chip>Responsive</crusher-chip>
+              <crusher-chip>Reusable</crusher-chip>
+            </div>
           </crusher-stack>
         </crusher-card>
 
@@ -446,6 +603,8 @@ hello('Crusher');`}
     const tableFilters = $('table-filters');
     const filterStatus = $('filter-status');
     const filterRegion = $('filter-region');
+    const heroOpenPalette = $('hero-open-palette');
+    const heroCopyState = $('hero-copy-state');
     const params = new URLSearchParams(location.search);
     const allowedModes = new Set(['light', 'dark']);
     const allowedThemes = new Set(['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento']);
@@ -612,6 +771,16 @@ hello('Crusher');`}
       ];
     };
     $('open-palette').onclick = () => palette.open = true;
+    heroOpenPalette.onclick = () => palette.open = true;
+    heroCopyState.onclick = async () => {
+      const href = location.href;
+      try {
+        await navigator.clipboard.writeText(href);
+        toast?.({ title:'State URL copied', message: href, variant:'success' });
+      } catch {
+        toast?.({ title:'Copy failed', message: href, variant:'info' });
+      }
+    };
     $('spawn-toast').onclick  = () => toast?.({ title:'Hello from Crusher', message:'Looks crisp.', variant:'success' });
 
     // === TABLE ===
