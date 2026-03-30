@@ -20,31 +20,50 @@ export class CrusherMenubar extends LitElement {
     :host { display: block; position: relative; z-index: var(--crusher-z-dropdown); }
     .bar {
       display: flex; gap: var(--crusher-spacing-1); align-items: center; flex-wrap: nowrap;
-      background: var(--crusher-surface);
-      border: var(--crusher-component-border-weight) solid var(--crusher-border);
-      border-radius: var(--crusher-radius-md);
-      padding-block: var(--crusher-spacing-1); padding-inline: var(--crusher-spacing-1);
+      background: var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent));
+      -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
+      backdrop-filter: blur(var(--crusher-effect-blur-md));
+      border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
+      border-radius: var(--crusher-radius-lg);
+      box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-1));
+      padding-block: var(--crusher-spacing-1);
+      padding-inline: var(--crusher-spacing-1);
       overflow: hidden;
     }
     ::slotted([slot="menu"]) {
-      appearance: none; background: transparent; border: none; cursor: default;
+      appearance: none;
+      background: transparent;
+      border: none;
+      cursor: default;
       padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
       border-radius: var(--crusher-radius-md);
-      color: var(--crusher-fg); white-space: nowrap;
+      color: var(--crusher-fg);
+      font: inherit;
+      font-weight: var(--crusher-font-weight-medium);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      transition:
+        background var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
+        color var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
+        box-shadow var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout);
+    }
+    ::slotted([slot="menu"]:hover) {
+      background: var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent));
     }
     ::slotted([slot="menu"][hidden]) { display: none !important; }
     ::slotted([slot="menu"][aria-expanded="true"]) {
-      background: color-mix(in srgb, var(--crusher-fg) 8%, transparent);
+      background: var(--crusher-nav-item-bg-active, color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent));
+      box-shadow: inset 0 0 0 var(--crusher-component-border-weight) var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border)));
     }
 
     .menu {
       position: absolute; min-width: calc(var(--crusher-spacing-10) * 5.5);
-      background: var(--crusher-surface);
+      background: var(--crusher-toolbar-bg, var(--crusher-surface));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: var(--crusher-component-border-weight) solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
       border-radius: var(--crusher-radius-lg);
-      box-shadow: var(--crusher-shadow-2);
+      box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-2));
       padding: var(--crusher-spacing-1); display: none;
       margin-top: var(--crusher-spacing-1);
     }
@@ -63,12 +82,12 @@ export class CrusherMenubar extends LitElement {
     .item[submenu]::after { content: '›'; margin-inline-start: auto; opacity:.65; }
     .submenu {
       position: absolute; top: 0; inset-inline-start: 100%; min-width: calc(var(--crusher-spacing-10) * 5.5);
-      background: var(--crusher-surface);
+      background: var(--crusher-toolbar-bg, var(--crusher-surface));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
-      border: var(--crusher-component-border-weight) solid var(--crusher-border);
+      border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
       border-radius: var(--crusher-radius-lg);
-      box-shadow: var(--crusher-shadow-2);
+      box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-2));
       padding: var(--crusher-spacing-1); display: none; margin-inline-start: var(--crusher-spacing-1);
     }
     .item[sub-open] > .submenu { display: block; }

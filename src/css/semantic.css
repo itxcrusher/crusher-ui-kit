@@ -53,7 +53,7 @@ html[data-mode="dark"] {
   --crusher-shell-padding-inline: clamp(var(--crusher-spacing-4), 3vw, var(--crusher-spacing-8));
   --crusher-shell-padding-block: var(--crusher-spacing-6);
   --crusher-shell-nav-width: 18rem;
-  --crusher-shell-aside-width: 20rem;
+  --crusher-shell-aside-width: 22rem;
   --crusher-nav-item-bg: transparent;
   --crusher-nav-item-bg-hover: color-mix(in srgb, var(--crusher-fg) 6%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent);

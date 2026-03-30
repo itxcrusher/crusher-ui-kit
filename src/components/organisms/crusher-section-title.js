@@ -3,18 +3,20 @@ import { LitElement, html, css } from 'lit';
 export class CrusherSectionTitle extends LitElement {
   static styles = css`
     :host {
-      display: block; /* The component itself takes up block space */
-      margin-bottom: var(--crusher-spacing-12);
+      display: block;
+      margin-bottom: var(--crusher-spacing-10);
+      position: relative;
+      z-index: 1;
     }
     .title {
       font-size: var(--crusher-font-size-4xl);
       font-weight: var(--crusher-font-weight-bold);
       color: var(--crusher-text-primary);
       position: relative;
-      padding-bottom: var(--crusher-spacing-4);
-      margin: 0; /* Remove default h2 margin */
+      padding-bottom: calc(var(--crusher-spacing-4) + var(--crusher-spacing-2));
+      margin: 0;
+      isolation: isolate;
     }
-    /* The main (longer) underline */
     .title::before {
       content: '';
       position: absolute;
@@ -22,9 +24,9 @@ export class CrusherSectionTitle extends LitElement {
       width: calc(var(--crusher-spacing-12) + (var(--crusher-spacing-1) / 2));
       background-color: var(--crusher-color-brand-primary);
       left: 0;
-      bottom: 0;
+      bottom: var(--crusher-spacing-2);
+      border-radius: var(--crusher-radius-full);
     }
-    /* The secondary (shorter) underline */
     .title::after {
       content: '';
       position: absolute;
@@ -32,7 +34,8 @@ export class CrusherSectionTitle extends LitElement {
       width: calc(var(--crusher-spacing-6) + (var(--crusher-focus-width) / 2));
       background-color: var(--crusher-color-brand-primary);
       left: 0;
-      bottom: calc(var(--crusher-spacing-2) * -1); /* Position it below the first line */
+      bottom: 0;
+      border-radius: var(--crusher-radius-full);
     }
   `;
 
