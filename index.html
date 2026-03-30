@@ -266,10 +266,10 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .runtime-showcase {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .organisms-showcase {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .mini-grid {
       display: grid;
@@ -326,6 +326,11 @@
     .runtime-actions {
       display: grid;
       gap: var(--crusher-spacing-3);
+    }
+    .runtime-summary-grid {
+      display: grid;
+      gap: var(--crusher-spacing-4);
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
     .theme-picks {
       display: flex;
@@ -385,7 +390,9 @@
     }
     @media (max-width: 1180px) {
       .atoms-showcase,
-      .overlays-showcase {
+      .overlays-showcase,
+      .runtime-showcase,
+      .organisms-showcase {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -992,7 +999,7 @@ hello('Crusher');`}
           <crusher-skill-bar label="Design systems" percentage="94"></crusher-skill-bar>
         </crusher-card>
 
-        <crusher-card class="showcase-card stack">
+        <crusher-card class="showcase-card span-2 stack">
           <h3>Table States</h3>
           <p class="muted">Busy and empty surfaces should still feel like part of the same framework, not fallback browser UI.</p>
           <div class="mini-grid">
@@ -1007,7 +1014,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="showcase-card stack">
+        <crusher-card class="showcase-card span-2 stack">
           <crusher-page-header
             eyebrow="Data surface"
             title="Service Fleet"
@@ -1072,6 +1079,26 @@ hello('Crusher');`}
       </div>
 
       <div class="showcase-grid runtime-showcase">
+        <crusher-card class="showcase-card span-2 stack">
+          <h3>Runtime Control Center</h3>
+          <p class="muted">Use this view to verify state sync, jump between focused review sections, and confirm the current route is shareable before you leave the local proving ground.</p>
+          <div class="runtime-summary-grid">
+            <div class="stack">
+              <p class="demo-note">Focused review links</p>
+              <div id="runtime-review-links" class="review-link-row"></div>
+            </div>
+            <div class="stack">
+              <p class="demo-note">Current view</p>
+              <div class="state-pills">
+                <span class="pill" id="state-route-pill">view: /</span>
+                <span class="pill" id="state-review-pill">review: full</span>
+                <span class="pill">matrix: 14 views</span>
+                <span class="pill">density: 3 modes</span>
+              </div>
+            </div>
+          </div>
+        </crusher-card>
+
         <crusher-card class="showcase-card stack">
           <h3>Theme Quick Picks</h3>
           <p class="muted">Jump between dialects without scrolling back to the top controls.</p>
@@ -1109,7 +1136,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="showcase-card stack">
+        <crusher-card class="showcase-card span-2 stack">
           <h3>Verification Checklist</h3>
           <p class="muted">Use this as the final pass before carrying Crusher into another repo.</p>
           <ul class="checklist muted">
@@ -1161,10 +1188,13 @@ hello('Crusher');`}
     const stateModePill = $('state-mode-pill');
     const stateDensityPill = $('state-density-pill');
     const stateBrandPill = $('state-brand-pill');
+    const stateRoutePill = $('state-route-pill');
+    const stateReviewPill = $('state-review-pill');
     const coveragePublicElements = $('coverage-public-elements');
     const coverageThemeMatrix = $('coverage-theme-matrix');
     const coverageDensityStates = $('coverage-density-states');
     const reviewLinks = $('review-links');
+    const runtimeReviewLinks = $('runtime-review-links');
     const tableBusy = $('table-busy');
     const tableEmpty = $('table-empty');
     const checkboxChecked = $('checkbox-checked');
@@ -1241,16 +1271,18 @@ hello('Crusher');`}
         });
       });
     };
+    const reviewLinkMarkup = () => [...allowedReviewSections]
+      .map((section) => {
+        const url = new URL(location.href);
+        url.searchParams.set('review', section);
+        url.hash = section;
+        return `<a class="review-link" href="${url.pathname}${url.search}${url.hash}">${section}</a>`;
+      })
+      .join('');
     const renderReviewLinks = () => {
-      if (!reviewLinks) return;
-      reviewLinks.innerHTML = [...allowedReviewSections]
-        .map((section) => {
-          const url = new URL(location.href);
-          url.searchParams.set('review', section);
-          url.hash = section;
-          return `<a class="review-link" href="${url.pathname}${url.search}${url.hash}">${section}</a>`;
-        })
-        .join('');
+      const markup = reviewLinkMarkup();
+      if (reviewLinks) reviewLinks.innerHTML = markup;
+      if (runtimeReviewLinks) runtimeReviewLinks.innerHTML = markup;
     };
     const syncRuntimeState = () => {
       const root = readRootState();
@@ -1258,6 +1290,8 @@ hello('Crusher');`}
       stateModePill.textContent = `mode: ${root.mode}`;
       stateDensityPill.textContent = `density: ${root.density}`;
       stateBrandPill.textContent = hasBrandOverride && ctlBrand.value ? `brand: ${ctlBrand.value}` : 'brand: default';
+      if (stateRoutePill) stateRoutePill.textContent = `view: ${location.hash || location.pathname}`;
+      if (stateReviewPill) stateReviewPill.textContent = `review: ${reviewSection || 'full'}`;
       runtimeDensity.textContent = `Toggle density (${root.density})`;
       themePicks?.querySelectorAll('[data-theme-pick]').forEach((button) => {
         const isActive = button.getAttribute('data-theme-pick') === root.theme;
