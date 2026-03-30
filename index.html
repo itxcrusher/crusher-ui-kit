@@ -66,6 +66,11 @@
     .hero-menubar {
       display: grid;
       gap: var(--crusher-spacing-3);
+      --crusher-menubar-item-radius: var(--crusher-radius-full);
+      --crusher-menubar-item-bg-hover: color-mix(in srgb, var(--crusher-color-base-white) 72%, transparent);
+      --crusher-menubar-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 12%, var(--crusher-color-base-white) 82%);
+      --crusher-menubar-item-shadow-hover: 0 0 0 1px color-mix(in srgb, var(--crusher-border-primary) 86%, transparent);
+      --crusher-menubar-item-shadow-active: 0 0 0 1px color-mix(in srgb, var(--crusher-color-brand-primary) 28%, var(--crusher-border-primary));
     }
     .hero-menubar-head {
       justify-content: space-between;
@@ -83,13 +88,14 @@
     .hero-grid {
       display: grid;
       gap: var(--crusher-spacing-6);
-      grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 1.08fr);
-      align-items: start;
+      grid-template-columns: minmax(0, 0.96fr) minmax(25rem, 1.1fr);
+      align-items: stretch;
     }
     .hero-copy {
       gap: var(--crusher-spacing-4);
       padding-block: var(--crusher-spacing-2);
       padding-inline-end: var(--crusher-spacing-4);
+      justify-content: center;
     }
     .hero-eyebrow {
       color: var(--crusher-color-brand-primary);
@@ -121,7 +127,8 @@
       gap: var(--crusher-spacing-3);
     }
     .control-panel {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: var(--crusher-spacing-4);
       background: var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent));
       border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
@@ -130,6 +137,7 @@
       padding: calc(var(--crusher-spacing-4) + var(--crusher-spacing-2));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
+      min-block-size: 100%;
     }
     .control-top {
       display: flex;
@@ -162,6 +170,7 @@
     }
     .control-note {
       gap: var(--crusher-spacing-2);
+      margin-top: auto;
     }
     .context-rail {
       gap: var(--crusher-spacing-4);

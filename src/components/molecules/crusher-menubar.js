@@ -44,6 +44,7 @@ export class CrusherMenubar extends LitElement {
       font-weight: var(--crusher-font-weight-medium);
       letter-spacing: 0.01em;
       white-space: nowrap;
+      box-shadow: var(--crusher-menubar-item-shadow, none);
       transition:
         background var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
         color var(--crusher-motion-duration-fast) var(--crusher-motion-easing-inout),
@@ -51,11 +52,12 @@ export class CrusherMenubar extends LitElement {
     }
     ::slotted([slot="menu"]:hover) {
       background: var(--crusher-menubar-item-bg-hover, var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent)));
+      box-shadow: var(--crusher-menubar-item-shadow-hover, 0 0 0 var(--crusher-component-border-weight) color-mix(in srgb, var(--crusher-border) 88%, transparent));
     }
     ::slotted([slot="menu"][hidden]) { display: none !important; }
     ::slotted([slot="menu"][aria-expanded="true"]) {
       background: var(--crusher-menubar-item-bg-active, var(--crusher-nav-item-bg-active, color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent)));
-      box-shadow: inset 0 0 0 var(--crusher-component-border-weight) var(--crusher-menubar-item-border-active, var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border))));
+      box-shadow: var(--crusher-menubar-item-shadow-active, 0 0 0 var(--crusher-component-border-weight) var(--crusher-menubar-item-border-active, var(--crusher-nav-item-border-active, color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border)))));
     }
 
     .menu {
