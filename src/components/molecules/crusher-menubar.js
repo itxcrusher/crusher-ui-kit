@@ -52,7 +52,7 @@ export class CrusherMenubar extends LitElement {
     }
     ::slotted([slot="menu"]:hover) {
       background: var(--crusher-menubar-item-bg-hover, var(--crusher-nav-item-bg-hover, color-mix(in srgb, var(--crusher-fg) 6%, transparent)));
-      box-shadow: var(--crusher-menubar-item-shadow-hover, 0 0 0 var(--crusher-component-border-weight) color-mix(in srgb, var(--crusher-border) 88%, transparent));
+      box-shadow: var(--crusher-menubar-item-shadow-hover, none);
     }
     ::slotted([slot="menu"][hidden]) { display: none !important; }
     ::slotted([slot="menu"][aria-expanded="true"]) {
