@@ -255,6 +255,22 @@
       gap: var(--crusher-spacing-4);
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
+    .showcase-grid {
+      display: grid;
+      gap: var(--crusher-spacing-4);
+    }
+    .atoms-showcase {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .overlays-showcase {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .runtime-showcase {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    .organisms-showcase {
+      grid-template-columns: 1fr;
+    }
     .mini-grid {
       display: grid;
       gap: var(--crusher-spacing-4);
@@ -278,6 +294,35 @@
       margin: 0;
       text-transform: uppercase;
     }
+    .section-flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--crusher-spacing-2);
+      margin-top: var(--crusher-spacing-3);
+    }
+    .showcase-card {
+      position: relative;
+      overflow: clip;
+      min-block-size: 100%;
+    }
+    .showcase-grid > .span-2 {
+      grid-column: span 2;
+    }
+    .overlay-card {
+      min-block-size: 15rem;
+    }
+    .showcase-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      block-size: 1px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--crusher-color-brand-primary) 55%, transparent), transparent);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .showcase-card h3 {
+      margin: 0;
+    }
     .runtime-actions {
       display: grid;
       gap: var(--crusher-spacing-3);
@@ -300,6 +345,49 @@
     }
     .checklist li {
       line-height: 1.5;
+    }
+    .review-link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--crusher-spacing-2);
+      align-items: center;
+    }
+    .review-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-block-size: calc(var(--crusher-spacing-4) + var(--crusher-spacing-1));
+      padding: var(--crusher-spacing-1) calc(var(--crusher-spacing-2) + 2px);
+      border-radius: var(--crusher-radius-full);
+      border: var(--crusher-component-border-weight) solid color-mix(in srgb, var(--crusher-border) 80%, transparent);
+      background: color-mix(in srgb, var(--crusher-surface) 92%, transparent);
+      color: var(--crusher-fg-muted);
+      font-size: var(--crusher-font-size-xs);
+      font-weight: var(--crusher-font-weight-medium);
+      text-decoration: none;
+    }
+    .review-link:hover {
+      color: var(--crusher-fg);
+      border-color: color-mix(in srgb, var(--crusher-color-brand-primary) 28%, var(--crusher-border));
+      background: color-mix(in srgb, var(--crusher-color-brand-primary) 10%, var(--crusher-surface));
+    }
+    .full-width-demo {
+      display: grid;
+      inline-size: 100%;
+    }
+    body[data-review-section] header.demo-container.section,
+    body[data-review-section] #coverage,
+    body[data-review-section] .project-footer {
+      display: none;
+    }
+    body[data-review-section] main.demo-container {
+      padding-block-start: clamp(20px, 3vw, 32px);
+    }
+    @media (max-width: 1180px) {
+      .atoms-showcase,
+      .overlays-showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
     @media (max-width: 880px) {
       .demo-container {
@@ -325,6 +413,19 @@
       }
       .site-nav-shell {
         position: static;
+      }
+      .showcase-grid,
+      .mini-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .atoms-showcase,
+      .overlays-showcase,
+      .runtime-showcase,
+      .organisms-showcase {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .showcase-grid > .span-2 {
+        grid-column: span 1;
       }
     }
   </style>
@@ -474,6 +575,11 @@
           <a class="site-link" href="#runtime">Runtime</a>
         </div>
 
+        <div class="review-link-row">
+          <span class="demo-note">Focused review</span>
+          <div id="review-links" class="review-link-row"></div>
+        </div>
+
         <crusher-grid min="13rem">
           <crusher-stat id="coverage-public-elements" label="Public elements" value="0" meta="Registered in src/js/main.js and shown on this page" tone="brand"></crusher-stat>
           <crusher-stat id="coverage-theme-matrix" label="Theme matrix" value="0 views" meta="Dialect coverage across light and dark mode" tone="info"></crusher-stat>
@@ -612,9 +718,15 @@
     <section class="section" id="atoms">
       <crusher-section-title>Atoms</crusher-section-title>
       <p class="section-lead muted">Atoms should hold up across every theme, size, and state. This section is where we validate low-level controls before trusting them inside bigger product compositions.</p>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(280px,1fr));">
+      <div class="section-flags">
+        <span class="pill">Hover + focus</span>
+        <span class="pill">Disabled</span>
+        <span class="pill">Filled + empty</span>
+        <span class="pill">Feedback tones</span>
+      </div>
+      <div class="showcase-grid atoms-showcase">
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Buttons</h3>
           <div class="demo-cluster">
             <p class="demo-note">Variants</p>
@@ -641,12 +753,14 @@
               <crusher-button loading>Loading…</crusher-button>
               <crusher-button disabled>Disabled</crusher-button>
               <crusher-button variant="secondary" disabled>Disabled secondary</crusher-button>
+            </div>
+            <div class="full-width-demo">
               <crusher-button full-width>Full width</crusher-button>
             </div>
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card span-2 stack">
           <h3>Inputs & Toggles</h3>
           <div class="demo-cluster">
             <p class="demo-note">Text entry</p>
@@ -674,7 +788,7 @@
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Feedback Surfaces</h3>
           <div class="demo-cluster">
             <p class="demo-note">Chips</p>
@@ -699,7 +813,7 @@
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card span-2 stack">
           <h3>Code Block</h3>
           <p class="muted">Syntax colors, chrome, and surface contrast should hold across all dialects.</p>
           <crusher-code-block language="js">
@@ -710,7 +824,7 @@ hello('Crusher');`}
           </crusher-code-block>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Form Primitives</h3>
           <p class="muted">The field contract needs to support neutral, hint, and error states without bespoke page CSS.</p>
           <crusher-field id="signup-field">
@@ -725,7 +839,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Selects & Dropdowns</h3>
           <p class="muted">Static, async, and nested selection surfaces should stay legible in every theme.</p>
 
@@ -766,12 +880,24 @@ hello('Crusher');`}
     <section class="section" id="overlays">
       <crusher-section-title>Overlays & Navigation</crusher-section-title>
       <p class="section-lead muted">These components handle transient interaction: dialogs, tabs, menus, quick actions, and runtime-driven command surfaces. They are often where theme regressions show up first.</p>
-      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(320px,1fr));">
+      <div class="section-flags">
+        <span class="pill">Transient surfaces</span>
+        <span class="pill">Keyboard flows</span>
+        <span class="pill">Nested actions</span>
+        <span class="pill">Global runtime triggers</span>
+      </div>
+      <div class="showcase-grid overlays-showcase">
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card overlay-card stack">
           <h3>Modal</h3>
+          <p class="muted">Review focus trap, header/footer spacing, and destructive-action clarity.</p>
           <div class="row">
             <crusher-button id="open-modal">Open modal</crusher-button>
+          </div>
+          <div class="row">
+            <span class="pill">Escape to close</span>
+            <span class="pill">Footer actions</span>
+            <span class="pill">Backdrop lock</span>
           </div>
           <crusher-modal id="modal">
             <h3 slot="header">Confirm Action</h3>
@@ -783,7 +909,7 @@ hello('Crusher');`}
           </crusher-modal>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card overlay-card stack">
           <h3>Tabs</h3>
           <p class="muted">Selected state, panel visibility, and border treatments need to remain stable across dialects.</p>
           <crusher-tabs id="tabs" value="settings">
@@ -791,13 +917,26 @@ hello('Crusher');`}
             <button id="logs" slot="tab">Logs</button>
             <button id="metrics" slot="tab">Metrics</button>
 
-            <div slot="panel" id="settings-panel" aria-labelledby="settings">Settings content…</div>
-            <div slot="panel" id="logs-panel" aria-labelledby="logs" hidden>Logs content…</div>
-            <div slot="panel" id="metrics-panel" aria-labelledby="metrics" hidden>Metrics content…</div>
+            <div slot="panel" id="settings-panel" aria-labelledby="settings" class="stack">
+              <strong>Settings overview</strong>
+              <p class="muted">Validate active tab chrome, default spacing, and readable secondary text.</p>
+              <div class="row">
+                <span class="pill">Runtime config</span>
+                <span class="pill">Theme hooks</span>
+              </div>
+            </div>
+            <div slot="panel" id="logs-panel" aria-labelledby="logs" hidden class="stack">
+              <strong>Recent log stream</strong>
+              <p class="muted">Check long-line wrapping and surface balance against active borders.</p>
+            </div>
+            <div slot="panel" id="metrics-panel" aria-labelledby="metrics" hidden class="stack">
+              <strong>Metrics snapshot</strong>
+              <p class="muted">Use this panel to confirm that selected-state styling holds under denser data surfaces.</p>
+            </div>
           </crusher-tabs>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card overlay-card stack">
           <h3>Command Palette</h3>
           <p class="muted">Press <span class="kbd">⌘/Ctrl</span>+<span class="kbd">K</span> or use the button.</p>
           <div class="row">
@@ -809,6 +948,11 @@ hello('Crusher');`}
             <span class="pill">Async command provider</span>
             <span class="pill">Global runtime API</span>
           </div>
+          <ul class="checklist muted">
+            <li>Open Settings</li>
+            <li>Scale cluster to 5 nodes</li>
+            <li>Tail app logs</li>
+          </ul>
         </crusher-card>
 
       </div>
@@ -818,9 +962,14 @@ hello('Crusher');`}
     <section class="section" id="organisms">
       <crusher-section-title>Organisms</crusher-section-title>
       <p class="section-lead muted">Organisms prove that Crusher can compose into real product surfaces: timelines, data tables, navigation-aware layouts, and dashboard content instead of isolated snippets.</p>
+      <div class="section-flags">
+        <span class="pill">Composed surfaces</span>
+        <span class="pill">Busy + empty states</span>
+        <span class="pill">Selection + filtering</span>
+      </div>
 
-      <div class="grid" style="grid-template-columns: 1fr;">
-        <crusher-card class="stack">
+      <div class="showcase-grid organisms-showcase">
+        <crusher-card class="showcase-card stack">
           <h3>Timeline</h3>
           <crusher-timeline>
             <crusher-timeline-item>
@@ -836,14 +985,14 @@ hello('Crusher');`}
           </crusher-timeline>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Skill Bars</h3>
           <crusher-skill-bar label="System design" percentage="92"></crusher-skill-bar>
           <crusher-skill-bar label="Frontend platform" percentage="88"></crusher-skill-bar>
           <crusher-skill-bar label="Design systems" percentage="94"></crusher-skill-bar>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Table States</h3>
           <p class="muted">Busy and empty surfaces should still feel like part of the same framework, not fallback browser UI.</p>
           <div class="mini-grid">
@@ -858,7 +1007,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <crusher-page-header
             eyebrow="Data surface"
             title="Service Fleet"
@@ -915,9 +1064,15 @@ hello('Crusher');`}
     <section class="section" id="runtime">
       <crusher-section-title>Runtime & Verification</crusher-section-title>
       <p class="section-lead muted">This section is the runtime sanity surface. Use it to confirm URL state sync, theme switching, palette behavior, and toast rendering without leaving the project website.</p>
+      <div class="section-flags">
+        <span class="pill">Theme sync</span>
+        <span class="pill">URL state</span>
+        <span class="pill">Palette API</span>
+        <span class="pill">Toast variants</span>
+      </div>
 
-      <div class="grid" style="grid-template-columns: repeat(auto-fit,minmax(300px,1fr));">
-        <crusher-card class="stack">
+      <div class="showcase-grid runtime-showcase">
+        <crusher-card class="showcase-card stack">
           <h3>Theme Quick Picks</h3>
           <p class="muted">Jump between dialects without scrolling back to the top controls.</p>
           <div id="theme-picks" class="theme-picks"></div>
@@ -928,7 +1083,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Current Runtime State</h3>
           <p class="muted">These values should always mirror the URL and top control panel.</p>
           <div class="state-pills">
@@ -943,7 +1098,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Toast Center</h3>
           <p class="muted">Validate success, info, warning, and destructive feedback without changing sections.</p>
           <div class="row">
@@ -954,7 +1109,7 @@ hello('Crusher');`}
           </div>
         </crusher-card>
 
-        <crusher-card class="stack">
+        <crusher-card class="showcase-card stack">
           <h3>Verification Checklist</h3>
           <p class="muted">Use this as the final pass before carrying Crusher into another repo.</p>
           <ul class="checklist muted">
@@ -967,7 +1122,7 @@ hello('Crusher');`}
       </div>
     </section>
 
-    <div class="section" style="text-align:center;">
+    <div class="section project-footer" style="text-align:center;">
       <p class="muted">This page is the living project website and the release-review surface for Crusher UI Kit. Expand it whenever a new public component or runtime contract lands.</p>
     </div>
   </main>
@@ -1009,6 +1164,7 @@ hello('Crusher');`}
     const coveragePublicElements = $('coverage-public-elements');
     const coverageThemeMatrix = $('coverage-theme-matrix');
     const coverageDensityStates = $('coverage-density-states');
+    const reviewLinks = $('review-links');
     const tableBusy = $('table-busy');
     const tableEmpty = $('table-empty');
     const checkboxChecked = $('checkbox-checked');
@@ -1023,8 +1179,10 @@ hello('Crusher');`}
     const allowedModes = new Set(['light', 'dark']);
     const allowedThemes = new Set(['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento']);
     const allowedDensity = new Set(['compact', 'cozy', 'comfortable']);
+    const allowedReviewSections = new Set(['primitives', 'atoms', 'overlays', 'organisms', 'runtime']);
     const themeOrder = ['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento'];
     const densityOrder = ['compact', 'cozy', 'comfortable'];
+    const reviewSection = allowedReviewSections.has(params.get('review')) ? params.get('review') : '';
     const componentInventory = {
       atoms: ['crusher-button', 'crusher-input', 'crusher-textarea', 'crusher-checkbox', 'crusher-switch', 'crusher-chip', 'crusher-code-block', 'crusher-tooltip', 'crusher-badge'],
       forms: ['crusher-field', 'crusher-label', 'crusher-hint', 'crusher-error'],
@@ -1083,6 +1241,17 @@ hello('Crusher');`}
         });
       });
     };
+    const renderReviewLinks = () => {
+      if (!reviewLinks) return;
+      reviewLinks.innerHTML = [...allowedReviewSections]
+        .map((section) => {
+          const url = new URL(location.href);
+          url.searchParams.set('review', section);
+          url.hash = section;
+          return `<a class="review-link" href="${url.pathname}${url.search}${url.hash}">${section}</a>`;
+        })
+        .join('');
+    };
     const syncRuntimeState = () => {
       const root = readRootState();
       stateThemePill.textContent = `theme: ${root.theme}`;
@@ -1101,7 +1270,17 @@ hello('Crusher');`}
     coverageThemeMatrix?.setAttribute('value', `${themeOrder.length * 2} views`);
     coverageDensityStates?.setAttribute('value', `${densityOrder.length} modes`);
     renderThemePicks();
+    renderReviewLinks();
     requestAnimationFrame(ensureBinaryDemoStates);
+
+    if (reviewSection) {
+      document.body.dataset.reviewSection = reviewSection;
+      document.querySelector('header.demo-container.section')?.setAttribute('hidden', '');
+      document.querySelectorAll('main > .section[id]').forEach((section) => {
+        section.hidden = section.id !== reviewSection;
+      });
+      location.hash = reviewSection;
+    }
 
     shellNav.items = [
       { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live', icon: '◈' },
