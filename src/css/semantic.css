@@ -69,6 +69,18 @@ html[data-mode="dark"] {
   --crusher-stat-tone-warning: var(--crusher-feedback-warning);
   --crusher-stat-tone-danger: var(--crusher-feedback-danger);
   --crusher-stat-value-size: var(--crusher-font-size-4xl);
+  --crusher-page-header-gap: var(--crusher-layout-gap-tight);
+  --crusher-page-header-eyebrow: var(--crusher-color-brand-primary);
+  --crusher-page-header-title-size: clamp(var(--crusher-font-size-3xl), 4vw, var(--crusher-font-size-5xl));
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-border) 70%, transparent);
+  --crusher-toolbar-gap: var(--crusher-layout-gap-tight);
+  --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-surface) 92%, transparent);
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-border) 80%, transparent);
+  --crusher-filter-bar-gap: var(--crusher-layout-gap-tight);
+  --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-surface) 94%, transparent);
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-border) 85%, transparent);
+  --crusher-filter-search-bg: var(--crusher-surface);
+  --crusher-filter-search-border: var(--crusher-border);
 
   /* Code token aliases derive from framework semantics instead of raw literals. */
   --crusher-code-token-comment: var(--crusher-text-secondary);

@@ -63,6 +63,7 @@ Current status:
 - `crusher-app-shell`, `crusher-grid`, and `crusher-stack` now provide a first reusable page-composition layer
 - existing command, menu, modal, table, and card primitives can now be arranged into a coherent product shell without ad hoc page CSS
 - `crusher-nav-list` and `crusher-stat` now cover reusable shell navigation and compact dashboard summaries
+- `crusher-page-header`, `crusher-toolbar`, and `crusher-filter-bar` now cover page-level actions, workflow chrome, and lightweight table filtering
 
 Tasks:
 - define layout and app-shell primitives

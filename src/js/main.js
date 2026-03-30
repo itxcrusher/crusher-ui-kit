@@ -47,15 +47,18 @@ import '../components/molecules/crusher-stack.js';
 import '../components/molecules/crusher-style-switcher.js';
 import '../components/molecules/crusher-toast-center.js';
 import '../components/molecules/crusher-dropdown.js';
+import '../components/molecules/crusher-filter-bar.js';
 import '../components/molecules/crusher-tabs.js';
 import '../components/molecules/crusher-command-palette.js';
 import '../components/molecules/crusher-select.js';
 import '../components/molecules/crusher-menubar.js';
 import '../components/molecules/crusher-stat.js';
+import '../components/molecules/crusher-toolbar.js';
 
 // --- Organisms ---
 import '../components/organisms/crusher-app-shell.js';
 import '../components/organisms/crusher-nav-list.js';
+import '../components/organisms/crusher-page-header.js';
 import '../components/organisms/crusher-section-title.js';
 import '../components/organisms/crusher-timeline-item.js';
 import '../components/organisms/crusher-timeline.js';

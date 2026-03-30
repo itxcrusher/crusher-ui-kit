@@ -121,21 +121,39 @@
       <crusher-section-title>Framework Primitives</crusher-section-title>
 
       <crusher-app-shell style="--crusher-shell-min-height:auto; --crusher-shell-max-width:100%; --crusher-shell-padding-inline:0; --crusher-shell-padding-block:0;">
-        <crusher-card slot="header">
-          <div class="row" style="justify-content:space-between;">
-            <div>
-              <h3 style="margin:0;">Project Shell</h3>
-              <p class="muted" style="margin:.5rem 0 0;">A reusable frame for portfolio pages, dashboards, and product surfaces.</p>
-            </div>
+        <crusher-page-header
+          slot="header"
+          eyebrow="Framework shell"
+          title="Project Workspace"
+          subtitle="A reusable frame for portfolio pages, dashboards, and product surfaces."
+        >
+          <div slot="actions" class="row">
             <crusher-badge>Phase 4</crusher-badge>
+            <crusher-button id="shell-launch" variant="secondary">Launch flow</crusher-button>
           </div>
-        </crusher-card>
+          <div slot="meta" class="row">
+            <span class="pill">Reusable shell</span>
+            <span class="pill">Command surfaces</span>
+            <span class="pill">Theme-aware</span>
+          </div>
+        </crusher-page-header>
 
         <crusher-card slot="nav">
           <crusher-nav-list id="shell-nav"></crusher-nav-list>
         </crusher-card>
 
         <crusher-stack gap="var(--crusher-spacing-6)">
+          <crusher-toolbar>
+            <div slot="leading" class="row">
+              <span class="pill">Shell primitives</span>
+              <span class="pill">Navigation</span>
+              <span class="pill">Dashboard summaries</span>
+            </div>
+            <div slot="actions" class="row">
+              <crusher-button id="shell-sync" variant="outline">Sync shell</crusher-button>
+            </div>
+          </crusher-toolbar>
+
           <crusher-grid min="13rem">
             <crusher-stat label="Shipping velocity" value="12 merges" delta="+18%" meta="Framework and app work this week" tone="success"></crusher-stat>
             <crusher-stat label="Theme coverage" value="7 dialects" delta="stable" meta="Glass, minimal, futuristic, brutal, bento, and more" tone="info"></crusher-stat>
@@ -318,7 +336,54 @@ hello('Crusher');`}
         </crusher-card>
 
         <crusher-card class="stack">
-          <h3>Table (resizable + pinned + sortable + selectable)</h3>
+          <crusher-page-header
+            eyebrow="Data surface"
+            title="Service Fleet"
+            subtitle="Page header, toolbar, and filter bar composed above the existing table."
+            style="--crusher-page-header-title-size: var(--crusher-font-size-3xl);"
+          >
+            <div slot="actions" class="row">
+              <crusher-button id="refresh-table" variant="outline">Refresh</crusher-button>
+              <crusher-button id="export-table" variant="secondary">Export</crusher-button>
+            </div>
+            <div slot="meta" class="row">
+              <span class="pill">Resizable columns</span>
+              <span class="pill">Sticky pins</span>
+              <span class="pill">Selectable rows</span>
+            </div>
+          </crusher-page-header>
+
+          <crusher-toolbar>
+            <div slot="leading" class="row">
+              <span class="pill" id="table-count">24 visible</span>
+              <span class="pill" id="table-selection">0 selected</span>
+            </div>
+            <div slot="center" class="row muted">
+              Live dataset wiring through framework workflow primitives
+            </div>
+            <div slot="actions" class="row">
+              <crusher-button id="focus-running" variant="subtle">Focus running</crusher-button>
+            </div>
+          </crusher-toolbar>
+
+          <crusher-filter-bar id="table-filters" placeholder="Search services, region, or uptime…">
+            <crusher-select id="filter-status" slot="filters" placeholder="All status">
+              <div value="">All status</div>
+              <div value="Running">Running</div>
+              <div value="Starting">Starting</div>
+              <div value="Stopped">Stopped</div>
+            </crusher-select>
+
+            <crusher-select id="filter-region" slot="filters" placeholder="All regions">
+              <div value="">All regions</div>
+              <div value="us-east-1">us-east-1</div>
+              <div value="eu-west-1">eu-west-1</div>
+              <div value="ap-south-1">ap-south-1</div>
+            </crusher-select>
+
+            <crusher-button id="clear-filters" slot="actions" variant="subtle">Clear</crusher-button>
+          </crusher-filter-bar>
+
           <crusher-table id="table"></crusher-table>
         </crusher-card>
       </div>
@@ -345,6 +410,9 @@ hello('Crusher');`}
     const ctlDensity = $('ctl-density');
     const ctlBrand = $('ctl-brand');
     const shellNav = $('shell-nav');
+    const tableFilters = $('table-filters');
+    const filterStatus = $('filter-status');
+    const filterRegion = $('filter-region');
 
     shellNav.items = [
       { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live' },
@@ -434,6 +502,8 @@ hello('Crusher');`}
     shellNav.addEventListener('change', (e) => {
       toast?.({ title:'Shell navigation', message: e.detail.item.label || e.detail.value, variant:'info' });
     });
+    $('shell-launch').onclick = () => toast?.({ title:'Shell action', message:'Workflow launched', variant:'brand' });
+    $('shell-sync').onclick = () => toast?.({ title:'Shell action', message:'Shell synced', variant:'success' });
 
     // === PALETTE ===
     const palette = $('palette');
@@ -469,10 +539,58 @@ hello('Crusher');`}
       mem: [256,512,1024,2048][i%4],
       uptime: `${(i%9)+1}d ${(i*3)%24}h`
     }));
+    const allRows = [...t.rows];
+    const tableCount = $('table-count');
+    const tableSelection = $('table-selection');
+    const applyTableFilters = () => {
+      const query = (tableFilters.query || '').toLowerCase();
+      const status = filterStatus.value || '';
+      const region = filterRegion.value || '';
+
+      const filteredRows = allRows.filter((row) => {
+        const hay = `${row.name} ${row.region} ${row.status} ${row.uptime}`.toLowerCase();
+        const matchesQuery = !query || hay.includes(query);
+        const matchesStatus = !status || row.status === status;
+        const matchesRegion = !region || row.region === region;
+        return matchesQuery && matchesStatus && matchesRegion;
+      });
+
+      t.rows = filteredRows;
+      t.selectedKeys = t.selectedKeys.filter((key) => filteredRows.some((row) => row.key === key));
+      tableCount.textContent = `${filteredRows.length} of ${allRows.length} visible`;
+      tableSelection.textContent = `${t.selectedKeys.length} selected`;
+    };
     t.selectable = true;
-    t.addEventListener('select', e => toast?.({ title:'Selected', message: `${e.detail.keys.length} row(s)` }));
+    t.addEventListener('select', e => {
+      tableSelection.textContent = `${e.detail.keys.length} selected`;
+      toast?.({ title:'Selected', message: `${e.detail.keys.length} row(s)` });
+    });
     t.addEventListener('sort',   e => toast?.({ title:'Sorted',   message: `${e.detail.key} ${e.detail.dir}` }));
     t.addEventListener('resize', e => console.log('column widths', e.detail.widths));
+    tableFilters.addEventListener('search', applyTableFilters);
+    filterStatus.addEventListener('change', applyTableFilters);
+    filterRegion.addEventListener('change', applyTableFilters);
+    $('clear-filters').onclick = () => {
+      tableFilters.query = '';
+      filterStatus.value = '';
+      filterRegion.value = '';
+      applyTableFilters();
+      toast?.({ title:'Filters cleared', variant:'info' });
+    };
+    $('focus-running').onclick = () => {
+      filterStatus.value = 'Running';
+      applyTableFilters();
+      toast?.({ title:'Filter', message:'Running services', variant:'info' });
+    };
+    $('refresh-table').onclick = () => {
+      allRows.forEach((row, index) => {
+        row.cpu = (row.cpu + (index % 7) + 3) % 100;
+      });
+      applyTableFilters();
+      toast?.({ title:'Table refreshed', message:'Dataset updated', variant:'success' });
+    };
+    $('export-table').onclick = () => toast?.({ title:'Export', message:`${t.rows.length} visible rows ready`, variant:'brand' });
+    applyTableFilters();
 
     // === FORM demo ===
     const field = $('signup-field');
