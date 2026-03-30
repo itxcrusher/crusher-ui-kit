@@ -25,6 +25,21 @@ html[data-theme="glass"] {
   --crusher-card-border: var(--crusher-border-primary);
   --crusher-card-shadow: var(--crusher-shadow-2);
   --crusher-card-backdrop: blur(var(--crusher-effect-blur-md));
+  --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-background-surface) 82%, transparent);
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 16%);
+  --crusher-toolbar-shadow: 0 10px 28px color-mix(in srgb, black 12%, transparent);
+  --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-background-surface) 86%, transparent);
+  --crusher-filter-bar-border: var(--crusher-toolbar-border);
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-surface) 78%, transparent);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 12%);
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-border-primary) 68%, transparent);
+}
+html[data-theme="glass"][data-mode="dark"] {
+  --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 24%);
+  --btn-subtle-bg: color-mix(in srgb, var(--crusher-background-surface) 92%, transparent);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 18%);
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-border-primary), var(--crusher-color-base-white) 24%);
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-surface) 84%, transparent);
 }
 
 /* ===== Futuristic / Neon ===== */
@@ -58,6 +73,26 @@ html[data-theme="futuristic"] {
     0 0 0 var(--crusher-component-border-weight) color-mix(in srgb, var(--crusher-color-brand-primary) 30%, transparent),
     var(--crusher-shadow-2);
   --crusher-card-backdrop: blur(calc(var(--crusher-effect-blur-md) / 2));
+  --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-background-surface) 80%, transparent);
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-color-brand-primary) 34%, var(--crusher-border-primary));
+  --crusher-toolbar-shadow:
+    0 0 0 1px color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent),
+    0 0 24px color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent);
+  --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-background-surface) 84%, transparent);
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 72%, var(--crusher-color-brand-primary) 8%);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-primary) 26%, var(--crusher-border-primary));
+  --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 20%, transparent);
+  --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-primary) 54%, var(--crusher-border-primary));
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-color-brand-primary) 22%, var(--crusher-border-primary));
+}
+html[data-theme="futuristic"][data-mode="light"] {
+  --btn-outline-bg: color-mix(in srgb, var(--crusher-color-base-white) 72%, transparent);
+  --btn-subtle-bg: color-mix(in srgb, var(--crusher-color-base-white) 68%, var(--crusher-color-brand-primary) 6%);
+  --crusher-card-bg:
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-base-white) 82%, var(--crusher-color-brand-primary) 8%), transparent 42%),
+    color-mix(in srgb, var(--crusher-background-surface) 88%, transparent);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-primary) 32%, var(--crusher-border-primary));
 }
 
 /* ===== Minimal ===== */
@@ -76,6 +111,18 @@ html[data-theme="minimal"] {
   --crusher-card-border: var(--crusher-border-primary);
   --crusher-card-shadow: var(--crusher-shadow-1);
   --crusher-card-backdrop: none;
+  --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-surface) 98%, transparent);
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-border) 92%, transparent);
+  --crusher-toolbar-shadow: none;
+  --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-surface) 98%, transparent);
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-border) 90%, transparent);
+  --crusher-filter-search-bg: var(--crusher-surface);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-border) 92%, transparent);
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-text-primary) 8%, transparent);
+}
+html[data-theme="minimal"][data-mode="dark"] {
+  --btn-subtle-bg: color-mix(in srgb, var(--crusher-background-surface) 94%, transparent);
+  --crusher-card-shadow: 0 8px 18px color-mix(in srgb, black 18%, transparent);
 }
 
 /* ===== Brutal ===== */
@@ -87,10 +134,33 @@ html[data-theme="brutal"] {
   --ctl-backdrop: none;
   --ctl-hover-lift: translateY(-1px);
 
-  --btn-outline-border: #111; /* strong line in light */
-  html[data-mode="dark"] & { --btn-outline-border: #fafafa; }
+  --btn-outline-border: color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
   --btn-ghost-bg: transparent;
   --btn-primary-letter: 0.01em; /* subtle punch */
+  --crusher-card-bg: var(--crusher-background-surface);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-card-shadow: 8px 8px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-card-backdrop: none;
+  --crusher-card-hover-shadow: 10px 10px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-toolbar-bg: var(--crusher-background-surface);
+  --crusher-toolbar-border: var(--crusher-card-border);
+  --crusher-toolbar-shadow: 6px 6px 0 0 color-mix(in srgb, var(--crusher-text-primary) 92%, transparent);
+  --crusher-filter-bar-bg: var(--crusher-background-surface);
+  --crusher-filter-bar-border: var(--crusher-card-border);
+  --crusher-filter-search-bg: var(--crusher-background-canvas);
+  --crusher-filter-search-border: var(--crusher-card-border);
+  --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-background-surface));
+  --crusher-nav-item-border-active: var(--crusher-card-border);
+  --crusher-nav-badge-bg: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, transparent);
+  --crusher-nav-badge-fg: var(--crusher-text-primary);
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-text-primary) 65%, transparent);
+}
+html[data-theme="brutal"][data-mode="dark"] {
+  --btn-outline-border: color-mix(in srgb, var(--crusher-color-base-white) 96%, transparent);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-base-white) 96%, transparent);
+  --crusher-card-shadow: 8px 8px 0 0 color-mix(in srgb, black 70%, transparent);
+  --crusher-card-hover-shadow: 10px 10px 0 0 color-mix(in srgb, black 72%, transparent);
+  --crusher-toolbar-shadow: 6px 6px 0 0 color-mix(in srgb, black 76%, transparent);
 }
 
 /* ===== NeoBrutal ===== */
@@ -104,6 +174,21 @@ html[data-theme="neobrutal"] {
   --btn-primary-border: currentColor;
   --btn-secondary-border: currentColor;
   --btn-danger-border: currentColor;
+  --crusher-card-bg: color-mix(in srgb, var(--crusher-background-surface) 94%, var(--crusher-color-base-white) 6%);
+  --crusher-card-border: color-mix(in srgb, currentColor 86%, transparent);
+  --crusher-card-shadow: 0 0 0 3px color-mix(in srgb, currentColor 88%, transparent), 8px 8px 0 0 rgba(0,0,0,0.82);
+  --crusher-card-backdrop: none;
+  --crusher-card-hover-shadow: 0 0 0 3px color-mix(in srgb, currentColor 88%, transparent), 10px 10px 0 0 rgba(0,0,0,0.86);
+  --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-color-base-white) 4%);
+  --crusher-toolbar-border: color-mix(in srgb, currentColor 82%, transparent);
+  --crusher-toolbar-shadow: 0 0 0 3px color-mix(in srgb, currentColor 84%, transparent), 6px 6px 0 0 rgba(0,0,0,0.82);
+  --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-color-base-white) 4%);
+  --crusher-filter-bar-border: color-mix(in srgb, currentColor 82%, transparent);
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 92%, transparent);
+  --crusher-filter-search-border: color-mix(in srgb, currentColor 78%, transparent);
+  --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent);
+  --crusher-nav-item-border-active: color-mix(in srgb, currentColor 76%, transparent);
+  --crusher-page-header-divider: color-mix(in srgb, currentColor 28%, transparent);
 }
 
 /* ===== Neumorphism ===== */
@@ -114,6 +199,35 @@ html[data-theme="neumorph"] {
   --ctl-elev-hover: 10px 10px 18px rgba(0,0,0,0.10), -10px -10px 18px rgba(255,255,255,0.65);
   --ctl-backdrop: none;
   --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary) 50%, transparent);
+  --crusher-card-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 96%, var(--crusher-color-brand-primary) 4%), color-mix(in srgb, var(--crusher-background-surface) 96%, black 4%));
+  --crusher-card-border: color-mix(in srgb, var(--crusher-border-primary) 38%, transparent);
+  --crusher-card-shadow: 10px 10px 22px rgba(0,0,0,0.08), -10px -10px 22px rgba(255,255,255,0.62);
+  --crusher-card-backdrop: none;
+  --crusher-card-hover-shadow: 12px 12px 24px rgba(0,0,0,0.10), -12px -12px 24px rgba(255,255,255,0.66);
+  --crusher-toolbar-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-primary) 5%), color-mix(in srgb, var(--crusher-background-surface) 95%, black 5%));
+  --crusher-toolbar-border: transparent;
+  --crusher-toolbar-shadow: 8px 8px 18px rgba(0,0,0,0.08), -8px -8px 18px rgba(255,255,255,0.58);
+  --crusher-filter-bar-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-background-surface) 95%, black 5%));
+  --crusher-filter-bar-border: transparent;
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-surface) 98%, transparent);
+  --crusher-filter-search-border: transparent;
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-border-primary) 42%, transparent);
+}
+html[data-theme="neumorph"][data-mode="dark"] {
+  --ctl-elev: 10px 10px 20px rgba(0,0,0,0.45), -8px -8px 16px rgba(255,255,255,0.04);
+  --ctl-elev-hover: 12px 12px 22px rgba(0,0,0,0.5), -10px -10px 18px rgba(255,255,255,0.05);
+  --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary) 80%, transparent);
+  --crusher-card-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-color-base-white) 4%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
+  --crusher-card-border: color-mix(in srgb, var(--crusher-border-primary) 56%, transparent);
+  --crusher-card-shadow: 10px 10px 22px rgba(0,0,0,0.42), -8px -8px 16px rgba(255,255,255,0.04);
+  --crusher-card-hover-shadow: 12px 12px 24px rgba(0,0,0,0.48), -10px -10px 18px rgba(255,255,255,0.05);
+  --crusher-toolbar-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-color-base-white) 4%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
+  --crusher-toolbar-border: transparent;
+  --crusher-toolbar-shadow: 10px 10px 20px rgba(0,0,0,0.4), -8px -8px 16px rgba(255,255,255,0.04);
+  --crusher-filter-bar-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 95%, var(--crusher-color-base-white) 5%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
+  --crusher-filter-bar-border: transparent;
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 82%, var(--crusher-background-surface) 18%);
+  --crusher-filter-search-border: transparent;
 }
 
 /* ===== Bento (curved, airy) ===== */
@@ -122,4 +236,40 @@ html[data-theme="bento"] {
   --ctl-elev: 0 8px 24px rgba(0,0,0,0.08);
   --ctl-elev-hover: 0 10px 28px rgba(0,0,0,0.10);
   --ctl-backdrop: none;
+  --btn-subtle-bg: color-mix(in srgb, var(--crusher-color-base-white) 88%, var(--crusher-color-brand-primary) 6%);
+  --crusher-card-bg:
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-base-white) 86%, transparent), color-mix(in srgb, var(--crusher-background-surface) 96%, transparent));
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, var(--crusher-border-primary));
+  --crusher-card-shadow: 0 14px 32px color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent);
+  --crusher-card-backdrop: none;
+  --crusher-card-hover-shadow: 0 18px 36px color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, transparent);
+  --crusher-toolbar-bg:
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 90%, var(--crusher-color-brand-primary) 10%), color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-secondary) 8%));
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 20%, var(--crusher-border-primary));
+  --crusher-toolbar-shadow: 0 18px 40px color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent);
+  --crusher-filter-bar-bg:
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-primary) 8%), color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-secondary) 8%));
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, var(--crusher-border-primary));
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-color-base-white) 88%, var(--crusher-color-brand-primary) 7%);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, var(--crusher-border-primary));
+  --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent);
+  --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-border-primary));
+  --crusher-page-header-divider: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, var(--crusher-border-primary));
+}
+html[data-theme="bento"][data-mode="dark"] {
+  --btn-subtle-bg: color-mix(in srgb, var(--crusher-background-surface) 86%, var(--crusher-color-brand-primary) 10%);
+  --crusher-card-bg:
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-background-surface) 92%, var(--crusher-color-brand-secondary) 8%), color-mix(in srgb, var(--crusher-background-surface) 84%, transparent));
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
+  --crusher-card-shadow: 0 18px 38px color-mix(in srgb, black 34%, transparent);
+  --crusher-card-hover-shadow: 0 22px 44px color-mix(in srgb, black 38%, transparent);
+  --crusher-toolbar-bg:
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-background-surface) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-background-surface) 90%, var(--crusher-color-brand-secondary) 10%));
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 32%, var(--crusher-border-primary));
+  --crusher-toolbar-shadow: 0 20px 42px color-mix(in srgb, black 38%, transparent);
+  --crusher-filter-bar-bg:
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-background-surface) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-background-surface) 90%, var(--crusher-color-brand-secondary) 10%));
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-background-canvas) 76%, var(--crusher-color-brand-primary) 10%);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 20%, var(--crusher-border-primary));
 }

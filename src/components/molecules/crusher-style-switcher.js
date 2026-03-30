@@ -2,6 +2,9 @@ import { setMode, setTheme } from '../../runtime/theme.js';
 import { LitElement, html, css } from 'lit';
 import { classMap } from 'lit/directives/class-map.js';
 
+const THEME_EVENT = 'crusher:themechange';
+const BRAND_EVENT = 'crusher:brandchange';
+
 export class CrusherStyleSwitcher extends LitElement {
   static styles = css`
     .style-switcher {
@@ -50,47 +53,68 @@ export class CrusherStyleSwitcher extends LitElement {
       padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
       font-size: var(--crusher-font-size-sm);
     }
+    .dialect-btn.active {
+      background: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent);
+      border-color: color-mix(in srgb, var(--crusher-color-brand-primary) 44%, var(--crusher-border-primary));
+      color: var(--crusher-text-primary);
+      box-shadow: 0 0 0 var(--crusher-component-border-weight) color-mix(in srgb, var(--crusher-color-brand-primary) 20%, transparent);
+    }
   `;
 
   static properties = {
     isOpen: { type: Boolean, state: true },
     isDarkMode: { type: Boolean, state: true },
+    activeTheme: { type: String, state: true },
     colors: { type: Object, state: true },
   };
 
   constructor() {
     super();
     this.isOpen = false;
-
-    // Read actual current mode from the DOM (set by runtime/theme.js),
-    // fall back to system preference if attribute not present yet.
-    const modeAttr = document.documentElement.getAttribute('data-mode');
-    this.isDarkMode = modeAttr
-      ? modeAttr === 'dark'
-      : (window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false);
+    this.isDarkMode = document.documentElement.getAttribute('data-mode') === 'dark';
+    this.activeTheme = document.documentElement.getAttribute('data-theme') || 'glass';
 
     this.colors = {
-      primary: 'var(--crusher-color-brand-primary)',
-      secondary: 'var(--crusher-color-brand-secondary)',
-      orange: 'var(--crusher-color-brand-accent-orange)',
-      pink: 'var(--crusher-color-brand-accent-pink)',
-      red: 'var(--crusher-color-brand-accent-red)',
+      primary: '--crusher-color-brand-primary',
+      secondary: '--crusher-color-brand-secondary',
+      orange: '--crusher-color-brand-accent-orange',
+      pink: '--crusher-color-brand-accent-pink',
+      red: '--crusher-color-brand-accent-red',
     };
+
+    this._syncFromDom = this._syncFromDom.bind(this);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener(THEME_EVENT, this._syncFromDom);
+    this._syncFromDom();
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener(THEME_EVENT, this._syncFromDom);
+    super.disconnectedCallback();
   }
 
   _togglePanel() { this.isOpen = !this.isOpen; }
 
   _toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
-    setMode(this.isDarkMode ? 'dark' : 'light');
+    setMode(this.isDarkMode ? 'light' : 'dark');
   }
 
-  _setActiveColor(colorVar) {
-    document.documentElement.style.setProperty('--crusher-color-brand-primary', colorVar);
-    document.body?.style?.setProperty('--crusher-color-brand-primary', colorVar);
+  _setActiveColor(token) {
+    const resolved = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+    if (!resolved) return;
+    document.documentElement.style.setProperty('--crusher-color-brand-primary', resolved);
+    window.dispatchEvent(new CustomEvent(BRAND_EVENT, { detail: { brand: resolved } }));
   }
 
   _setTheme(name) { setTheme(name); }
+
+  _syncFromDom() {
+    this.isDarkMode = document.documentElement.getAttribute('data-mode') === 'dark';
+    this.activeTheme = document.documentElement.getAttribute('data-theme') || 'glass';
+  }
 
   render() {
     const classes = { 'style-switcher': true, open: this.isOpen };
@@ -105,15 +129,15 @@ export class CrusherStyleSwitcher extends LitElement {
 
         <h4>Theme Colors</h4>
         <div class="colors">
-          ${Object.entries(this.colors).map(([_, colorVar]) => html`
-            <span style="background: ${colorVar}" @click=${() => this._setActiveColor(colorVar)}></span>
+          ${Object.entries(this.colors).map(([_, token]) => html`
+            <span style="background: var(${token})" @click=${() => this._setActiveColor(token)}></span>
           `)}
         </div>
 
         <h4 style="margin-top: var(--crusher-spacing-4)">Dialects</h4>
         <div class="colors dialect-row">
           ${['glass','brutal','neumorph','neobrutal','minimal','futuristic','bento'].map(t => html`
-            <button class="btn dialect-btn"
+            <button class="btn dialect-btn ${this.activeTheme === t ? 'active' : ''}"
               @click=${() => this._setTheme(t)}>${t}</button>
           `)}
         </div>

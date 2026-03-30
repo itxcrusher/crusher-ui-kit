@@ -20,14 +20,37 @@
     .demo-container { max-width: 1100px; margin-inline:auto; padding: 24px; }
     .section { margin: 32px 0; }
     .muted { color: var(--crusher-fg-muted); }
-    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: color-mix(in srgb, var(--crusher-fg) 90%, transparent); padding: 0 6px; border-radius: 4px; }
-    .hr { height:1px; background: var(--crusher-border); opacity:.6; margin: 24px 0; }
-    .pill { padding:.25rem .5rem; border:1px solid var(--crusher-border); border-radius:9999px; font-size: .85rem; }
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: color-mix(in srgb, var(--crusher-surface) 92%, transparent);
+      border: 1px solid color-mix(in srgb, var(--crusher-border) 80%, transparent);
+      color: var(--crusher-fg);
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+    .hr { height:1px; background: color-mix(in srgb, var(--crusher-border) 78%, transparent); margin: 24px 0; }
+    .pill {
+      padding:.25rem .5rem;
+      border:1px solid color-mix(in srgb, var(--crusher-border) 78%, transparent);
+      border-radius:9999px;
+      font-size: .85rem;
+      background: color-mix(in srgb, var(--crusher-surface) 90%, transparent);
+      color: var(--crusher-fg-muted);
+    }
+    label {
+      color: var(--crusher-fg-muted);
+      font-size: var(--crusher-font-size-sm);
+      font-weight: var(--crusher-font-weight-medium);
+    }
   </style>
 </head>
 
 <!-- <body style="min-height:100vh; background-image: linear-gradient(120deg,#0ea5e9 0%, #a855f7 35%, #f97316 70%, #22c55e 100%); background-attachment: fixed;"> -->
 <body style="min-height:100vh; background: var(--crusher-background-canvas);">
+  <div class="scene" aria-hidden="true">
+    <div class="grid-overlay"></div>
+  </div>
+
   <!-- Global centers (toasts etc.) -->
   <crusher-toast-center></crusher-toast-center>
   <crusher-command-palette id="palette" placeholder="Jump to anything…"></crusher-command-palette>
@@ -407,8 +430,11 @@ hello('Crusher');`}
   <!-- App script: wires everything together -->
   <script type="module" src="/src/js/main.js"></script>
   <script type="module">
+    import { setMode, setTheme, setDensity } from '/src/runtime/index.js';
+
     // Toast helper
     const toast = (opts) => window.crusherToast?.(opts);
+    const BRAND_EVENT = 'crusher:brandchange';
 
     // === THEME / MODE / DENSITY / BRAND ===
     const $ = (id) => document.getElementById(id);
@@ -424,7 +450,30 @@ hello('Crusher');`}
     const allowedModes = new Set(['light', 'dark']);
     const allowedThemes = new Set(['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento']);
     const allowedDensity = new Set(['compact', 'cozy', 'comfortable']);
+    let hasBrandOverride = params.has('brand') || Boolean(document.documentElement.style.getPropertyValue('--crusher-color-brand-primary').trim());
     const pick = (value, fallback, allowed) => allowed.has(value) ? value : fallback;
+    const toHex = (value) => {
+      if (!value) return '';
+      const color = value.trim();
+      if (/^#[0-9a-f]{3}$/i.test(color)) {
+        return `#${[...color.slice(1)].map((part) => part + part).join('').toLowerCase()}`;
+      }
+      if (/^#[0-9a-f]{6}$/i.test(color)) return color.toLowerCase();
+      const rgb = color.match(/rgba?\(([^)]+)\)/i);
+      if (!rgb) return '';
+      const channels = rgb[1]
+        .split(',')
+        .slice(0, 3)
+        .map((part) => Math.max(0, Math.min(255, Math.round(Number.parseFloat(part.trim())))));
+      if (channels.some((channel) => Number.isNaN(channel))) return '';
+      return `#${channels.map((channel) => channel.toString(16).padStart(2, '0')).join('')}`;
+    };
+    const readRootState = () => ({
+      mode: pick(document.documentElement.getAttribute('data-mode'), 'light', allowedModes),
+      theme: pick(document.documentElement.getAttribute('data-theme'), 'glass', allowedThemes),
+      density: pick(document.documentElement.getAttribute('data-density'), 'comfortable', allowedDensity)
+    });
+    const readBrandColor = () => toHex(getComputedStyle(document.documentElement).getPropertyValue('--crusher-color-brand-primary'));
 
     shellNav.items = [
       { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live' },
@@ -435,72 +484,86 @@ hello('Crusher');`}
     ];
     shellNav.value = 'overview';
 
-    // sensible defaults in the selects
-    ctlMode.value = pick(params.get('mode'), 'light', allowedModes);
-    ctlTheme.value = pick(params.get('theme'), 'glass', allowedThemes);
-    ctlDensity.value = pick(params.get('density'), 'comfortable', allowedDensity);
-    if (params.get('brand')) ctlBrand.value = params.get('brand');
+    const syncControlsFromRoot = () => {
+      const root = readRootState();
+      ctlMode.value = root.mode;
+      ctlTheme.value = root.theme;
+      ctlDensity.value = root.density;
+      const brand = readBrandColor();
+      if (brand) ctlBrand.value = brand;
+    };
 
-    // Optional: make the **page background** reflect the selected theme so differences are visible.
-    const themedBackgrounds = {
-      glass:      'linear-gradient(120deg,#60a5fa 0%, #a78bfa 35%, #22c55e 100%)',
-      minimal:    'linear-gradient(120deg,#f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%)',
-      futuristic: 'linear-gradient(120deg,#0ea5e9 0%, #22d3ee 40%, #a78bfa 80%)',
-      neobrutal:  'linear-gradient(120deg,#fde68a 0%, #f43f5e 50%, #7c3aed 100%)',
-      neumorph:   'linear-gradient(120deg,#e2e8f0 0%, #f8fafc 60%, #cbd5e1 100%)',
-      brutal:     'linear-gradient(120deg,#111827 0%, #fbbf24 50%, #111827 100%)',
-      bento:      'linear-gradient(120deg,#f0f9ff 0%, #d1fae5 50%, #e0e7ff 100%)',
-    };
-    const applyBackground = () => {
-      const t = ctlTheme.value || 'glass';
-      const background = themedBackgrounds[t] || themedBackgrounds.glass;
-      document.documentElement.style.background = background;
-      document.documentElement.style.backgroundAttachment = 'fixed';
-      document.documentElement.style.minHeight = '100%';
-      document.body.style.background = background;
-      document.body.style.backgroundAttachment = 'fixed';
-      document.body.style.minHeight = '100vh';
-    };
     const syncUrlState = () => {
       const url = new URL(location.href);
-      url.searchParams.set('mode', ctlMode.value);
-      url.searchParams.set('theme', ctlTheme.value);
-      url.searchParams.set('density', ctlDensity.value);
-      url.searchParams.set('brand', ctlBrand.value);
+      const root = readRootState();
+      url.searchParams.set('mode', root.mode);
+      url.searchParams.set('theme', root.theme);
+      url.searchParams.set('density', root.density);
+      if (hasBrandOverride && ctlBrand.value) {
+        url.searchParams.set('brand', ctlBrand.value);
+      } else {
+        url.searchParams.delete('brand');
+      }
       history.replaceState(null, '', `${url.pathname}?${url.searchParams.toString()}`);
     };
 
-    // Apply root attributes + background
-    const applyRoot = () => {
-      document.documentElement.setAttribute('data-mode', ctlMode.value);
-      document.documentElement.setAttribute('data-theme', ctlTheme.value);
-      document.documentElement.setAttribute('data-density', ctlDensity.value);
-      document.documentElement.style.setProperty('--crusher-color-brand-primary', ctlBrand.value);
-      applyBackground();
+    const applyBrand = (value) => {
+      const color = toHex(value);
+      if (!color) return;
+      hasBrandOverride = true;
+      ctlBrand.value = color;
+      document.documentElement.style.setProperty('--crusher-color-brand-primary', color);
       syncUrlState();
     };
 
+    const applyRoot = () => {
+      const current = readRootState();
+      const nextTheme = ctlTheme.value;
+      const nextMode = ctlMode.value;
+      const nextDensity = ctlDensity.value;
+      if (nextTheme !== current.theme) setTheme(nextTheme);
+      if (nextMode !== current.mode) setMode(nextMode);
+      if (nextDensity !== current.density) setDensity(nextDensity);
+      if (hasBrandOverride) applyBrand(ctlBrand.value);
+      syncControlsFromRoot();
+      syncUrlState();
+    };
+
+    const initial = readRootState();
+    ctlMode.value = params.has('mode') ? pick(params.get('mode'), initial.mode, allowedModes) : initial.mode;
+    ctlTheme.value = params.has('theme') ? pick(params.get('theme'), initial.theme, allowedThemes) : initial.theme;
+    ctlDensity.value = params.has('density') ? pick(params.get('density'), initial.density, allowedDensity) : initial.density;
+    ctlBrand.value = readBrandColor() || ctlBrand.value;
+    if (params.has('brand')) {
+      const brand = toHex(params.get('brand'));
+      if (brand) ctlBrand.value = brand;
+    }
+
     // Wire listeners
     ctlMode.addEventListener('change', (e) => {
-      document.documentElement.setAttribute('data-mode', e.detail?.value || e.target.value);
-      syncUrlState();
-      toast?.({ title:'Mode', message: e.detail?.value || e.target.value });
+      const mode = e.detail?.value || e.target.value;
+      setMode(mode);
+      toast?.({ title:'Mode', message: mode });
     });
     ctlTheme.addEventListener('change', (e) => {
       const theme = e.detail?.value || e.target.value;
-      document.documentElement.setAttribute('data-theme', theme);
-      applyBackground();
-      syncUrlState();
+      setTheme(theme);
       toast?.({ title:'Dialect', message: theme });
     });
     ctlDensity.addEventListener('change', (e) => {
-      document.documentElement.setAttribute('data-density', e.detail?.value || e.target.value);
-      syncUrlState();
+      setDensity(e.detail?.value || e.target.value);
     });
     ctlBrand.addEventListener('input', (e) => {
-      document.documentElement.style.setProperty('--crusher-color-brand-primary', e.target.value);
+      applyBrand(e.target.value);
+      toast?.({ title:'Brand updated', message: ctlBrand.value, variant: 'brand' });
+    });
+    window.addEventListener('crusher:themechange', () => {
+      syncControlsFromRoot();
       syncUrlState();
-      toast?.({ title:'Brand updated', message: e.target.value, variant: 'brand' });
+    });
+    window.addEventListener(BRAND_EVENT, (e) => {
+      if (!e.detail?.brand) return;
+      applyBrand(e.detail.brand);
     });
 
     // === SELECT (async) ===

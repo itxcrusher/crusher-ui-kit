@@ -5,12 +5,12 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  /* default fallback */
   background: var(--crusher-background-canvas);
+  transition: background var(--crusher-motion-duration-slow) var(--crusher-motion-easing-inout);
 }
 
 /* ===== GLASS ===== */
-:root[data-theme="glass"] .scene {
+html[data-theme="glass"] .scene {
   --blob1: radial-gradient(800px 600px at 10% 20%, rgba(255,255,255,0.35), transparent 60%);
   --blob2: radial-gradient(600px 500px at 80% 10%, rgba(255,0,200,0.15), transparent 60%);
   --blob3: radial-gradient(700px 600px at 30% 90%, rgba(34,197,94,0.18), transparent 60%);
@@ -25,14 +25,38 @@
 }
 
 /* ===== FUTURISTIC ===== */
-:root[data-theme="futuristic"] .scene {
+html[data-theme="futuristic"] .scene {
   background:
-    radial-gradient(1200px 800px at 80% 20%, rgba(34,211,238,0.08), transparent 60%),
-    radial-gradient(1000px 700px at 10% 80%, rgba(167,139,250,0.08), transparent 60%),
-    linear-gradient(180deg, rgba(7, 12, 24, 0.95), rgba(2, 6, 23, 0.98));
+    radial-gradient(1200px 800px at 80% 20%, color-mix(in srgb, var(--crusher-color-brand-primary) 20%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 10% 80%, color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent), transparent 60%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--crusher-background-canvas) 92%, var(--crusher-color-brand-primary) 8%),
+      var(--crusher-background-canvas)
+    );
   mask-image: radial-gradient(120% 90% at 50% 35%, #000 60%, transparent 100%);
 }
-:root[data-theme="futuristic"] .grid-overlay {
+html[data-theme="futuristic"][data-mode="light"] .scene {
+  background:
+    radial-gradient(1200px 800px at 80% 20%, color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 10% 80%, color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, transparent), transparent 60%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--crusher-color-base-white) 72%, var(--crusher-color-brand-primary) 10%),
+      var(--crusher-background-canvas)
+    );
+}
+html[data-theme="futuristic"][data-mode="dark"] .scene {
+  background:
+    radial-gradient(1200px 800px at 80% 20%, color-mix(in srgb, var(--crusher-color-brand-primary) 24%, transparent), transparent 60%),
+    radial-gradient(1000px 700px at 10% 80%, color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, transparent), transparent 60%),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--crusher-background-canvas) 90%, black 10%),
+      var(--crusher-background-canvas)
+    );
+}
+html[data-theme="futuristic"] .grid-overlay {
   position: absolute; inset: -2rem;
   pointer-events: none;
   background-image:
@@ -43,37 +67,65 @@
 }
 
 /* ===== BRUTAL ===== */
-:root[data-theme="brutal"] .scene {
-  background: linear-gradient(0deg, #fff, #fff);
+html[data-theme="brutal"] .scene {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--crusher-color-brand-accent-orange) 40%, var(--crusher-background-canvas)) 0 18%,
+      var(--crusher-background-canvas) 18% 72%,
+      color-mix(in srgb, var(--crusher-color-brand-primary) 32%, var(--crusher-background-canvas)) 72% 100%
+    );
+}
+html[data-theme="brutal"][data-mode="dark"] .scene {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--crusher-color-brand-accent-orange) 50%, var(--crusher-background-canvas)) 0 18%,
+      var(--crusher-background-canvas) 18% 72%,
+      color-mix(in srgb, var(--crusher-color-brand-primary) 40%, var(--crusher-background-canvas)) 72% 100%
+    );
 }
 
 /* ===== NEOBRUTAL ===== */
-:root[data-theme="neobrutal"] .scene {
+html[data-theme="neobrutal"] .scene {
   background:
-    radial-gradient(1200px 600px at 20% 10%, rgba(124,58,237,0.08), transparent 60%),
-    radial-gradient(1200px 600px at 90% 80%, rgba(6,182,212,0.08), transparent 60%),
-    #fafafa;
+    radial-gradient(1200px 600px at 20% 10%, color-mix(in srgb, var(--crusher-color-brand-secondary) 14%, transparent), transparent 60%),
+    radial-gradient(1200px 600px at 90% 80%, color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent), transparent 60%),
+    var(--crusher-background-canvas);
+}
+html[data-theme="neobrutal"][data-mode="dark"] .scene {
+  background:
+    radial-gradient(1200px 600px at 20% 10%, color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, transparent), transparent 60%),
+    radial-gradient(1200px 600px at 90% 80%, color-mix(in srgb, var(--crusher-color-brand-primary) 18%, transparent), transparent 60%),
+    var(--crusher-background-canvas);
 }
 
 /* ===== MINIMAL ===== */
-:root[data-theme="minimal"] .scene {
+html[data-theme="minimal"] .scene {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--crusher-text-primary) 4%, transparent), transparent 40%),
     var(--crusher-background-canvas);
 }
 
 /* ===== NEUMORPH ===== */
-:root[data-theme="neumorph"] .scene {
+html[data-theme="neumorph"] .scene {
   background:
-    radial-gradient(1000px 700px at 10% 20%, rgba(255,255,255,0.04), transparent 60%),
-    radial-gradient(900px 600px at 90% 80%, rgba(0,0,0,0.25), transparent 60%),
+    radial-gradient(1000px 700px at 10% 20%, color-mix(in srgb, var(--crusher-color-base-white) 24%, transparent), transparent 60%),
+    radial-gradient(900px 600px at 90% 80%, color-mix(in srgb, black 14%, transparent), transparent 60%),
+    var(--crusher-background-canvas);
+}
+html[data-theme="neumorph"][data-mode="dark"] .scene {
+  background:
+    radial-gradient(1000px 700px at 10% 20%, color-mix(in srgb, var(--crusher-color-base-white) 8%, transparent), transparent 60%),
+    radial-gradient(900px 600px at 90% 80%, color-mix(in srgb, black 28%, transparent), transparent 60%),
     var(--crusher-background-canvas);
 }
 
 /* ===== BENTO ===== */
-:root[data-theme="bento"] .scene {
+html[data-theme="bento"] .scene {
   background:
     radial-gradient(600px 400px at 20% 20%, color-mix(in srgb, var(--crusher-color-brand-primary) 12%, transparent), transparent 65%),
     radial-gradient(600px 400px at 80% 30%, color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-brand-primary) 4%, transparent), transparent 42%),
     var(--crusher-background-canvas);
 }
