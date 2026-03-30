@@ -11,10 +11,10 @@ Evidence:
 Impact:
 - reuse friction will still surface late when the framework is adopted in actual projects
 
-2. Framework primitives are still thin compared with the stated ambition.
+2. Framework primitives have started, but the surface is still early relative to the stated ambition.
 Evidence:
-- the repo has a solid component core
-- it does not yet provide a broader app-shell/layout/navigation/data surface expected from a personal framework
+- the repo now has first-pass layout/app-shell primitives
+- it still does not yet provide the broader navigation, dashboard, and app-shell ecosystem expected from a personal framework
 Impact:
 - downstream projects still need too much project-specific scaffolding
 

@@ -43,6 +43,17 @@ html[data-mode="dark"] {
   --crusher-feedback-warning: var(--crusher-color-brand-accent-orange);
   --crusher-feedback-danger: var(--crusher-color-brand-accent-red);
   --crusher-feedback-on-solid: var(--crusher-color-base-white);
+  --crusher-layout-gap: var(--crusher-spacing-6);
+  --crusher-layout-gap-tight: var(--crusher-spacing-4);
+  --crusher-layout-gap-loose: var(--crusher-spacing-8);
+  --crusher-stack-gap: var(--crusher-layout-gap-tight);
+  --crusher-grid-gap: var(--crusher-layout-gap);
+  --crusher-grid-min-column: 18rem;
+  --crusher-shell-max-width: 80rem;
+  --crusher-shell-padding-inline: clamp(var(--crusher-spacing-4), 3vw, var(--crusher-spacing-8));
+  --crusher-shell-padding-block: var(--crusher-spacing-6);
+  --crusher-shell-nav-width: 18rem;
+  --crusher-shell-aside-width: 20rem;
 
   /* Code token aliases derive from framework semantics instead of raw literals. */
   --crusher-code-token-comment: var(--crusher-text-secondary);

@@ -40,8 +40,10 @@ import '../components/atoms/crusher-badge.js';
 
 // --- Molecules ---
 import '../components/molecules/crusher-card.js';
+import '../components/molecules/crusher-grid.js';
 import '../components/molecules/crusher-modal.js';
 import '../components/molecules/crusher-skill-bar.js';
+import '../components/molecules/crusher-stack.js';
 import '../components/molecules/crusher-style-switcher.js';
 import '../components/molecules/crusher-toast-center.js';
 import '../components/molecules/crusher-dropdown.js';
@@ -51,6 +53,7 @@ import '../components/molecules/crusher-select.js';
 import '../components/molecules/crusher-menubar.js';
 
 // --- Organisms ---
+import '../components/organisms/crusher-app-shell.js';
 import '../components/organisms/crusher-section-title.js';
 import '../components/organisms/crusher-timeline-item.js';
 import '../components/organisms/crusher-timeline.js';

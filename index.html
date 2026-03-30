@@ -117,6 +117,67 @@
   </header>
 
   <main class="demo-container">
+    <section class="section">
+      <crusher-section-title>Framework Primitives</crusher-section-title>
+
+      <crusher-app-shell style="--crusher-shell-min-height:auto; --crusher-shell-max-width:100%; --crusher-shell-padding-inline:0; --crusher-shell-padding-block:0;">
+        <crusher-card slot="header">
+          <div class="row" style="justify-content:space-between;">
+            <div>
+              <h3 style="margin:0;">Project Shell</h3>
+              <p class="muted" style="margin:.5rem 0 0;">A reusable frame for portfolio pages, dashboards, and product surfaces.</p>
+            </div>
+            <crusher-badge>Phase 4</crusher-badge>
+          </div>
+        </crusher-card>
+
+        <crusher-card slot="nav">
+          <crusher-stack gap="var(--crusher-spacing-3)">
+            <strong>Navigation</strong>
+            <crusher-button variant="subtle" full-width>Overview</crusher-button>
+            <crusher-button variant="subtle" full-width>Projects</crusher-button>
+            <crusher-button variant="subtle" full-width>Activity</crusher-button>
+          </crusher-stack>
+        </crusher-card>
+
+        <crusher-stack gap="var(--crusher-spacing-6)">
+          <crusher-grid min="15rem">
+            <crusher-card>
+              <h3>Shipping velocity</h3>
+              <p class="muted">12 merged changes this week across framework and app work.</p>
+            </crusher-card>
+            <crusher-card>
+              <h3>Theme coverage</h3>
+              <p class="muted">Glass, minimal, futuristic, brutal, bento, and more from the same primitives.</p>
+            </crusher-card>
+            <crusher-card>
+              <h3>Reuse target</h3>
+              <p class="muted">Designed to carry product shells before domain-specific screens are built.</p>
+            </crusher-card>
+          </crusher-grid>
+
+          <crusher-card class="stack">
+            <h3>Composed main surface</h3>
+            <p class="muted">Use <span class="kbd">crusher-app-shell</span> to place navigation and supporting rails, then nest <span class="kbd">crusher-grid</span> and <span class="kbd">crusher-stack</span> for page-level composition.</p>
+          </crusher-card>
+        </crusher-stack>
+
+        <crusher-card slot="aside">
+          <crusher-stack gap="var(--crusher-spacing-3)">
+            <strong>Context rail</strong>
+            <p class="muted">Attach filters, status, or command surfaces without bespoke layout CSS.</p>
+            <crusher-chip>Live</crusher-chip>
+            <crusher-chip>Responsive</crusher-chip>
+            <crusher-chip>Reusable</crusher-chip>
+          </crusher-stack>
+        </crusher-card>
+
+        <crusher-card slot="footer">
+          <p class="muted" style="margin:0;">The same shell contract can wrap a portfolio, admin page, AI workspace, or infra console.</p>
+        </crusher-card>
+      </crusher-app-shell>
+    </section>
+
     <!-- Typography / Section Title -->
     <section class="section">
       <crusher-section-title>Atoms</crusher-section-title>

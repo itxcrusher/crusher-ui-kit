@@ -28,6 +28,10 @@ The local verification path is green when dependencies are installed:
   - layered imports in `src/js/main.js`
   - exported style entrypoints under `./styles/*`
   - exported theme entrypoints under `./themes/*.css`
+- Framework primitives now include:
+  - `crusher-app-shell` for responsive product/page shells
+  - `crusher-grid` for auto-fit content grids
+  - `crusher-stack` for vertical composition without ad hoc page CSS
 - Package contract is materially hardened:
   - root package entry for bundlers
   - `./standalone` entry for static/drop-in ESM
