@@ -32,7 +32,7 @@ export class CrusherNavList extends LitElement {
       border: var(--crusher-component-border-weight) solid var(--crusher-nav-panel-border, color-mix(in srgb, var(--crusher-border) 78%, transparent));
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-nav-panel-shadow, none);
-      padding: var(--crusher-spacing-3);
+      padding: var(--crusher-spacing-4);
     }
 
     .section-label {
@@ -69,7 +69,8 @@ export class CrusherNavList extends LitElement {
       grid-template-columns: auto minmax(0, 1fr) auto;
       inline-size: 100%;
       min-inline-size: 0;
-      padding: var(--crusher-spacing-3);
+      padding-block: var(--crusher-spacing-3);
+      padding-inline: var(--crusher-spacing-4);
       text-align: start;
       text-decoration: none;
       box-shadow: var(--crusher-nav-item-shadow, none);

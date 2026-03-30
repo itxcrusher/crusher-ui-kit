@@ -31,12 +31,20 @@
     }
     .hr { height:1px; background: color-mix(in srgb, var(--crusher-border) 78%, transparent); margin: 24px 0; }
     .pill {
-      padding:.25rem .5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-block-size: calc(var(--crusher-spacing-4) + var(--crusher-spacing-2));
+      padding: calc(var(--crusher-spacing-1) + 1px) calc(var(--crusher-spacing-3) - 1px);
       border:1px solid color-mix(in srgb, var(--crusher-border) 78%, transparent);
       border-radius:9999px;
-      font-size: .85rem;
-      background: color-mix(in srgb, var(--crusher-surface) 90%, transparent);
+      font-size: var(--crusher-font-size-xs);
+      font-weight: var(--crusher-font-weight-medium);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-base-white) 20%, transparent), transparent),
+        color-mix(in srgb, var(--crusher-surface) 90%, transparent);
       color: var(--crusher-fg-muted);
+      box-shadow: inset 0 1px 0 color-mix(in srgb, var(--crusher-color-base-white) 28%, transparent);
     }
     label {
       color: var(--crusher-fg-muted);
@@ -72,12 +80,13 @@
     .hero-grid {
       display: grid;
       gap: var(--crusher-spacing-6);
-      grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.95fr);
+      grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 1.08fr);
       align-items: start;
     }
     .hero-copy {
       gap: var(--crusher-spacing-4);
       padding-block: var(--crusher-spacing-2);
+      padding-inline-end: var(--crusher-spacing-4);
     }
     .hero-eyebrow {
       color: var(--crusher-color-brand-primary);
@@ -93,12 +102,12 @@
       font-weight: var(--crusher-font-weight-bold);
       letter-spacing: -0.04em;
       line-height: 0.96;
-      max-inline-size: 11ch;
+      max-inline-size: 12.5ch;
     }
     .hero-summary {
       font-size: var(--crusher-font-size-lg);
       line-height: 1.6;
-      max-inline-size: 56ch;
+      max-inline-size: 52ch;
     }
     .hero-actions {
       gap: var(--crusher-spacing-3);
@@ -110,7 +119,7 @@
       border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
       border-radius: var(--crusher-radius-xl);
       box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-1));
-      padding: var(--crusher-spacing-4);
+      padding: calc(var(--crusher-spacing-4) + var(--crusher-spacing-2));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
     }
@@ -153,6 +162,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--crusher-spacing-2);
+      align-items: center;
     }
     @media (max-width: 880px) {
       .hero-grid,
@@ -351,9 +361,9 @@
             </div>
             <crusher-stat label="Health" value="Green" meta="Core checks passing in CI and local builds" tone="success"></crusher-stat>
             <div class="chip-row">
-              <crusher-chip>Live</crusher-chip>
-              <crusher-chip>Responsive</crusher-chip>
-              <crusher-chip>Reusable</crusher-chip>
+              <crusher-chip color="success">Live</crusher-chip>
+              <crusher-chip color="neutral">Responsive</crusher-chip>
+              <crusher-chip color="secondary">Reusable</crusher-chip>
             </div>
           </crusher-stack>
         </crusher-card>

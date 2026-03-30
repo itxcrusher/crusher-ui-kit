@@ -19,15 +19,15 @@ export class CrusherMenubar extends LitElement {
   static styles = css`
     :host { display: block; position: relative; z-index: var(--crusher-z-dropdown); }
     .bar {
-      display: flex; gap: var(--crusher-spacing-1); align-items: center; flex-wrap: nowrap;
+      display: flex; gap: var(--crusher-spacing-2); align-items: center; flex-wrap: nowrap;
       background: var(--crusher-toolbar-bg, color-mix(in srgb, var(--crusher-surface) 92%, transparent));
       -webkit-backdrop-filter: blur(var(--crusher-effect-blur-md));
       backdrop-filter: blur(var(--crusher-effect-blur-md));
       border: var(--crusher-component-border-weight) solid var(--crusher-toolbar-border, var(--crusher-border));
       border-radius: var(--crusher-radius-lg);
       box-shadow: var(--crusher-toolbar-shadow, var(--crusher-shadow-1));
-      padding-block: var(--crusher-spacing-1);
-      padding-inline: var(--crusher-spacing-1);
+      padding-block: calc(var(--crusher-spacing-1) + 2px);
+      padding-inline: var(--crusher-spacing-4);
       overflow: hidden;
     }
     ::slotted([slot="menu"]) {
@@ -35,7 +35,7 @@ export class CrusherMenubar extends LitElement {
       background: transparent;
       border: none;
       cursor: default;
-      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-2);
+      padding: calc((var(--crusher-spacing-1) + var(--crusher-spacing-2)) / 2) var(--crusher-spacing-4);
       border-radius: var(--crusher-radius-md);
       color: var(--crusher-fg);
       font: inherit;

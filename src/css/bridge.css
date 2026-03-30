@@ -56,9 +56,9 @@
   --btn-primary-letter: normal;
   --btn-primary-text-shadow: none;
 
-  --btn-secondary-bg: var(--crusher-color-brand-secondary);
+  --btn-secondary-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 72%, var(--crusher-color-brand-secondary) 28%);
   --btn-secondary-fg: var(--crusher-color-base-white);
-  --btn-secondary-border: color-mix(in srgb, currentColor 12%, transparent);
+  --btn-secondary-border: color-mix(in srgb, var(--crusher-color-brand-primary) 28%, var(--crusher-border-primary));
   --btn-secondary-shadow: var(--ctl-elev);
 
   --btn-danger-bg: var(--crusher-color-brand-accent-red);
