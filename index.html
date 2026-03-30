@@ -255,6 +255,11 @@
       gap: var(--crusher-spacing-4);
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
+    .mini-grid {
+      display: grid;
+      gap: var(--crusher-spacing-4);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
     .tag-cloud {
       display: flex;
       flex-wrap: wrap;
@@ -286,6 +291,15 @@
       display: flex;
       flex-wrap: wrap;
       gap: var(--crusher-spacing-2);
+    }
+    .checklist {
+      display: grid;
+      gap: var(--crusher-spacing-2);
+      margin: 0;
+      padding-inline-start: calc(var(--crusher-spacing-4) + var(--crusher-spacing-1));
+    }
+    .checklist li {
+      line-height: 1.5;
     }
     @media (max-width: 880px) {
       .demo-container {
@@ -489,6 +503,36 @@
             <div id="inventory-organisms" class="tag-cloud"></div>
           </crusher-card>
         </div>
+
+        <div class="mini-grid">
+          <crusher-card class="stack">
+            <p class="demo-note">Framework Reach</p>
+            <h3>One system, multiple product shapes</h3>
+            <ul class="checklist muted">
+              <li>Static HTML via standalone build and theme CSS.</li>
+              <li>Bundler apps via package root, runtime helpers, and exported themes.</li>
+              <li>Shared layout primitives for portfolio, SaaS, dashboard, and AI surfaces.</li>
+            </ul>
+          </crusher-card>
+          <crusher-card class="stack">
+            <p class="demo-note">Review Workflow</p>
+            <h3>Use this page as the release gate</h3>
+            <ul class="checklist muted">
+              <li>Scan the landing section in light and dark mode for overall balance.</li>
+              <li>Check atoms and overlays for spacing, hover, disabled, and empty states.</li>
+              <li>Finish with runtime controls, toasts, and table flows before packaging.</li>
+            </ul>
+          </crusher-card>
+          <crusher-card class="stack">
+            <p class="demo-note">What To Watch</p>
+            <h3>Theme regressions show up first in shared surfaces</h3>
+            <ul class="checklist muted">
+              <li>Menubar, toolbars, filter bars, chips, and badges.</li>
+              <li>Focus rings, contrast, and dense-mode spacing.</li>
+              <li>Busy, empty, and validation states that are easy to forget.</li>
+            </ul>
+          </crusher-card>
+        </div>
       </crusher-card>
     </section>
 
@@ -575,7 +619,7 @@
           <div class="demo-cluster">
             <p class="demo-note">Variants</p>
             <div class="row">
-              <crusher-button id="btn-primary"><i class="fa fa-bolt" style="margin-right:.5rem;"></i>Primary</crusher-button>
+              <crusher-button id="btn-primary"><span slot="icon">⚡</span>Primary</crusher-button>
               <crusher-button variant="secondary">Secondary</crusher-button>
               <crusher-button variant="outline">Outline</crusher-button>
               <crusher-button variant="ghost">Ghost</crusher-button>
@@ -606,26 +650,50 @@
           <h3>Inputs & Toggles</h3>
           <div class="demo-cluster">
             <p class="demo-note">Text entry</p>
-            <crusher-input label="Email" type="email" placeholder="you@domain.com"></crusher-input>
-            <crusher-textarea label="Message" rows="3" placeholder="Write something…"></crusher-textarea>
+            <div class="mini-grid">
+              <crusher-input id="input-empty" label="Email" type="email" placeholder="you@domain.com"></crusher-input>
+              <crusher-input id="input-filled" label="Account owner" value="ops@crusher.dev"></crusher-input>
+            </div>
+            <div class="mini-grid">
+              <crusher-textarea id="textarea-default" label="Message" rows="3" placeholder="Write something…"></crusher-textarea>
+              <crusher-textarea id="textarea-disabled" label="System note" rows="3" value="Locked by deployment policy." disabled></crusher-textarea>
+            </div>
           </div>
           <div class="demo-cluster">
             <p class="demo-note">Binary controls</p>
             <div class="row">
               <crusher-checkbox id="checkbox-default">Unchecked</crusher-checkbox>
               <crusher-checkbox id="checkbox-checked">Checked</crusher-checkbox>
+              <crusher-checkbox disabled>Disabled</crusher-checkbox>
             </div>
             <div class="row">
               <crusher-switch id="switch-default">Off</crusher-switch>
               <crusher-switch id="switch-checked">On</crusher-switch>
+              <crusher-switch disabled>Disabled</crusher-switch>
             </div>
           </div>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Feedback Surfaces</h3>
           <div class="demo-cluster">
-            <p class="demo-note">Inline feedback</p>
+            <p class="demo-note">Chips</p>
             <div class="row">
               <crusher-chip>Chip</crusher-chip>
               <crusher-chip color="secondary">Secondary chip</crusher-chip>
+              <crusher-chip color="warning">Warning</crusher-chip>
+              <crusher-chip color="danger">Danger</crusher-chip>
+              <crusher-chip color="neutral">Neutral</crusher-chip>
+            </div>
+          </div>
+          <div class="demo-cluster">
+            <p class="demo-note">Badges & tooltip</p>
+            <div class="row">
               <crusher-badge>Badge</crusher-badge>
+              <crusher-badge tone="brand" pill>Brand</crusher-badge>
+              <crusher-badge tone="success" size="sm">Success</crusher-badge>
+              <crusher-badge tone="warning" pill>Warning</crusher-badge>
+              <crusher-badge tone="error" pill>Error</crusher-badge>
               <crusher-tooltip text="Hi 👋"><crusher-button variant="outline">Tooltip</crusher-button></crusher-tooltip>
             </div>
           </div>
@@ -661,26 +729,34 @@ hello('Crusher');`}
           <h3>Selects & Dropdowns</h3>
           <p class="muted">Static, async, and nested selection surfaces should stay legible in every theme.</p>
 
-          <crusher-select id="select-static" placeholder="Environment">
-            <div value="dev">Development</div>
-            <div value="stg">Staging</div>
-            <div value="prd">Production</div>
-          </crusher-select>
+          <div class="demo-cluster">
+            <p class="demo-note">Select states</p>
+            <div class="mini-grid">
+              <crusher-select id="select-static" placeholder="Environment">
+                <div value="dev">Development</div>
+                <div value="stg">Staging</div>
+                <div value="prd">Production</div>
+              </crusher-select>
 
-          <crusher-select id="select-async" placeholder="OpenAI Model (async)"></crusher-select>
-
-          <crusher-dropdown id="create-dd" label="Create">
-            <div value="file">New File</div>
-            <div value="folder">New Folder</div>
-            <div class="sep"></div>
-            <div>
-              AI Tools
-              <div slot="submenu">
-                <div value="gen-summary">Generate Summary</div>
-                <div value="gen-readme">Generate README</div>
-              </div>
+              <crusher-select id="select-async" placeholder="OpenAI Model (async)"></crusher-select>
             </div>
-          </crusher-dropdown>
+          </div>
+
+          <div class="demo-cluster">
+            <p class="demo-note">Nested actions</p>
+            <crusher-dropdown id="create-dd" label="Create">
+              <div value="file">New File</div>
+              <div value="folder">New Folder</div>
+              <div class="sep"></div>
+              <div>
+                AI Tools
+                <div slot="submenu">
+                  <div value="gen-summary">Generate Summary</div>
+                  <div value="gen-readme">Generate README</div>
+                </div>
+              </div>
+            </crusher-dropdown>
+          </div>
         </crusher-card>
 
       </div>
@@ -709,6 +785,7 @@ hello('Crusher');`}
 
         <crusher-card class="stack">
           <h3>Tabs</h3>
+          <p class="muted">Selected state, panel visibility, and border treatments need to remain stable across dialects.</p>
           <crusher-tabs id="tabs" value="settings">
             <button id="settings" slot="tab">Settings</button>
             <button id="logs" slot="tab">Logs</button>
@@ -726,6 +803,11 @@ hello('Crusher');`}
           <div class="row">
             <crusher-button id="open-palette">Open Palette</crusher-button>
             <crusher-button id="spawn-toast" variant="secondary">Show Toast</crusher-button>
+          </div>
+          <div class="row">
+            <span class="pill">Keyboard shortcut</span>
+            <span class="pill">Async command provider</span>
+            <span class="pill">Global runtime API</span>
           </div>
         </crusher-card>
 
@@ -759,6 +841,21 @@ hello('Crusher');`}
           <crusher-skill-bar label="System design" percentage="92"></crusher-skill-bar>
           <crusher-skill-bar label="Frontend platform" percentage="88"></crusher-skill-bar>
           <crusher-skill-bar label="Design systems" percentage="94"></crusher-skill-bar>
+        </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Table States</h3>
+          <p class="muted">Busy and empty surfaces should still feel like part of the same framework, not fallback browser UI.</p>
+          <div class="mini-grid">
+            <div class="stack">
+              <p class="demo-note">Busy</p>
+              <crusher-table id="table-busy"></crusher-table>
+            </div>
+            <div class="stack">
+              <p class="demo-note">Empty</p>
+              <crusher-table id="table-empty" empty-text="No incidents matched this view."></crusher-table>
+            </div>
+          </div>
         </crusher-card>
 
         <crusher-card class="stack">
@@ -856,6 +953,17 @@ hello('Crusher');`}
             <crusher-button id="toast-danger" variant="destructive">Danger toast</crusher-button>
           </div>
         </crusher-card>
+
+        <crusher-card class="stack">
+          <h3>Verification Checklist</h3>
+          <p class="muted">Use this as the final pass before carrying Crusher into another repo.</p>
+          <ul class="checklist muted">
+            <li>Check hero, menus, chips, and cards in light and dark mode.</li>
+            <li>Cycle density and confirm rows, fields, and toolbars still breathe correctly.</li>
+            <li>Trigger validation, toasts, modal, dropdown, and command palette.</li>
+            <li>Review normal, busy, empty, and filtered table surfaces.</li>
+          </ul>
+        </crusher-card>
       </div>
     </section>
 
@@ -901,6 +1009,8 @@ hello('Crusher');`}
     const coveragePublicElements = $('coverage-public-elements');
     const coverageThemeMatrix = $('coverage-theme-matrix');
     const coverageDensityStates = $('coverage-density-states');
+    const tableBusy = $('table-busy');
+    const tableEmpty = $('table-empty');
     const checkboxChecked = $('checkbox-checked');
     const switchChecked = $('switch-checked');
     const inventoryRoots = {
@@ -994,11 +1104,12 @@ hello('Crusher');`}
     requestAnimationFrame(ensureBinaryDemoStates);
 
     shellNav.items = [
-      { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live' },
-      { section: 'Workspace', value: 'projects', label: 'Projects', hint: 'Consumer apps and reusable surfaces', badge: '4' },
-      { section: 'Workspace', value: 'activity', label: 'Activity', hint: 'Recent releases, fixes, and QA work' },
-      { section: 'Operations', value: 'deployments', label: 'Deployments', hint: 'Build, package, and publish checks', badge: 'CI' },
-      { section: 'Operations', value: 'settings', label: 'Settings', hint: 'Theme, runtime, and framework controls' }
+      { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live', icon: '◈' },
+      { section: 'Workspace', value: 'projects', label: 'Projects', hint: 'Consumer apps and reusable surfaces', badge: '4', icon: '▣' },
+      { section: 'Workspace', value: 'activity', label: 'Activity', hint: 'Recent releases, fixes, and QA work', icon: '◎' },
+      { section: 'Operations', value: 'deployments', label: 'Deployments', hint: 'Build, package, and publish checks', badge: 'CI', icon: '↗' },
+      { section: 'Operations', value: 'settings', label: 'Settings', hint: 'Theme, runtime, and framework controls', icon: '⚙' },
+      { section: 'Operations', value: 'locked', label: 'Locked workspace', hint: 'Disabled state review', disabled: true, icon: '•' }
     ];
     shellNav.value = 'overview';
 
@@ -1104,18 +1215,21 @@ hello('Crusher');`}
     // === SELECT (async) ===
     const selectAsync = $('select-async');
     selectAsync.items = []; selectAsync.loading = true;
+    $('select-static').value = 'stg';
     setTimeout(() => {
       selectAsync.items = [
         { value:'gpt-4.1', label:'GPT-4.1' },
         { value:'gpt-4o',  label:'GPT-4o'  },
         { value:'o3-mini', label:'o3-mini' }
       ];
+      selectAsync.value = 'gpt-4.1';
       selectAsync.loading = false;
     }, 650);
     $('select-static').addEventListener('change', e => toast?.({ title:'Environment', message: e.detail.value }));
 
     // === DROPDOWN ===
     $('create-dd').addEventListener('change', e => toast?.({ title:'Action', message: e.detail.value }));
+    $('tabs').addEventListener('change', e => toast?.({ title:'Tab', message: e.detail.value, variant:'info' }));
 
     // === MODAL ===
     const modal = $('modal');
@@ -1178,6 +1292,17 @@ hello('Crusher');`}
       mem: [256,512,1024,2048][i%4],
       uptime: `${(i%9)+1}d ${(i*3)%24}h`
     }));
+    tableBusy.columns = [
+      { key: 'name', label: 'Job', width: 180 },
+      { key: 'status', label: 'Status', width: 120 }
+    ];
+    tableBusy.busy = true;
+    tableBusy.rows = [];
+    tableEmpty.columns = [
+      { key: 'service', label: 'Service', width: 180 },
+      { key: 'region', label: 'Region', width: 140 }
+    ];
+    tableEmpty.rows = [];
     const allRows = [...t.rows];
     const tableCount = $('table-count');
     const tableSelection = $('table-selection');
