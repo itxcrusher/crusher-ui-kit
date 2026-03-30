@@ -21,11 +21,13 @@ declare global {
     'crusher-select': HTMLElement;
     'crusher-skill-bar': HTMLElement;
     'crusher-stack': HTMLElement;
+    'crusher-stat': HTMLElement;
     'crusher-style-switcher': HTMLElement;
     'crusher-tabs': HTMLElement;
     'crusher-toast-center': HTMLElement;
     // organisms
     'crusher-app-shell': HTMLElement;
+    'crusher-nav-list': HTMLElement;
     'crusher-section-title': HTMLElement;
     'crusher-table': HTMLElement;
     'crusher-timeline-item': HTMLElement;

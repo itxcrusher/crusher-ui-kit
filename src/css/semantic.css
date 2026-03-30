@@ -54,6 +54,21 @@ html[data-mode="dark"] {
   --crusher-shell-padding-block: var(--crusher-spacing-6);
   --crusher-shell-nav-width: 18rem;
   --crusher-shell-aside-width: 20rem;
+  --crusher-nav-item-bg: transparent;
+  --crusher-nav-item-bg-hover: color-mix(in srgb, var(--crusher-fg) 6%, transparent);
+  --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 14%, transparent);
+  --crusher-nav-item-border: transparent;
+  --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-primary) 38%, var(--crusher-border));
+  --crusher-nav-section-fg: var(--crusher-fg-muted);
+  --crusher-nav-badge-bg: color-mix(in srgb, var(--crusher-fg) 8%, transparent);
+  --crusher-nav-badge-fg: var(--crusher-fg-muted);
+  --crusher-stat-tone-neutral: var(--crusher-fg-muted);
+  --crusher-stat-tone-brand: var(--crusher-color-brand-primary);
+  --crusher-stat-tone-info: var(--crusher-feedback-info);
+  --crusher-stat-tone-success: var(--crusher-feedback-success);
+  --crusher-stat-tone-warning: var(--crusher-feedback-warning);
+  --crusher-stat-tone-danger: var(--crusher-feedback-danger);
+  --crusher-stat-value-size: var(--crusher-font-size-4xl);
 
   /* Code token aliases derive from framework semantics instead of raw literals. */
   --crusher-code-token-comment: var(--crusher-text-secondary);

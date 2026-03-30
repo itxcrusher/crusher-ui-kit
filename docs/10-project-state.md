@@ -32,6 +32,8 @@ The local verification path is green when dependencies are installed:
   - `crusher-app-shell` for responsive product/page shells
   - `crusher-grid` for auto-fit content grids
   - `crusher-stack` for vertical composition without ad hoc page CSS
+  - `crusher-nav-list` for reusable shell/sidebar navigation
+  - `crusher-stat` for compact dashboard summary surfaces
 - Package contract is materially hardened:
   - root package entry for bundlers
   - `./standalone` entry for static/drop-in ESM

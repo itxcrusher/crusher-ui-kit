@@ -13,8 +13,8 @@ Impact:
 
 2. Framework primitives have started, but the surface is still early relative to the stated ambition.
 Evidence:
-- the repo now has first-pass layout/app-shell primitives
-- it still does not yet provide the broader navigation, dashboard, and app-shell ecosystem expected from a personal framework
+- the repo now has first-pass layout, app-shell, navigation, and summary/dashboard primitives
+- it still does not yet provide the broader app-shell ecosystem and higher-level product patterns expected from a personal framework
 Impact:
 - downstream projects still need too much project-specific scaffolding
 

@@ -51,9 +51,11 @@ import '../components/molecules/crusher-tabs.js';
 import '../components/molecules/crusher-command-palette.js';
 import '../components/molecules/crusher-select.js';
 import '../components/molecules/crusher-menubar.js';
+import '../components/molecules/crusher-stat.js';
 
 // --- Organisms ---
 import '../components/organisms/crusher-app-shell.js';
+import '../components/organisms/crusher-nav-list.js';
 import '../components/organisms/crusher-section-title.js';
 import '../components/organisms/crusher-timeline-item.js';
 import '../components/organisms/crusher-timeline.js';

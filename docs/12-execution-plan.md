@@ -62,6 +62,7 @@ Add the reusable surfaces that make this practical across many product types.
 Current status:
 - `crusher-app-shell`, `crusher-grid`, and `crusher-stack` now provide a first reusable page-composition layer
 - existing command, menu, modal, table, and card primitives can now be arranged into a coherent product shell without ad hoc page CSS
+- `crusher-nav-list` and `crusher-stat` now cover reusable shell navigation and compact dashboard summaries
 
 Tasks:
 - define layout and app-shell primitives

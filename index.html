@@ -132,33 +132,20 @@
         </crusher-card>
 
         <crusher-card slot="nav">
-          <crusher-stack gap="var(--crusher-spacing-3)">
-            <strong>Navigation</strong>
-            <crusher-button variant="subtle" full-width>Overview</crusher-button>
-            <crusher-button variant="subtle" full-width>Projects</crusher-button>
-            <crusher-button variant="subtle" full-width>Activity</crusher-button>
-          </crusher-stack>
+          <crusher-nav-list id="shell-nav"></crusher-nav-list>
         </crusher-card>
 
         <crusher-stack gap="var(--crusher-spacing-6)">
-          <crusher-grid min="15rem">
-            <crusher-card>
-              <h3>Shipping velocity</h3>
-              <p class="muted">12 merged changes this week across framework and app work.</p>
-            </crusher-card>
-            <crusher-card>
-              <h3>Theme coverage</h3>
-              <p class="muted">Glass, minimal, futuristic, brutal, bento, and more from the same primitives.</p>
-            </crusher-card>
-            <crusher-card>
-              <h3>Reuse target</h3>
-              <p class="muted">Designed to carry product shells before domain-specific screens are built.</p>
-            </crusher-card>
+          <crusher-grid min="13rem">
+            <crusher-stat label="Shipping velocity" value="12 merges" delta="+18%" meta="Framework and app work this week" tone="success"></crusher-stat>
+            <crusher-stat label="Theme coverage" value="7 dialects" delta="stable" meta="Glass, minimal, futuristic, brutal, bento, and more" tone="info"></crusher-stat>
+            <crusher-stat label="Reuse target" value="Multi-product" delta="active" meta="Portfolio, SaaS, infra, and AI shells" tone="brand"></crusher-stat>
           </crusher-grid>
 
           <crusher-card class="stack">
             <h3>Composed main surface</h3>
             <p class="muted">Use <span class="kbd">crusher-app-shell</span> to place navigation and supporting rails, then nest <span class="kbd">crusher-grid</span> and <span class="kbd">crusher-stack</span> for page-level composition.</p>
+            <p class="muted">Add <span class="kbd">crusher-nav-list</span> for reusable side navigation and <span class="kbd">crusher-stat</span> for dashboard summaries before dropping into tables or domain-specific screens.</p>
           </crusher-card>
         </crusher-stack>
 
@@ -166,6 +153,7 @@
           <crusher-stack gap="var(--crusher-spacing-3)">
             <strong>Context rail</strong>
             <p class="muted">Attach filters, status, or command surfaces without bespoke layout CSS.</p>
+            <crusher-stat label="Health" value="Green" meta="Core checks passing in CI and local builds" tone="success"></crusher-stat>
             <crusher-chip>Live</crusher-chip>
             <crusher-chip>Responsive</crusher-chip>
             <crusher-chip>Reusable</crusher-chip>
@@ -356,6 +344,16 @@ hello('Crusher');`}
     const ctlTheme = $('ctl-theme');
     const ctlDensity = $('ctl-density');
     const ctlBrand = $('ctl-brand');
+    const shellNav = $('shell-nav');
+
+    shellNav.items = [
+      { section: 'Workspace', value: 'overview', label: 'Overview', hint: 'Framework health and system status', badge: 'Live' },
+      { section: 'Workspace', value: 'projects', label: 'Projects', hint: 'Consumer apps and reusable surfaces', badge: '4' },
+      { section: 'Workspace', value: 'activity', label: 'Activity', hint: 'Recent releases, fixes, and QA work' },
+      { section: 'Operations', value: 'deployments', label: 'Deployments', hint: 'Build, package, and publish checks', badge: 'CI' },
+      { section: 'Operations', value: 'settings', label: 'Settings', hint: 'Theme, runtime, and framework controls' }
+    ];
+    shellNav.value = 'overview';
 
     // sensible defaults in the selects
     ctlMode.value = 'light';
@@ -432,6 +430,9 @@ hello('Crusher');`}
     $('topbar').addEventListener('action', (e) => {
       if (e.detail.value === 'palette') { $('open-palette').click(); return; }
       toast?.({ title:'Menu', message: e.detail.value });
+    });
+    shellNav.addEventListener('change', (e) => {
+      toast?.({ title:'Shell navigation', message: e.detail.item.label || e.detail.value, variant:'info' });
     });
 
     // === PALETTE ===
