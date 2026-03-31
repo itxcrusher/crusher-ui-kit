@@ -131,6 +131,14 @@ dist is build output and must never be manually edited.
 
 ---
 
+site-dist/
+
+Static site artifact for GitHub Pages, built from `index.html` through `npm run build:site`.
+
+This output is deployment-only and must never be manually edited.
+
+---
+
 ## Build Flow
 
 Token build
@@ -155,6 +163,18 @@ src/js/main.js
 Output goes to:
 
 dist/
+
+Project site build
+
+npm run build:site
+
+Builds the public website/demo from:
+
+index.html
+
+Output goes to:
+
+site-dist/
 
 ---
 

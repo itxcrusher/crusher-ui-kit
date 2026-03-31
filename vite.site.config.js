@@ -1,0 +1,11 @@
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  base: './',
+  build: {
+    outDir: 'site-dist',
+    emptyOutDir: true,
+    sourcemap: false,
+    assetsDir: 'assets'
+  }
+});

@@ -69,3 +69,4 @@ coverage/
 *storybook.log
 
 dist/
+site-dist/

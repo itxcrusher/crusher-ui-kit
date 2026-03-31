@@ -11,6 +11,8 @@ It currently supports three delivery modes:
 - npm package consumption through `package.json` `exports`
 - static HTML through `dist/crusher-ui.min.css` + `dist/crusher-ui.standalone.esm.js`
 
+The public project site is now intended to deploy separately through GitHub Pages as a built static artifact generated from `index.html`, not from Jekyll-rendered markdown or npm package contents.
+
 ## Verified Baseline
 The local verification path is green when dependencies are installed:
 - `npm ci`
@@ -47,6 +49,9 @@ The local verification path is green when dependencies are installed:
   - contrast checks
   - library build
   - package contract validation
+- GitHub Pages is moving to an explicit static-site workflow:
+  - `npm run build:site`
+  - deploy `site-dist/`
 
 ## Current Limitations
 - This repo is web-first. It can drive static sites, modern web frameworks, dashboards, SaaS apps, AI tools, infra consoles, and hybrid/mobile-web surfaces.

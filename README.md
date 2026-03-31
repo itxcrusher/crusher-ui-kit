@@ -92,6 +92,7 @@ Example:
 | --------------------------------- | ------------------------------- |
 | `npm run dev`                     | Vite dev server                 |
 | `npm run build:tokens`            | Generate token + theme CSS      |
+| `npm run build:site`             | Build the GitHub Pages site artifact from `index.html` |
 | `npm run build`                   | Build distributable (bundler ESM + standalone ESM + CSS) |
 | `npm run check:package`           | Verify runtime/package contracts |
 | `npm run check:contrast`          | WCAG color contrast validation  |

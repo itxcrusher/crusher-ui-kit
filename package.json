@@ -15,6 +15,7 @@
     "review:acceptance": "npm run build && npm run check:contrast && npm run check:package && npm run review:matrix && npm run review:matrix:mobile",
     "build:core": "vite build",
     "build:standalone": "vite build --config vite.standalone.config.js",
+    "build:site": "npm run build:tokens && vite build --config vite.site.config.js",
     "build": "npm run build:core && npm run build:standalone",
     "preview": "vite preview",
     "prepublishOnly": "npm run build:tokens && npm run check:contrast && npm run build && npm run check:package",
