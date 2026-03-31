@@ -18,7 +18,7 @@ Do not force everything under the `Crusher` name if the public-facing truth is b
 
 ## Site Roles
 
-### Personal Website
+### Site
 
 Canonical role:
 
@@ -32,43 +32,59 @@ This site should act as the canonical source of truth for:
 - current work
 - capabilities
 - links
-- tools
-- products
+- selected projects
+- tool and product directory links
 - selected writing/public signals
+
+The site should collect and show information about the person, not every artifact at full depth.
 
 ### Portfolio
 
 Canonical role:
 
-- curated showcase
-- more experimental and creative
-- can include older design/dev experiments if they are intentionally framed
+- curated showcase of work
+- presentation-first surface
+- allowed to include older experiments if they are intentionally framed and still defensible
 
 This site should not try to duplicate the entire personal website.
 It should emphasize:
 
 - selected work
+- case studies
 - presentation quality
 - experimentation
 - visual identity
 
-### Tools / Products / Apps
+### Tools
 
 Canonical role:
 
-- independent but connected surfaces
-- linked from the personal website
-- allowed to grow into their own domains when justified
+- discovery surface for products, tools, projects, and SaaS
+- aggregation and routing layer, not necessarily the runtime host for each thing
+- bridge between the personal ecosystem and independently hosted products
 
-These should not be buried as random subpages forever if they become real products.
+This site should list, group, and link projects clearly.
+If a tool or product becomes substantial, it should be free to live in its own repo, domain, and hosting setup.
+
+### Crusher
+
+Canonical role:
+
+- creative workspace
+- experimental lab
+- codename/alias-led surface
+- valid place for experiments, concept work, visual R&D, or internal/public playgrounds
+
+Crusher should remain flexible.
+It does not need to be the canonical trust anchor for professional identity.
 
 ## Recommended Domain Strategy
 
 Primary recommendation:
 
-- `muhammadhassaanjaved.com` = canonical personal website
-- `portfolio.muhammadhassaanjaved.com` = curated portfolio if you want one connected ecosystem
-- `tools.muhammadhassaanjaved.com` = tools hub while the tools are still part of the personal ecosystem
+- `muhammadhassaanjaved.com` = canonical personal site
+- `portfolio.muhammadhassaanjaved.com` = curated work/portfolio surface
+- `tools.muhammadhassaanjaved.com` = tools and products hub while those products are still part of the personal ecosystem
 
 Optional brand-led alternatives:
 
@@ -81,6 +97,35 @@ Recommendation:
 - use `Crusher` as a sub-brand, not the primary public identity, unless a specific surface is intentionally persona-led
 
 This is the cleaner long-term structure for trust, discoverability, and professional clarity.
+
+## Current Repo Mapping
+
+Current truth in the local workspace:
+
+- `crusher-ui-kit` = shared framework/system repo
+- `hassaan-site` = canonical personal site repo
+- `crusher-portfolio` = curated/creative portfolio repo
+- `tools` = planned separate hub repo/site, not yet established in this workspace
+
+If repository names drift from their actual role again, prefer renaming to truth over preserving confusing history.
+
+## Stack Strategy
+
+Do not force the same stack across every surface just for symmetry.
+
+Correct rule:
+
+- use the best-fit stack for each site or product
+- keep the design system, runtime contracts, and canonical data model aligned
+- allow implementation to vary when the use case justifies it
+
+Examples:
+
+- a static site can remain static if that is the best operational choice
+- a content-heavy or AI-assisted site may later justify a CMS, headless setup, or application framework
+- a product or tool can use a completely different stack if that stack is the right engineering choice
+
+The shared system is the product language, tokens, components, runtime conventions, and data contracts, not a requirement that every repo uses the same framework or build tool.
 
 ## Architecture Recommendation
 
@@ -151,26 +196,30 @@ The right model is:
 
 ## Naming Guidance
 
-Current naming is mostly acceptable:
+Current naming is acceptable after the latest clarification:
 
 - `crusher-ui-kit` is a good framework name
-- `hassaan-portfolio` is misnamed if it is actually the personal website
-- `crusher-portfolio` is acceptable if it remains the creative/experimental portfolio
+- `hassaan-site` is a truthful name for the canonical personal site
+- `crusher-portfolio` is acceptable if it remains the curated/creative portfolio
+- `tools` should be named by truth when that repo is created
+- `crusher` remains a valid label for experimental/creative workspace surfaces
 
 Recommended truth-aligned mapping:
 
-- `hassaan-portfolio` -> treat as personal website, and consider renaming later
-- `crusher-portfolio` -> treat as the curated/creative portfolio
+- `hassaan-site` -> canonical personal site
+- `crusher-portfolio` -> curated/creative portfolio
+- `tools` -> tools/products/projects hub
+- `crusher` -> experiments/workspace/lab surface
 
 If you rename later, prefer truth over inertia.
 
 ## Near-Term Execution Order
 
-1. Finish Crusher UI Kit repo contracts and public site
-2. Integrate into the personal website first
-3. Integrate into the portfolio second
-4. Add tools/product ecosystem structure after the first two are stable
-5. Design the canonical profile data model before attempting the AI updater
+1. Finish Crusher UI Kit repo contracts, public site, and release flow
+2. Integrate into `hassaan-site` first
+3. Integrate into `crusher-portfolio` second
+4. Stand up the tools hub after the first two establish the ecosystem contract
+5. Design the canonical profile/content data model before attempting the AI updater
 
 ## Do Not Do
 
@@ -178,3 +227,4 @@ If you rename later, prefer truth over inertia.
 - Do not make the portfolio the canonical source of truth for all personal data
 - Do not let AI write public profile data without a review layer
 - Do not choose domains based only on branding preference if they reduce trust or clarity
+- Do not standardize on one stack across all repos when a different stack is clearly the better fit

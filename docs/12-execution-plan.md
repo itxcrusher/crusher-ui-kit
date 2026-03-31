@@ -84,9 +84,10 @@ Tasks:
 - then repeat with a second consumer project if needed
 
 Preferred order:
-1. `hassaan-portfolio` as the canonical personal website
+1. `hassaan-site` as the canonical personal site
 2. `crusher-portfolio` as the curated/creative portfolio
-3. tools and product surfaces only after the first two integrations establish the ecosystem contract
+3. a dedicated tools hub after the first two integrations establish the ecosystem contract
+4. independent products and SaaS surfaces only after the first three clarify the shared system boundaries
 
 Done when:
 - downstream adoption feels routine, not custom
@@ -110,13 +111,16 @@ Goal:
 Align repository roles, domains, and downstream apps with the real personal ecosystem.
 
 Tasks:
-- keep the full-name website as the canonical public hub
+- keep the full-name site as the canonical public hub
 - keep portfolio as a curated showcase instead of duplicating the full personal site
+- define a dedicated tools hub instead of burying tools inside the site or portfolio forever
 - define when tools/products stay under the personal ecosystem versus when they deserve separate domains
 - design a structured profile/data layer before attempting AI-driven website updates
+- choose the best-fit stack per surface instead of forcing one stack across all repos
 
 Done when:
 - repository names and deployment roles reflect reality well enough that future work does not keep re-opening the same identity/domain questions
+- the ecosystem can evolve without repeatedly forcing role, domain, or stack decisions back into the framework repo
 
 ## Working Rule
 Each phase should end with:
@@ -128,3 +132,4 @@ Each phase should end with:
 - Do not skip consumer validation and call it framework-ready.
 - Do not add domain packs before Phase 2 and Phase 3 are materially complete.
 - Do not let docs drift behind the implementation again.
+- Do not force identical implementation stacks across site, portfolio, tools, and products if the use cases diverge.
