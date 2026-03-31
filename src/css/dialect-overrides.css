@@ -295,6 +295,7 @@ html[data-theme="neumorph"] {
 html[data-theme="neumorph"][data-mode="dark"] {
   --ctl-elev: 14px 14px 30px rgba(0,0,0,0.46), -10px -10px 20px rgba(255,255,255,0.05);
   --ctl-elev-hover: 18px 18px 34px rgba(0,0,0,0.52), -12px -12px 22px rgba(255,255,255,0.06);
+  --crusher-surface: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-color-base-white) 4%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
   --btn-outline-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 95%, var(--crusher-color-base-white) 5%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
   --btn-outline-border: color-mix(in srgb, var(--crusher-border-primary) 80%, transparent);
   --btn-subtle-bg: linear-gradient(145deg, color-mix(in srgb, var(--crusher-background-surface) 95%, var(--crusher-color-base-white) 5%), color-mix(in srgb, var(--crusher-background-canvas) 92%, black 8%));
@@ -365,6 +366,7 @@ html[data-theme="bento"] {
   --code-pill-bg: color-mix(in srgb, var(--crusher-color-base-white) 90%, var(--crusher-color-brand-primary) 10%);
 }
 html[data-theme="bento"][data-mode="dark"] {
+  --crusher-surface: color-mix(in srgb, var(--crusher-background-surface) 92%, var(--crusher-background-canvas) 8%);
   --btn-secondary-bg: linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-brand-secondary) 74%, var(--crusher-background-surface) 26%), color-mix(in srgb, var(--crusher-color-brand-primary) 18%, var(--crusher-background-surface) 82%));
   --btn-secondary-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 30%, var(--crusher-border-primary));
   --btn-secondary-shadow: 0 18px 30px color-mix(in srgb, black 28%, transparent);
