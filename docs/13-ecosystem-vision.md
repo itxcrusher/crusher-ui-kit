@@ -98,6 +98,28 @@ Recommendation:
 
 This is the cleaner long-term structure for trust, discoverability, and professional clarity.
 
+## Hosting Strategy
+
+Current default:
+
+- use GitHub Pages for the framework site and personal ecosystem surfaces while they remain static-first
+- attach custom domains/subdomains at the DNS and GitHub Pages layer
+- move a repo to separate hosting only when the product or operational model actually requires it
+
+Current domain posture:
+
+- `ui.muhammadhassaanjaved.com` = Crusher UI Kit public site
+- `muhammadhassaanjaved.com` = canonical personal site
+- `portfolio.muhammadhassaanjaved.com` = curated portfolio
+- future `tools.*` and `crusher.*` subdomains can be added later when those repos are real and stable enough to justify public hosting
+
+Move away from GitHub Pages only when there is a clear reason, such as:
+
+- SSR or authenticated application behavior
+- backend APIs tightly coupled to the site
+- editorial workflows that GitHub Pages is the wrong tool for
+- deployment/runtime requirements that static hosting cannot satisfy
+
 ## Current Repo Mapping
 
 Current truth in the local workspace:
