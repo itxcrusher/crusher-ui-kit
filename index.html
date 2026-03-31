@@ -386,7 +386,18 @@
       display: none;
     }
     body[data-review-section] main.demo-container {
-      padding-block-start: clamp(20px, 3vw, 32px);
+      min-block-size: calc(100svh - clamp(1rem, 2vw, 2rem));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: clamp(20px, 3vw, 40px);
+    }
+    body[data-review-section] main.demo-container > .section[id] {
+      inline-size: 100%;
+      margin-block: 0;
+    }
+    body[data-capture-mode] crusher-style-switcher {
+      display: none;
     }
     @media (max-width: 1180px) {
       .atoms-showcase,
@@ -433,6 +444,11 @@
       }
       .showcase-grid > .span-2 {
         grid-column: span 1;
+      }
+      body[data-review-section] main.demo-container {
+        min-block-size: auto;
+        display: block;
+        padding-block: 20px;
       }
     }
   </style>
@@ -1213,6 +1229,7 @@ hello('Crusher');`}
     const themeOrder = ['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento'];
     const densityOrder = ['compact', 'cozy', 'comfortable'];
     const reviewSection = allowedReviewSections.has(params.get('review')) ? params.get('review') : '';
+    const captureMode = params.get('capture') === '1';
     const componentInventory = {
       atoms: ['crusher-button', 'crusher-input', 'crusher-textarea', 'crusher-checkbox', 'crusher-switch', 'crusher-chip', 'crusher-code-block', 'crusher-tooltip', 'crusher-badge'],
       forms: ['crusher-field', 'crusher-label', 'crusher-hint', 'crusher-error'],
@@ -1306,6 +1323,10 @@ hello('Crusher');`}
     renderThemePicks();
     renderReviewLinks();
     requestAnimationFrame(ensureBinaryDemoStates);
+
+    if (captureMode) {
+      document.body.dataset.captureMode = '1';
+    }
 
     if (reviewSection) {
       document.body.dataset.reviewSection = reviewSection;

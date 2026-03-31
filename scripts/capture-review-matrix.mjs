@@ -8,10 +8,10 @@ const THEMES = ['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brut
 const MODES = ['light', 'dark'];
 const SECTION_CONFIG = {
   home: { size: '1600,1000' },
-  atoms: { review: 'atoms', hash: '#atoms', size: '1600,1700' },
-  overlays: { review: 'overlays', hash: '#overlays', size: '1600,1600' },
-  organisms: { review: 'organisms', hash: '#organisms', size: '1600,1900' },
-  runtime: { review: 'runtime', hash: '#runtime', size: '1600,1700' }
+  atoms: { review: 'atoms', hash: '#atoms', size: '1600,1450' },
+  overlays: { review: 'overlays', hash: '#overlays', size: '1600,1080' },
+  organisms: { review: 'organisms', hash: '#organisms', size: '1600,1450' },
+  runtime: { review: 'runtime', hash: '#runtime', size: '1600,1180' }
 };
 const SECTION_NAMES = Object.keys(SECTION_CONFIG);
 const PRESETS = {
@@ -154,6 +154,7 @@ function findBrowser() {
 function buildUrl(baseUrl, entry) {
   const config = SECTION_CONFIG[entry.section];
   const url = new URL(baseUrl);
+  url.searchParams.set('capture', '1');
   url.searchParams.set('theme', entry.theme);
   url.searchParams.set('mode', entry.mode);
   if (config.review) url.searchParams.set('review', config.review);
@@ -168,6 +169,10 @@ async function ensureUrlReachable(baseUrl) {
   if (!response.ok) {
     throw new Error(`Review URL is not reachable: ${baseUrl} -> ${response.status}`);
   }
+}
+
+async function ensureFileWritten(outputFile) {
+  await access(outputFile, fsConstants.R_OK);
 }
 
 function runCapture(browser, url, outputFile, size, budget) {
@@ -190,9 +195,14 @@ function runCapture(browser, url, outputFile, size, budget) {
     });
 
     child.on('error', reject);
-    child.on('close', (code) => {
+    child.on('close', async (code) => {
       if (code === 0) {
-        resolve({ stderr });
+        try {
+          await ensureFileWritten(outputFile);
+          resolve({ stderr });
+        } catch {
+          reject(new Error(`Capture reported success but no screenshot was written for ${url}\nExpected: ${outputFile}\n${stderr}`));
+        }
       } else {
         reject(new Error(`Capture failed (${code}) for ${url}\n${stderr}`));
       }
@@ -219,6 +229,8 @@ async function main() {
   if (!browser) {
     throw new Error('Could not find Chrome or Edge. Set CHROME_BIN to a local browser executable.');
   }
+
+  options.outputDir = path.resolve(process.cwd(), options.outputDir);
 
   await ensureUrlReachable(options.baseUrl);
 
