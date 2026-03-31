@@ -10,6 +10,7 @@
     "check:contrast": "node ./scripts/check-contrast.mjs",
     "check:package": "node ./scripts/check-package-contract.mjs",
     "review:matrix": "node ./scripts/capture-review-matrix.mjs",
+    "review:matrix:mobile": "node ./scripts/capture-review-matrix.mjs --preset=balanced --viewport=mobile",
     "build:core": "vite build",
     "build:standalone": "vite build --config vite.standalone.config.js",
     "build": "npm run build:core && npm run build:standalone",

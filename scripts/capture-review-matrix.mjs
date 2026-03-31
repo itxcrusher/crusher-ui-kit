@@ -6,12 +6,13 @@ import process from 'node:process';
 
 const THEMES = ['glass', 'minimal', 'futuristic', 'neobrutal', 'neumorph', 'brutal', 'bento'];
 const MODES = ['light', 'dark'];
+const VIEWPORTS = ['desktop', 'mobile'];
 const SECTION_CONFIG = {
-  home: { size: '1600,1000' },
-  atoms: { review: 'atoms', hash: '#atoms', size: '1600,1450' },
-  overlays: { review: 'overlays', hash: '#overlays', size: '1600,1080' },
-  organisms: { review: 'organisms', hash: '#organisms', size: '1600,1450' },
-  runtime: { review: 'runtime', hash: '#runtime', size: '1600,1180' }
+  home: { sizes: { desktop: '1600,1000', mobile: '430,1400' } },
+  atoms: { review: 'atoms', hash: '#atoms', sizes: { desktop: '1600,1450', mobile: '430,1700' } },
+  overlays: { review: 'overlays', hash: '#overlays', sizes: { desktop: '1600,1080', mobile: '430,1300' } },
+  organisms: { review: 'organisms', hash: '#organisms', sizes: { desktop: '1600,1450', mobile: '430,1900' } },
+  runtime: { review: 'runtime', hash: '#runtime', sizes: { desktop: '1600,1180', mobile: '430,1700' } }
 };
 const SECTION_NAMES = Object.keys(SECTION_CONFIG);
 const PRESETS = {
@@ -35,6 +36,7 @@ function parseArgs(argv) {
     baseUrl: process.env.CRUSHER_REVIEW_URL || 'http://127.0.0.1:4173/',
     outputDir: process.env.CRUSHER_REVIEW_OUTDIR || path.join(process.cwd(), '.tmp', 'review-matrix'),
     preset: process.env.CRUSHER_REVIEW_PRESET || 'balanced',
+    viewport: process.env.CRUSHER_REVIEW_VIEWPORT || 'desktop',
     themes: null,
     modes: null,
     sections: null,
@@ -56,6 +58,9 @@ function parseArgs(argv) {
         break;
       case 'themes':
         options.themes = rawValue.split(',').filter(Boolean);
+        break;
+      case 'viewport':
+        options.viewport = rawValue;
         break;
       case 'modes':
         options.modes = rawValue.split(',').filter(Boolean);
@@ -105,6 +110,13 @@ function resolveEntries(options) {
     }
   }
   return entries;
+}
+
+function resolveViewport(viewport) {
+  if (!VIEWPORTS.includes(viewport)) {
+    throw new Error(`Unsupported viewport: ${viewport}`);
+  }
+  return viewport;
 }
 
 function findBrowser() {
@@ -231,6 +243,7 @@ async function main() {
   }
 
   options.outputDir = path.resolve(process.cwd(), options.outputDir);
+  options.viewport = resolveViewport(options.viewport);
 
   await ensureUrlReachable(options.baseUrl);
 
@@ -245,14 +258,16 @@ async function main() {
 
   for (const [index, entry] of entries.entries()) {
     const config = SECTION_CONFIG[entry.section];
+    const size = config.sizes[options.viewport];
     const fileName = `${String(index + 1).padStart(2, '0')}-${entry.section}-${entry.theme}-${entry.mode}.png`;
     const filePath = path.join(runDir, fileName);
     const url = buildUrl(options.baseUrl, entry);
     process.stdout.write(`[review-matrix] ${index + 1}/${entries.length} ${entry.section} ${entry.theme}/${entry.mode}\n`);
-    await runCapture(browser, url, filePath, config.size, options.budget);
+    await runCapture(browser, url, filePath, size, options.budget);
     manifest.push({
       ...entry,
-      size: config.size,
+      size,
+      viewport: options.viewport,
       url,
       file: path.relative(process.cwd(), filePath)
     });
@@ -264,6 +279,7 @@ async function main() {
     browser,
     baseUrl: options.baseUrl,
     preset: options.preset,
+    viewport: options.viewport,
     captures: manifest
   }, null, 2));
 
