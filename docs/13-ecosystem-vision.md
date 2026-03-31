@@ -66,6 +66,15 @@ Canonical role:
 This site should list, group, and link projects clearly.
 If a tool or product becomes substantial, it should be free to live in its own repo, domain, and hosting setup.
 
+Preferred repository name:
+
+- `hassaan-tools`
+
+Preferred description:
+
+- hub site for Muhammad Hassaan Javed's tools, products, projects, and SaaS
+- directory and routing surface only; each substantial tool or product can live in its own repository, domain, and hosting stack
+
 ### Crusher
 
 Canonical role:
@@ -111,7 +120,8 @@ Current domain posture:
 - `ui.muhammadhassaanjaved.com` = Crusher UI Kit public site
 - `muhammadhassaanjaved.com` = canonical personal site
 - `portfolio.muhammadhassaanjaved.com` = curated portfolio
-- future `tools.*` and `crusher.*` subdomains can be added later when those repos are real and stable enough to justify public hosting
+- `tools.muhammadhassaanjaved.com` = preferred tools/products hub domain when that repo is established
+- future `crusher.*` subdomains can be added later when those repos are real and stable enough to justify public hosting
 
 Move away from GitHub Pages only when there is a clear reason, such as:
 
@@ -127,7 +137,7 @@ Current truth in the local workspace:
 - `crusher-ui-kit` = shared framework/system repo
 - `hassaan-site` = canonical personal site repo
 - `crusher-portfolio` = curated/creative portfolio repo
-- `tools` = planned separate hub repo/site, not yet established in this workspace
+- `hassaan-tools` = preferred planned hub repo/site for tools and products, not yet established in this workspace
 
 If repository names drift from their actual role again, prefer renaming to truth over preserving confusing history.
 
@@ -223,14 +233,14 @@ Current naming is acceptable after the latest clarification:
 - `crusher-ui-kit` is a good framework name
 - `hassaan-site` is a truthful name for the canonical personal site
 - `crusher-portfolio` is acceptable if it remains the curated/creative portfolio
-- `tools` should be named by truth when that repo is created
+- `hassaan-tools` is the preferred truthful name for the tools hub
 - `crusher` remains a valid label for experimental/creative workspace surfaces
 
 Recommended truth-aligned mapping:
 
 - `hassaan-site` -> canonical personal site
 - `crusher-portfolio` -> curated/creative portfolio
-- `tools` -> tools/products/projects hub
+- `hassaan-tools` -> tools/products/projects hub
 - `crusher` -> experiments/workspace/lab surface
 
 If you rename later, prefer truth over inertia.
