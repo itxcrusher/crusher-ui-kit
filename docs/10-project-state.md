@@ -46,12 +46,14 @@ The local verification path is green when dependencies are installed:
   - token generation
   - contrast checks
   - library build
+  - package contract validation
 
 ## Current Limitations
 - This repo is web-first. It can drive static sites, modern web frameworks, dashboards, SaaS apps, AI tools, infra consoles, and hybrid/mobile-web surfaces.
 - It is not yet a native mobile UI framework. The reusable mobile-ready layer today is primarily tokens and design language, not native rendered components.
 - `dist/` is generated build output and is intentionally gitignored. A fresh clone requires `npm ci` and `npm run build` before static artifacts exist locally.
 - the weaker legacy browser-global UMD path has been retired from the public contract in favor of bundler ESM + standalone ESM.
+- npm registry publication is not complete yet. The package can be consumed locally and via packed tarballs, but first public publish still depends on npm owner/auth setup and a successful Changesets release run.
 
 ## Do Not Do
 - Do not treat the demo page as the whole framework.

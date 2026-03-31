@@ -13,11 +13,11 @@ Whenever you make changes to the library:
 * You **add a Changeset note** describing the change type (`patch`, `minor`, or `major`).
 * When you **push to `main`**, GitHub Actions:
 
-  1. Runs the build
-  2. Applies the version bump from the Changeset
-  3. Publishes the package to **npm**
+  1. Runs the release validation steps
+  2. Creates or updates a **release PR** from pending Changesets
+  3. Publishes to **npm only after that release PR is merged**
 
-No manual tagging or PRs — just push and it’s live. ⚡
+This keeps ordinary pushes from attempting to publish unreleased work.
 
 ---
 
@@ -71,9 +71,9 @@ When your changes hit the `main` branch:
 
 * GitHub workflow automatically:
 
-  * Runs `npx changeset version`
-  * Builds the tokens + library
-  * Publishes to npm with provenance
+  * validates tokens, contrast, build, and package contracts
+  * opens or updates the release PR
+  * publishes only after the generated release PR is merged
 
 ---
 
@@ -114,8 +114,8 @@ This allows the GitHub Action to authenticate with npm and publish automatically
   1. Checkout repo
   2. Install dependencies
   3. Build tokens + library
-  4. Run `changeset version`
-  5. Publish to npm
+  4. Create/update the Changesets release PR
+  5. Publish to npm only from the merged release commit
 
 ---
 
@@ -133,7 +133,7 @@ This allows the GitHub Action to authenticate with npm and publish automatically
 
 * Each Changeset file represents one pending release.
 * Once published, Changesets automatically delete used `.md` files.
-* If you forget to add a Changeset, your push won’t create a new version — you’ll just update code without releasing.
+* If you forget to add a Changeset, your push will validate normally but no release PR or publish will happen.
 
 ---
 
@@ -154,7 +154,7 @@ git commit -m "feat: improved crusher-chip hover state"
 git push
 ```
 
-→ CI will build and publish a new **patch** version automatically.
+→ CI will update the release PR automatically; merging that PR publishes the new version.
 
 ---
 
@@ -175,9 +175,10 @@ After publish, your changelog will look like:
 
 ✅ Automatic versioning
 ✅ Automatic changelog
-✅ Automatic npm publish
+✅ Automatic release PRs
+✅ Automatic npm publish after release merge
 ✅ Zero manual tagging
-✅ Runs safely only on push to `main`
+✅ Ordinary pushes no longer attempt accidental publish
 
 ---
 

@@ -96,7 +96,9 @@ Example:
 | `npm run check:package`           | Verify runtime/package contracts |
 | `npm run check:contrast`          | WCAG color contrast validation  |
 
-**Release flow:** Uses Changesets → creates release PR → publishes on merge.
+**Release flow:** Uses Changesets release PRs. Pushes to `main` validate the package and either update the release PR or publish only after a versioned release PR is merged.
+
+**First publish prerequisite:** configure GitHub secret `NPM_TOKEN` for the owning npm account before expecting CI to publish `crusher-ui-kit`.
 
 ---
 

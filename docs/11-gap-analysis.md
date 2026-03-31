@@ -24,6 +24,13 @@ Evidence:
 Impact:
 - not an immediate blocker for framework design, but it should be tracked and reduced
 
+4. Public npm release is still not proven.
+Evidence:
+- `npm pack --dry-run` is green, but `crusher-ui-kit` is not currently available from the npm registry
+- release automation needed hardening to stop attempting publish on every push to `main`
+Impact:
+- downstream apps can adopt locally today, but public install documentation is still ahead of reality until the first successful publish lands
+
 ## Interpretation
 The repo is past the "is this a real system?" stage.
 It is now in the "turn a strong UI kit into a reusable framework" stage.
