@@ -114,6 +114,10 @@
       padding-block: var(--crusher-spacing-2);
       padding-inline-end: var(--crusher-spacing-4);
       justify-content: center;
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+      color: var(--crusher-text-primary);
     }
     .hero-eyebrow {
       color: var(--crusher-color-brand-primary);
@@ -123,23 +127,44 @@
       text-transform: uppercase;
     }
     .hero-title {
-      color: var(--crusher-color-light-text-primary) !important;
+      color: var(--crusher-text-primary) !important;
+      -webkit-text-fill-color: currentColor;
       font-family: var(--crusher-font-family-display);
       font-size: clamp(2.35rem, 6vw, 4.5rem);
       font-weight: var(--crusher-font-weight-bold);
       letter-spacing: -0.04em;
       line-height: 0.96;
       max-inline-size: 12.5ch;
-      text-shadow: 0 1px 0 color-mix(in srgb, var(--crusher-color-base-white) 22%, transparent);
+      text-shadow: 0 1px 0 color-mix(in srgb, var(--crusher-color-base-white) 18%, transparent);
     }
     html[data-mode="dark"] .hero-title {
-      color: var(--crusher-color-dark-text-primary) !important;
+      color: var(--crusher-text-primary) !important;
+      -webkit-text-fill-color: currentColor;
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
     }
     .hero-summary {
+      color: var(--crusher-text-secondary);
       font-size: var(--crusher-font-size-lg);
       line-height: 1.6;
       max-inline-size: 52ch;
+    }
+    .hero-copy .pill {
+      color: color-mix(in srgb, var(--crusher-text-secondary) 88%, var(--crusher-text-primary) 12%);
+      border-color: color-mix(in srgb, var(--crusher-border) 92%, transparent);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-base-white) 22%, transparent), transparent),
+        color-mix(in srgb, var(--crusher-surface) 94%, transparent);
+      box-shadow:
+        inset 0 1px 0 color-mix(in srgb, var(--crusher-color-base-white) 32%, transparent),
+        0 8px 20px color-mix(in srgb, black 6%, transparent);
+    }
+    .hero-actions crusher-button[variant="outline"] {
+      --btn-outline-bg: color-mix(in srgb, var(--crusher-surface) 96%, transparent);
+      --btn-outline-border: color-mix(in srgb, var(--crusher-border) 90%, transparent);
+      --btn-outline-shadow: 0 8px 20px color-mix(in srgb, black 6%, transparent);
+    }
+    html[data-mode="light"] .hero-copy {
+      text-shadow: none;
     }
     .hero-actions {
       gap: var(--crusher-spacing-3);
