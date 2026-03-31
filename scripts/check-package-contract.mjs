@@ -1,9 +1,21 @@
 #!/usr/bin/env node
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const expectedRootError =
   "crusher-ui-kit root import is browser-only. In Node/SSR, import 'crusher-ui-kit/runtime' and CSS/theme exports; load 'crusher-ui-kit' only on the client.";
+
+const packageJson = JSON.parse(
+  fs.readFileSync(path.resolve(import.meta.dirname, '../package.json'), 'utf8')
+);
+
+assert.equal(
+  packageJson.dependencies?.lit,
+  '^3.3.1',
+  'Expected "lit" to be a runtime dependency for bundler consumers.'
+);
 
 const runtime = await import('crusher-ui-kit/runtime');
 

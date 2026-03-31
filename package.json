@@ -24,12 +24,14 @@
     "release:version": "npx changeset version",
     "release:publish": "npm publish --provenance --access public"
   },
+  "dependencies": {
+    "lit": "^3.3.1"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.29.7",
     "eslint": "^9.11.0",
     "eslint-plugin-lit": "^1.12.0",
     "eslint-plugin-wc": "^2.0.4",
-    "lit": "^3.3.1",
     "prettier": "^3.3.3",
     "sass": "^1.77.4",
     "style-dictionary": "^5.0.2",
