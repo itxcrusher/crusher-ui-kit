@@ -139,11 +139,11 @@ html[data-theme="neumorph"][data-mode="dark"] .scene {
 /* ===== BENTO ===== */
 html[data-theme="bento"] .scene {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-brand-primary) 4%, transparent), transparent 38%),
-    linear-gradient(125deg, transparent 0 64%, color-mix(in srgb, var(--crusher-color-brand-primary) 7%, transparent) 64% 78%, transparent 78%),
-    linear-gradient(215deg, transparent 0 68%, color-mix(in srgb, var(--crusher-color-brand-secondary) 7%, transparent) 68% 82%, transparent 82%),
-    radial-gradient(560px 380px at 18% 18%, color-mix(in srgb, var(--crusher-color-brand-primary) 10%, transparent), transparent 65%),
-    radial-gradient(600px 400px at 82% 22%, color-mix(in srgb, var(--crusher-color-brand-secondary) 10%, transparent), transparent 65%),
+    linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-brand-primary) 3%, transparent), transparent 36%),
+    linear-gradient(125deg, transparent 0 68%, color-mix(in srgb, var(--crusher-color-brand-primary) 5%, transparent) 68% 80%, transparent 80%),
+    linear-gradient(215deg, transparent 0 72%, color-mix(in srgb, var(--crusher-color-brand-secondary) 5%, transparent) 72% 84%, transparent 84%),
+    radial-gradient(520px 340px at 18% 18%, color-mix(in srgb, var(--crusher-color-brand-primary) 6%, transparent), transparent 68%),
+    radial-gradient(560px 360px at 84% 20%, color-mix(in srgb, var(--crusher-color-brand-secondary) 6%, transparent), transparent 68%),
     var(--crusher-background-canvas);
 }
 html[data-theme="bento"][data-mode="dark"] .scene {

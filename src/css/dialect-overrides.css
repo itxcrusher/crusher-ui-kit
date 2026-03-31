@@ -129,13 +129,13 @@ html[data-theme="minimal"] {
   --btn-secondary-shadow: none;
 
   --crusher-card-bg: linear-gradient(180deg, color-mix(in srgb, var(--crusher-color-base-white) 98%, var(--crusher-color-brand-primary) 2%), color-mix(in srgb, var(--crusher-background-surface) 96%, var(--crusher-text-primary) 4%));
-  --crusher-card-border: color-mix(in srgb, var(--crusher-text-primary) 12%, transparent);
-  --crusher-card-shadow: 0 18px 34px rgba(15, 23, 42, 0.06);
-  --crusher-card-hover-shadow: 0 24px 42px rgba(15, 23, 42, 0.1);
+  --crusher-card-border: color-mix(in srgb, var(--crusher-text-primary) 14%, transparent);
+  --crusher-card-shadow: 0 16px 30px rgba(15, 23, 42, 0.08);
+  --crusher-card-hover-shadow: 0 22px 38px rgba(15, 23, 42, 0.12);
   --crusher-card-backdrop: none;
   --crusher-toolbar-bg: color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-primary) 8%);
   --crusher-toolbar-border: color-mix(in srgb, var(--crusher-text-primary) 10%, transparent);
-  --crusher-toolbar-shadow: none;
+  --crusher-toolbar-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
   --crusher-filter-bar-bg: color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-primary) 6%);
   --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-text-primary) 10%, transparent);
   --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-color-base-white) 98%, transparent);
@@ -143,7 +143,7 @@ html[data-theme="minimal"] {
   --crusher-page-header-divider: color-mix(in srgb, var(--crusher-text-primary) 12%, transparent);
   --crusher-nav-panel-bg: color-mix(in srgb, var(--crusher-color-base-white) 96%, var(--crusher-color-brand-primary) 4%);
   --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-text-primary) 12%, transparent);
-  --crusher-nav-panel-shadow: none;
+  --crusher-nav-panel-shadow: 0 12px 24px rgba(15, 23, 42, 0.045);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-text-primary) 7%, var(--crusher-color-base-white));
   --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-text-primary) 14%, transparent);
   --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-text-primary) 6%, transparent);
@@ -333,23 +333,23 @@ html[data-theme="bento"] {
   --btn-secondary-shadow: 0 14px 26px color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent);
   --btn-subtle-bg: color-mix(in srgb, var(--crusher-color-base-white) 88%, var(--crusher-color-brand-primary) 6%);
   --crusher-card-bg:
-    linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-primary) 8%), color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-secondary) 6%));
-  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, var(--crusher-border-primary));
-  --crusher-card-shadow: 0 18px 36px color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent);
+    linear-gradient(145deg, color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-primary) 5%), color-mix(in srgb, var(--crusher-color-base-white) 96%, var(--crusher-color-brand-secondary) 4%));
+  --crusher-card-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-border-primary));
+  --crusher-card-shadow: 0 18px 34px color-mix(in srgb, var(--crusher-color-brand-secondary) 14%, transparent);
   --crusher-card-backdrop: none;
-  --crusher-card-hover-shadow: 0 22px 42px color-mix(in srgb, var(--crusher-color-brand-secondary) 16%, transparent);
+  --crusher-card-hover-shadow: 0 22px 40px color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, transparent);
   --crusher-toolbar-bg:
-    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 92%, var(--crusher-color-brand-primary) 8%), color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-secondary) 6%));
-  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, var(--crusher-border-primary));
-  --crusher-toolbar-shadow: 0 18px 40px color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent);
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-primary) 5%), color-mix(in srgb, var(--crusher-color-base-white) 96%, var(--crusher-color-brand-secondary) 4%));
+  --crusher-toolbar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 24%, var(--crusher-border-primary));
+  --crusher-toolbar-shadow: 0 18px 34px color-mix(in srgb, var(--crusher-color-brand-secondary) 14%, transparent);
   --crusher-filter-bar-bg:
-    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-secondary) 6%));
-  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 20%, var(--crusher-border-primary));
-  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-color-base-white) 90%, var(--crusher-color-brand-primary) 6%);
-  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, var(--crusher-border-primary));
+    linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-primary) 5%), color-mix(in srgb, var(--crusher-color-base-white) 96%, var(--crusher-color-brand-secondary) 4%));
+  --crusher-filter-bar-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, var(--crusher-border-primary));
+  --crusher-filter-search-bg: color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-primary) 4%);
+  --crusher-filter-search-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 20%, var(--crusher-border-primary));
   --crusher-nav-panel-bg: linear-gradient(135deg, color-mix(in srgb, var(--crusher-color-base-white) 94%, var(--crusher-color-brand-primary) 6%), color-mix(in srgb, var(--crusher-color-base-white) 95%, var(--crusher-color-brand-secondary) 5%));
-  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 18%, var(--crusher-border-primary));
-  --crusher-nav-panel-shadow: 0 18px 38px color-mix(in srgb, var(--crusher-color-brand-secondary) 10%, transparent);
+  --crusher-nav-panel-border: color-mix(in srgb, var(--crusher-color-brand-secondary) 22%, var(--crusher-border-primary));
+  --crusher-nav-panel-shadow: 0 18px 34px color-mix(in srgb, var(--crusher-color-brand-secondary) 12%, transparent);
   --crusher-nav-item-bg-active: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, var(--crusher-color-base-white));
   --crusher-nav-item-border-active: color-mix(in srgb, var(--crusher-color-brand-secondary) 28%, var(--crusher-border-primary));
   --crusher-nav-item-icon-bg: color-mix(in srgb, var(--crusher-color-brand-primary) 16%, transparent);
