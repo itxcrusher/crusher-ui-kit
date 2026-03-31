@@ -84,8 +84,9 @@ Tasks:
 - then repeat with a second consumer project if needed
 
 Preferred order:
-1. `crusher-portfolio`
-2. `hassaan-portfolio`
+1. `hassaan-portfolio` as the canonical personal website
+2. `crusher-portfolio` as the curated/creative portfolio
+3. tools and product surfaces only after the first two integrations establish the ecosystem contract
 
 Done when:
 - downstream adoption feels routine, not custom
@@ -103,6 +104,19 @@ Examples:
 
 Done when:
 - new domain work is built on top of stable framework contracts, not mixed into unfinished core cleanup
+
+## Phase 7 - Personal Ecosystem Alignment
+Goal:
+Align repository roles, domains, and downstream apps with the real personal ecosystem.
+
+Tasks:
+- keep the full-name website as the canonical public hub
+- keep portfolio as a curated showcase instead of duplicating the full personal site
+- define when tools/products stay under the personal ecosystem versus when they deserve separate domains
+- design a structured profile/data layer before attempting AI-driven website updates
+
+Done when:
+- repository names and deployment roles reflect reality well enough that future work does not keep re-opening the same identity/domain questions
 
 ## Working Rule
 Each phase should end with:
