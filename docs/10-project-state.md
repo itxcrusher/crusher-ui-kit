@@ -12,6 +12,7 @@ It currently supports three delivery modes:
 - static HTML through `dist/crusher-ui.min.css` + `dist/crusher-ui.standalone.esm.js`
 
 The public project site is now intended to deploy separately through GitHub Pages as a built static artifact generated from `index.html`, not from Jekyll-rendered markdown or npm package contents.
+The live site is served at `https://ui.muhammadhassaanjaved.com/`.
 
 ## Verified Baseline
 The local verification path is green when dependencies are installed:
