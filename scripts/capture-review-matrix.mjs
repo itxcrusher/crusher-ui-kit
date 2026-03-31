@@ -89,18 +89,31 @@ function validateSubset(values, allowed, label) {
 }
 
 function resolveEntries(options) {
+  const themes = validateSubset(options.themes, THEMES, 'themes');
+  const modes = validateSubset(options.modes, MODES, 'modes');
+  const sections = validateSubset(options.sections, SECTION_NAMES, 'sections');
+
+  if (sections) {
+    const sectionThemes = themes || THEMES;
+    const sectionModes = modes || MODES;
+    const entries = [];
+    for (const section of sections) {
+      for (const theme of sectionThemes) {
+        for (const mode of sectionModes) {
+          entries.push({ section, theme, mode });
+        }
+      }
+    }
+    return entries;
+  }
+
   const presetEntries = PRESETS[options.preset];
   if (!presetEntries) {
     throw new Error(`Unsupported preset: ${options.preset}`);
   }
 
-  const themes = validateSubset(options.themes, THEMES, 'themes');
-  const modes = validateSubset(options.modes, MODES, 'modes');
-  const sections = validateSubset(options.sections, SECTION_NAMES, 'sections');
-
   const entries = [];
   for (const entry of presetEntries) {
-    if (sections && !sections.includes(entry.section)) continue;
     const sectionThemes = entry.themes.filter((theme) => !themes || themes.includes(theme));
     const sectionModes = entry.modes.filter((mode) => !modes || modes.includes(mode));
     for (const theme of sectionThemes) {
