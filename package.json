@@ -1,6 +1,6 @@
 {
   "name": "crusher-ui-kit",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Token-driven Web Components UI framework with interchangeable design dialects for modern web products.",
   "type": "module",
   "main": "./src/runtime/root-node.cjs",
