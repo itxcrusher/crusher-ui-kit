@@ -53,7 +53,7 @@ The local verification path is green when dependencies are installed:
 - It is not yet a native mobile UI framework. The reusable mobile-ready layer today is primarily tokens and design language, not native rendered components.
 - `dist/` is generated build output and is intentionally gitignored. A fresh clone requires `npm ci` and `npm run build` before static artifacts exist locally.
 - the weaker legacy browser-global UMD path has been retired from the public contract in favor of bundler ESM + standalone ESM.
-- npm registry publication is not complete yet. The package can be consumed locally and via packed tarballs, but first public publish still depends on npm owner/auth setup and a successful Changesets release run.
+- `crusher-ui-kit@0.1.0` is now live on npm. The remaining release concern is validating the Changesets PR workflow end to end for follow-up versions.
 
 ## Do Not Do
 - Do not treat the demo page as the whole framework.

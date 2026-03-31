@@ -24,12 +24,13 @@ Evidence:
 Impact:
 - not an immediate blocker for framework design, but it should be tracked and reduced
 
-4. Public npm release is still not proven.
+4. Automated release flow is not fully proven end to end yet.
 Evidence:
-- `npm pack --dry-run` is green, but `crusher-ui-kit` is not currently available from the npm registry
-- release automation needed hardening to stop attempting publish on every push to `main`
+- `crusher-ui-kit@0.1.0` is now live on npm
+- release automation was recently hardened to stop attempting publish on every push to `main`
+- the remaining unproven path is the Changesets release PR -> merge -> publish loop for follow-up versions
 Impact:
-- downstream apps can adopt locally today, but public install documentation is still ahead of reality until the first successful publish lands
+- public installs now work, but future versioning/publishing still needs one clean CI-driven release cycle before it should be treated as fully settled
 
 ## Interpretation
 The repo is past the "is this a real system?" stage.

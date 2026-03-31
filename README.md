@@ -98,7 +98,7 @@ Example:
 
 **Release flow:** Uses Changesets release PRs. Pushes to `main` validate the package and either update the release PR or publish only after a versioned release PR is merged.
 
-**First publish prerequisite:** configure GitHub secret `NPM_TOKEN` for the owning npm account before expecting CI to publish `crusher-ui-kit`.
+**CI publish prerequisite:** configure GitHub secret `NPM_TOKEN` for the owning npm account before expecting automated releases to publish new versions of `crusher-ui-kit`.
 
 ---
 
